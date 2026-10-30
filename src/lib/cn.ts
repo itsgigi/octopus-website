@@ -28,6 +28,19 @@ const twMerge = extendTailwindMerge({
     },
     theme: {
       radius: ["card", "nav", "specifics"],
+      aspect: [
+        "banner",
+        "card-large",
+        "card-medium",
+        "card-tall",
+        "carousel-sm",
+        "carousel-md",
+        "carousel-lg",
+        "hero-tablet",
+        "pdp-product",
+        "pdp-lifestyle",
+        "photo",
+      ],
     },
   },
 });
