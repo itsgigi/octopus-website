@@ -47,12 +47,24 @@ src/
     styleguide/         # internal page: all primitives × all states
     fonts/              # Satoshi-Variable.woff2 + licence
   components/ui/        # primitives (below)
-  lib/cn.ts             # clsx + tailwind-merge aware of the custom tokens
+  data/                 # products.json · categories.json · pages/home.json — all site content
+  lib/
+    types.ts            # zod schemas → inferred TS types (Product, Category, HomeSection…)
+    data/               # 'use cache' loaders: products, categories, home (+ image fallback)
+    cn.ts               # clsx + tailwind-merge aware of the custom tokens
 tests/unit · tests/e2e
 docs/                   # brief, design system, plan, decisions, AI usage
 ```
 
-**Rendering:** everything is static at build time (content comes from local JSON). Data access will go through `src/lib/data/*` functions marked `'use cache'`, so swapping the JSON for a headless CMS later only changes those functions. Server Components by default; `'use client'` only for small interactive islands (menu, carousel, colour selector, accordion).
+**Rendering:** everything is static at build time (content comes from local JSON). Server Components by default; `'use client'` only for small interactive islands (menu, carousel, colour selector, accordion).
+
+### Data layer
+
+- **Content lives only in `src/data`.** `home.json` is an ordered list of typed sections (hero, best-sellers, category, banner, explore-categories, find-us) that reference products by slug.
+- **Validated at build time.** zod parses every JSON file when its loader loads. A wrong category, a duplicate slug or a `home.json` reference to a missing product fails `next build` instead of shipping a broken page. The TS types are inferred from the same schemas.
+- **CMS-ready seam.** Pages only call async `'use cache'` functions (`getHomePage`, `getProduct`, `getBestSellers`, `getFeaturedProducts`…). Replacing the JSON with a headless CMS changes these function bodies, not the components.
+- **Placement from data.** `featured: n` puts a product in its category section (the first one is the large card); `bestSeller` + `bestSellerRank` drive the carousels. Adding a product to `products.json` is enough for it to appear.
+- **Images:** paths are in the JSON. The loader keeps a path only if the file exists in `/public`, so dropping real assets into `public/images` replaces the placeholders with no code change.
 
 ### Design tokens
 
@@ -79,17 +91,17 @@ docs/                   # brief, design system, plan, decisions, AI usage
 
 ## Progress
 
-| Phase                   | Status | What & why                                                                                                                                        | AI cost |
-| ----------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| 0 — Scaffold            | ✅     | Next 16 + Tailwind 4 + strict TS, Prettier, Vitest, Playwright, folder structure. Small commits per step, so the history can be reviewed          | $0.99   |
-| 1 — Tokens & primitives | ✅     | `@theme` tokens, Satoshi, the primitives above, logo + favicon, `/styleguide`. Tokens first so every later component is token-only and consistent | $1.66   |
-| 2 — Data layer          | 🚧     | Typed JSON for products, categories and the home sections                                                                                         | —       |
-| 3 — Layout shell        | ⏳     | Navbar + mobile menu, footer, skip link                                                                                                           | —       |
-| 4 — Homepage            | ⏳     | Hero, carousel, category bentos, banners                                                                                                          | —       |
-| 5 — PDP                 | ⏳     | Product info, colour selector, gallery, accordion                                                                                                 | —       |
-| 6 — Motion & polish     | ⏳     | Scroll reveal, hover states                                                                                                                       | —       |
-| 7 — Quality             | ⏳     | e2e, Lighthouse ≥ 90, axe                                                                                                                         | —       |
-| 8 — Ship                | ⏳     | Vercel deploy, final README                                                                                                                       | —       |
+| Phase                   | Status | What & why                                                                                                                                             | AI cost |
+| ----------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- |
+| 0 — Scaffold            | ✅     | Next 16 + Tailwind 4 + strict TS, Prettier, Vitest, Playwright, folder structure. Small commits per step, so the history can be reviewed               | $0.99   |
+| 1 — Tokens & primitives | ✅     | `@theme` tokens, Satoshi, the primitives above, logo + favicon, `/styleguide`. Tokens first so every later component is token-only and consistent      | $1.66   |
+| 2 — Data layer          | ✅     | zod-validated JSON (16 products, 4 categories, home sections) + cached loaders. Data first so pages are pure composition and the CMS swap is one layer | $1.02   |
+| 3 — Layout shell        | ⏳     | Navbar + mobile menu, footer, skip link                                                                                                                | —       |
+| 4 — Homepage            | ⏳     | Hero, carousel, category bentos, banners                                                                                                               | —       |
+| 5 — PDP                 | ⏳     | Product info, colour selector, gallery, accordion                                                                                                      | —       |
+| 6 — Motion & polish     | ⏳     | Scroll reveal, hover states                                                                                                                            | —       |
+| 7 — Quality             | ⏳     | e2e, Lighthouse ≥ 90, axe                                                                                                                              | —       |
+| 8 — Ship                | ⏳     | Vercel deploy, final README                                                                                                                            | —       |
 
 Detailed checklist: [`docs/PLAN.md`](docs/PLAN.md).
 
@@ -103,6 +115,9 @@ Full lists: [`docs/DECISIONS.md`](docs/DECISIONS.md) (implementation) and [`docs
 - **Focus ring:** the Figma ring (35% alpha blue) is about 1.6:1 on white and fails WCAG 1.4.11, so the outline uses the same blue, fully opaque.
 - **Body line-height is 1.3** instead of Figma's 100% for multi-line copy (readability).
 - **The `/styleguide` page ships to production** with `noindex`, for use during the review call.
+- **Data shape adapted from the brief:** specs are `{ label, value }` pairs (rendered as `<dl>`), and products gain `description`, `lifestyleImages`, `features`, `downloads`, `featured` and `bestSellerRank`.
+- **Two best-seller lists:** the home carousel shows three editorial picks from `home.json`; the PDP shows every best seller by rank except the current product (Figma shows different sets).
+- **Placeholder content:** Figma truncates some blender specs (dimensions, weight, "In the box") and only shows a Black swatch, so these values and the Silver/Red colours are plausible placeholders.
 
 ## AI usage & costs
 
@@ -117,6 +132,8 @@ Full lists: [`docs/DECISIONS.md`](docs/DECISIONS.md) (implementation) and [`docs
 | ----------------------- | ---------- | ---------- |
 | 0 — Scaffold            | 0.99       | 0.99       |
 | 1 — Tokens & primitives | 1.66       | 2.65       |
+| README set-up           | 0.20       | 2.85       |
+| 2 — Data layer          | 1.02       | 3.87       |
 
 **Where the AI output was wrong** (full list in [`docs/AI_USAGE.md` → Corrections](docs/AI_USAGE.md)):
 

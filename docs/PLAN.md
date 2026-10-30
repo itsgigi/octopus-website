@@ -22,9 +22,9 @@ Track cost: `pnpm ai:usage "<phase> start"` before, `pnpm ai:usage "<phase> end"
 - [x] A dev-only `/styleguide` page rendering all primitives (handy for the review call; `robots: noindex`)
 
 ## Phase 2 — Data layer
-- [ ] `src/lib/types.ts` (Product per brief shape + `images`, `features`, `downloads`; Category; HomePage sections)
-- [ ] `products.json` (16 products, §9.2), `categories.json`, `pages/home.json` (§9.3)
-- [ ] Loaders in `src/lib/data` with `'use cache'`; unit test: every slug unique, every product in a valid category
+- [x] `src/lib/types.ts` (Product per brief shape + `images`, `features`, `downloads`; Category; HomePage sections)
+- [x] `products.json` (16 products, §9.2), `categories.json`, `pages/home.json` (§9.3)
+- [x] Loaders in `src/lib/data` with `'use cache'`; unit test: every slug unique, every product in a valid category
 
 ## Phase 3 — Layout shell
 - [ ] Navbar (floating glass pill), MobileMenu < 1200px (button with `aria-expanded`, focus trap, Escape closes, closes on route change, body scroll lock)

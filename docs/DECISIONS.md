@@ -19,3 +19,13 @@ Ambiguities in the brief / design system and the option chosen. Design-level dis
 | 13 | Styleguide in production | Built and deployed, `robots: noindex, nofollow`, not linked from the site | Useful during the review call; PLAN calls it "dev-only", noindex keeps it out of search |
 | 14 | Font weight token | `font-book` = 470 (Figma "Weight 470") | Satoshi Variable supports any weight 300–900; a named token avoids magic numbers |
 | 15 | Logo | Mark approximated as an inline SVG (head + 4 tentacles), wordmark set in Satoshi Bold | Figma export disabled; flagged for replacement in the README |
+| 16 | Data validation | zod schemas in `src/lib/types.ts`, parsed when each loader module loads; types inferred from the schemas | A content typo (bad category, duplicate slug, unknown reference in home.json) fails `next build` instead of shipping a broken page |
+| 17 | Homepage placement rule | `featured: n` puts a product in its category section (n = order, the first one is the large card); `bestSeller` + `bestSellerRank` drive the carousels | "Adding a product to the data shows it in the right section": a new `featured` product joins its bento grid with no code change |
+| 18 | Home best-sellers carousel | `home.json` lists 3 editorial picks (Air Fryer, Indoor Camera, Hair Dryer); the PDP carousel shows every best seller by rank, minus the current product | Figma shows different sets on the two pages; without `products` the home carousel falls back to the ranked list |
+| 19 | Specs shape | `items: { label, value }[]` instead of the brief's `string[]` | Renders as a semantic `<dl>` and keeps "Label: value" formatting out of the content |
+| 20 | Colour swatches | Hex values live in the product data (`colours[].value`) | A product's colour is content, not a design token; the "no hex in components" rule still holds |
+| 21 | Blender placeholder copy | Figma truncates dimensions and hides some specs: dimensions 238 × 210 × 450 mm, weight 4.6 kg, jug 2 L, "In the box" and the Silver/Red colours are **plausible placeholders** | DS §11 #3 and #5 |
+| 22 | Image fallback | Loaders keep `src` only if the file exists in `/public` | Real assets can be dropped in with no JSON or code change; until then, ratio-correct placeholders |
+| 23 | Explore tiles | Link to the homepage anchors (`/#kitchen`, …); hair care points to the banner section | The brief allows an anchor or a placeholder route; anchors keep users on the demo |
+| 24 | Retailer | "Find us at" shows the text "Partner Retailer" | The retailer logo can't be exported and reproducing a third-party logo is avoided |
+| 25 | Cache lifetime | Default `cacheLife` profile (revalidate 15 min) | Static at build today; with a CMS, content refreshes without a redeploy |
