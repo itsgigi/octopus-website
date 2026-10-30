@@ -10,12 +10,15 @@ type SectionHeadingProps = {
   cta?: Link;
 };
 
-/** Figma "Heading 2": centred H2 + muted subtitle + secondary CTA. */
+/**
+ * Figma "Heading 2": centred title + muted subtitle + secondary CTA. Category titles use the
+ * H1 scale (60 / 48 / 40) as in the Figma frames, not H2/L.
+ */
 export function SectionHeading({ id, title, subtitle, cta }: SectionHeadingProps) {
   return (
     <div className="flex flex-col items-center gap-8 text-center">
       <div className="flex flex-col items-center gap-4">
-        <Heading as="h2" size="h2" id={id}>
+        <Heading as="h2" size="display" id={id}>
           {title}
         </Heading>
         {subtitle ? (

@@ -69,3 +69,4 @@ Ambiguities in the brief / design system and the option chosen. Design-level dis
 | 63 | Low-resolution sources | Kept as-is | They're screenshots (136–1228 px wide), so they look soft when upscaled; replacing the files in `public/images` fixes it with no code change |
 | 64 | Raw captures | Git-ignored, not deleted | They're the user's originals; the processed copies are what ships |
 | 65 | Image focal point | Optional `focus` on `ImageRef` (CSS object-position) in the JSON, applied by `ProductImage` | The crop subject is content, not layout: the kettle sits on the right of a landscape photo and fell out of the portrait mobile card |
+| 66 | Category section titles | "Kitchen", "Home Security", "Accessories" use the H1 scale (60 desktop · 48 tablet · 40 mobile), still as `<h2>` | Checked against Figma by the developer: the section titles are 60 px, not H2/L 44 as first extracted |
