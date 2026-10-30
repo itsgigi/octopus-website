@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
 import { ProductImage } from "@/components/ui/ProductImage";
 import { Text } from "@/components/ui/Text";
+import { VisuallyHidden } from "@/components/ui/VisuallyHidden";
 import { productHref } from "@/lib/data/products";
 import type { SectionOf } from "./types";
 import { HeroVideo } from "./HeroVideo";
@@ -37,7 +38,10 @@ export function Hero({ section }: { section: SectionOf<"hero"> }) {
             {subtitle}
           </Text>
         </div>
-        <Button href={cta?.href ?? productHref(product.slug)}>{cta?.label ?? "Learn more"}</Button>
+        <Button href={cta?.href ?? productHref(product.slug)}>
+          {cta?.label ?? "Learn more"}
+          <VisuallyHidden> about {product.name}</VisuallyHidden>
+        </Button>
       </Container>
     </section>
   );

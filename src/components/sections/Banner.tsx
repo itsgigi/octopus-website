@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/Button";
 import { Heading } from "@/components/ui/Heading";
 import { Text } from "@/components/ui/Text";
+import { VisuallyHidden } from "@/components/ui/VisuallyHidden";
 import { productHref } from "@/lib/data/products";
 import { FullBleedBanner } from "./FullBleedBanner";
 import type { SectionOf } from "./types";
@@ -18,7 +19,10 @@ export function Banner({ section }: { section: SectionOf<"banner"> }) {
           {section.text}
         </Text>
       </div>
-      <Button href={productHref(section.product.slug)}>Learn more</Button>
+      <Button href={productHref(section.product.slug)}>
+        Learn more
+        <VisuallyHidden> about {section.product.name}</VisuallyHidden>
+      </Button>
     </FullBleedBanner>
   );
 }
