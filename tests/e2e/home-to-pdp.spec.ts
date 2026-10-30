@@ -47,7 +47,10 @@ test("best-sellers carousel: arrows disabled at the ends", async ({ page }) => {
   await expect(prev).toBeDisabled();
   await next.click();
   await expect(prev).toBeEnabled();
-  // Walk to the end: the number of stops depends on how many cards fit the viewport.
-  for (let i = 0; i < 5 && (await next.isEnabled()); i++) await next.click();
+  // Swipe to the end (native scroll, as on touch): Next must follow and disable itself. Clicking
+  // Next in a loop races the smooth scroll, since the button can disable between check and click.
+  await carousel.getByRole("group", { name: "1 of 3" }).locator("..").evaluate((track) => {
+    track.scrollTo({ left: track.scrollWidth, behavior: "instant" });
+  });
   await expect(next).toBeDisabled();
 });
