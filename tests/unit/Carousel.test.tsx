@@ -33,8 +33,8 @@ function setup() {
       <p>Hair Dryer</p>
     </Carousel>,
   );
-  const region = screen.getByRole("region", { name: "Best sellers" });
-  const track = screen.getAllByRole("group")[0]!.parentElement!;
+  const region = screen.getByRole("group", { name: "Best sellers" });
+  const track = screen.getByRole("group", { name: "1 of 3" }).parentElement!;
   fakeLayout(track);
   return {
     user,
@@ -49,7 +49,7 @@ function setup() {
 afterEach(() => vi.restoreAllMocks());
 
 describe("Carousel", () => {
-  it("is a labelled carousel region with numbered slides", () => {
+  it("is a labelled carousel group with numbered slides", () => {
     const { region } = setup();
     expect(region).toHaveAttribute("aria-roledescription", "carousel");
     expect(screen.getByRole("group", { name: "1 of 3" })).toHaveAttribute(
@@ -110,7 +110,7 @@ describe("Carousel with several slides visible", () => {
         ))}
       </Carousel>,
     );
-    const track = screen.getAllByRole("group")[0]!.parentElement!;
+    const track = screen.getByRole("group", { name: "1 of 4" }).parentElement!;
     // 4 slides of 100px with a 20px gap in a 340px track → 3 visible → 2 positions.
     Object.defineProperty(track, "clientWidth", { value: 340, configurable: true });
     Object.defineProperty(track, "scrollWidth", { value: 460, configurable: true });

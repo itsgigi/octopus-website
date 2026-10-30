@@ -88,7 +88,9 @@ export function Carousel({ label, children, slideClassName }: CarouselProps) {
   }
 
   return (
-    <section aria-label={label} aria-roledescription="carousel">
+    // role=group (not a <section>/region): the surrounding section is already the landmark, and two
+    // regions with the same name would be announced twice (APG carousel allows either role).
+    <div role="group" aria-label={label} aria-roledescription="carousel">
       <div
         ref={trackRef}
         // Scrollable region must be keyboard-focusable (arrow keys scroll it natively).
@@ -143,6 +145,6 @@ export function Carousel({ label, children, slideClassName }: CarouselProps) {
           />
         </div>
       </Container>
-    </section>
+    </div>
   );
 }
