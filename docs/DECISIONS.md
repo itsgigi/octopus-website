@@ -29,3 +29,11 @@ Ambiguities in the brief / design system and the option chosen. Design-level dis
 | 23 | Explore tiles | Link to the homepage anchors (`/#kitchen`, …); hair care points to the banner section | The brief allows an anchor or a placeholder route; anchors keep users on the demo |
 | 24 | Retailer | "Find us at" shows the text "Partner Retailer" | The retailer logo can't be exported and reproducing a third-party logo is avoided |
 | 25 | Cache lifetime | Default `cacheLife` profile (revalidate 15 min) | Static at build today; with a CMS, content refreshes without a redeploy |
+| 26 | Menu pattern | Disclosure (button + `aria-expanded`/`aria-controls`) with a focus trap, not a modal dialog | The panel is part of the header; a constant "Menu" label plus `aria-expanded` follows WAI-ARIA APG (no label swap) |
+| 27 | Close on route change | Open state stores the pathname it was opened on; `open = openOn === pathname` | Closes on navigation without a `setState` in an effect (React Compiler / `react-hooks` v7 friendly) |
+| 28 | Scroll lock | CSS `html:has([data-scroll-lock])` inside `@variant max-lg` | No JS, uses the breakpoint token, and releases automatically when resizing past 1200px |
+| 29 | Outside click | `pointerdown` listener closes the menu; the dim backdrop is decorative (`aria-hidden`) | Avoids a click handler on a non-interactive element; Escape covers keyboard users |
+| 30 | Nav targets | Header and footer category links point to homepage anchors (`/#kitchen`…); "Where to buy", "Contact us" and "Policies & Terms" go to `/placeholder/*` | Category pages are out of scope; anchors keep the demo navigable |
+| 31 | Placeholder route | `generateStaticParams` returns every `/placeholder/*` href found in the content; unlisted paths still render on request; `noindex` | `dynamicParams` isn't compatible with Cache Components |
+| 32 | UI chrome strings | "Skip to content", "Menu", "Octopus home" stay in components; page copy stays in `src/data` | They're accessibility labels for the interface, not content (a future i18n pass would move them to a dictionary) |
+| 33 | Mobile logo | Mark only below 810px, full logo from tablet | DS §6.2 (mobile pill shows the mark) |

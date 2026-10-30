@@ -20,6 +20,8 @@ Places where AI output was wrong and had to be rewritten. (Kept above the spend 
 | 1 | DS §12 fluid clamps (also AI-written) missed the Figma sizes at the breakpoints, e.g. display 54px instead of 60 at 1200 | Recomputed as two-segment clamps, verified in the browser |
 | 1 | `Text` typed its props as `<p>` props while allowing `as="li"`, which broke the types | Props typed as `HTMLAttributes<HTMLElement>` |
 | 1 | Styleguide used `<Heading as="p">`, outside the allowed heading levels | Used `headingVariants()` on a plain `<p>` |
+| 3 | The scaffold e2e smoke test asserted `<main>` was visible; it failed on WebKit once the homepage became an empty shell | Replaced with tests of the real shell (banner, footer, skip link, mobile menu) |
+| 3 | Mobile menu links were indented more than the logo (ghost button padding + panel padding) | Spotted in the browser and realigned to the 20px logo inset |
 | 1 | `cn` would have merged `font-book` as a font-family (it drops `font-sans`) | Registered custom font-size, font-weight and radius groups in tailwind-merge |
 
 ## Spend log
@@ -32,3 +34,4 @@ Places where AI output was wrong and had to be rewritten. (Kept above the spend 
 | 2026-10-30 14:19 | phase 2 data layer start | $0.2028 | $2.8507 | $3.4652 |
 | 2026-10-30 14:23 | phase 2 data layer end | $1.0194 | $3.8701 | $4.4846 |
 | 2026-10-30 14:26 | phase 3 layout shell start | $0.3247 | $4.1947 | $4.8093 |
+| 2026-10-30 14:31 | phase 3 layout shell end | $1.4881 | $5.6828 | $6.2974 |

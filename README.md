@@ -45,8 +45,11 @@ src/
     globals.css         # design tokens (@theme) — the only place colours, type, radius… are defined
     layout.tsx          # html, Satoshi font, default metadata
     styleguide/         # internal page: all primitives × all states
+    placeholder/[...slug]/ # landing page for out-of-scope links (noindex)
     fonts/              # Satoshi-Variable.woff2 + licence
   components/ui/        # primitives (below)
+  components/layout/    # Navbar (server) · MobileMenu (client island) · Footer · SkipLink
+  hooks/                # useFocusTrap
   data/                 # products.json · categories.json · pages/home.json — all site content
   lib/
     types.ts            # zod schemas → inferred TS types (Product, Category, HomeSection…)
@@ -75,6 +78,13 @@ docs/                   # brief, design system, plan, decisions, AI usage
 - **Responsive radius:** `--radius-card` is 16 on mobile and 24 from tablet up, changed in one place.
 - **Focus:** a visible 2 px outline on every `:focus-visible`, white on red or dark surfaces.
 
+### Layout shell
+
+- **Navbar**: a fixed glass pill (`bg-nav` + `backdrop-blur-nav` + `shadow-nav`), rendered as a Server Component. From 1200px it shows the full links and the "Where to buy" button.
+- **MobileMenu** (below 1200px) is the only client code in the shell. It uses the disclosure pattern (`aria-expanded` + `aria-controls`) and handles focus trap, Escape (focus returns to the toggle), outside click, link click and route change. The page scroll lock is pure CSS (`html:has([data-scroll-lock])`, below `lg` only).
+- **Footer**: the link columns come from `navigation.json` ("Our Products" splits into two sub-columns from tablet). Stacked on mobile.
+- **Skip link** to a focusable `<main>`; every out-of-scope link goes to `/placeholder/*`, which is prerendered from the links found in the data.
+
 ### UI primitives (`src/components/ui`)
 
 | Component        | Notes                                                                                                                                                                                                            |
@@ -91,17 +101,17 @@ docs/                   # brief, design system, plan, decisions, AI usage
 
 ## Progress
 
-| Phase                   | Status | What & why                                                                                                                                             | AI cost |
-| ----------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- |
-| 0 — Scaffold            | ✅     | Next 16 + Tailwind 4 + strict TS, Prettier, Vitest, Playwright, folder structure. Small commits per step, so the history can be reviewed               | $0.99   |
-| 1 — Tokens & primitives | ✅     | `@theme` tokens, Satoshi, the primitives above, logo + favicon, `/styleguide`. Tokens first so every later component is token-only and consistent      | $1.66   |
-| 2 — Data layer          | ✅     | zod-validated JSON (16 products, 4 categories, home sections) + cached loaders. Data first so pages are pure composition and the CMS swap is one layer | $1.02   |
-| 3 — Layout shell        | ⏳     | Navbar + mobile menu, footer, skip link                                                                                                                | —       |
-| 4 — Homepage            | ⏳     | Hero, carousel, category bentos, banners                                                                                                               | —       |
-| 5 — PDP                 | ⏳     | Product info, colour selector, gallery, accordion                                                                                                      | —       |
-| 6 — Motion & polish     | ⏳     | Scroll reveal, hover states                                                                                                                            | —       |
-| 7 — Quality             | ⏳     | e2e, Lighthouse ≥ 90, axe                                                                                                                              | —       |
-| 8 — Ship                | ⏳     | Vercel deploy, final README                                                                                                                            | —       |
+| Phase                   | Status | What & why                                                                                                                                                                                      | AI cost |
+| ----------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| 0 — Scaffold            | ✅     | Next 16 + Tailwind 4 + strict TS, Prettier, Vitest, Playwright, folder structure. Small commits per step, so the history can be reviewed                                                        | $0.99   |
+| 1 — Tokens & primitives | ✅     | `@theme` tokens, Satoshi, the primitives above, logo + favicon, `/styleguide`. Tokens first so every later component is token-only and consistent                                               | $1.66   |
+| 2 — Data layer          | ✅     | zod-validated JSON (16 products, 4 categories, home sections) + cached loaders. Data first so pages are pure composition and the CMS swap is one layer                                          | $1.02   |
+| 3 — Layout shell        | ✅     | Floating navbar, accessible mobile menu below 1200px (focus trap, Escape, closes on route change), data-driven footer, skip link, placeholder route. Shared by both pages, so built before them | $1.49   |
+| 4 — Homepage            | ⏳     | Hero, carousel, category bentos, banners                                                                                                                                                        | —       |
+| 5 — PDP                 | ⏳     | Product info, colour selector, gallery, accordion                                                                                                                                               | —       |
+| 6 — Motion & polish     | ⏳     | Scroll reveal, hover states                                                                                                                                                                     | —       |
+| 7 — Quality             | ⏳     | e2e, Lighthouse ≥ 90, axe                                                                                                                                                                       | —       |
+| 8 — Ship                | ⏳     | Vercel deploy, final README                                                                                                                                                                     | —       |
 
 Detailed checklist: [`docs/PLAN.md`](docs/PLAN.md).
 
@@ -128,12 +138,14 @@ Full lists: [`docs/DECISIONS.md`](docs/DECISIONS.md) (implementation) and [`docs
 
 **How costs are tracked:** `pnpm ai:usage` reads the key's `usage` from OpenRouter at the start and end of each phase and appends a row to [`docs/AI_USAGE.md`](docs/AI_USAGE.md). The key is never printed or committed.
 
-| Phase                   | Cost (USD) | Cumulative |
-| ----------------------- | ---------- | ---------- |
-| 0 — Scaffold            | 0.99       | 0.99       |
-| 1 — Tokens & primitives | 1.66       | 2.65       |
-| README set-up           | 0.20       | 2.85       |
-| 2 — Data layer          | 1.02       | 3.87       |
+| Phase                           | Cost (USD) | Cumulative |
+| ------------------------------- | ---------- | ---------- |
+| 0 — Scaffold                    | 0.99       | 0.99       |
+| 1 — Tokens & primitives         | 1.66       | 2.65       |
+| README set-up                   | 0.20       | 2.85       |
+| 2 — Data layer                  | 1.02       | 3.87       |
+| Phase 2 wrap-up (docs, summary) | 0.32       | 4.19       |
+| 3 — Layout shell                | 1.49       | 5.68       |
 
 **Where the AI output was wrong** (full list in [`docs/AI_USAGE.md` → Corrections](docs/AI_USAGE.md)):
 
@@ -141,6 +153,7 @@ Full lists: [`docs/DECISIONS.md`](docs/DECISIONS.md) (implementation) and [`docs
 - It aimed for TypeScript 7 (latest), which the lint toolchain doesn't support, so it was pinned to 6.0.3.
 - The fluid type formulas in the AI-written design system missed the Figma sizes (54 instead of 60 px at 1200) and were recomputed.
 - It typed `Text` props too narrowly and used `Heading as="p"`; both were caught by `tsc` and fixed.
+- An outdated smoke e2e test failed on WebKit once the homepage became an empty shell, and the mobile menu links were misaligned with the logo; the browser check caught both.
 - A shell redaction command didn't work on macOS and echoed a secret into the local session. Separately, an example config in `docs/` contained a real key. Both were caught before the first commit and the key was flagged for rotation.
 
 ## What I'd do with more time

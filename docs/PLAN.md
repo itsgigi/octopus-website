@@ -27,9 +27,9 @@ Track cost: `pnpm ai:usage "<phase> start"` before, `pnpm ai:usage "<phase> end"
 - [x] Loaders in `src/lib/data` with `'use cache'`; unit test: every slug unique, every product in a valid category
 
 ## Phase 3 — Layout shell
-- [ ] Navbar (floating glass pill), MobileMenu < 1200px (button with `aria-expanded`, focus trap, Escape closes, closes on route change, body scroll lock)
-- [ ] Footer (3 layouts), skip link, placeholder route for out-of-scope links
-- [ ] Tests: MobileMenu open/close/Escape
+- [x] Navbar (floating glass pill), MobileMenu < 1200px (button with `aria-expanded`, focus trap, Escape closes, closes on route change, body scroll lock)
+- [x] Footer (3 layouts), skip link, placeholder route for out-of-scope links
+- [x] Tests: MobileMenu open/close/Escape
 
 ## Phase 4 — Homepage
 - [ ] Hero (poster as LCP + lazy muted video + play/pause), BestSellers (Carousel + CarouselCard), CategorySection (bento variants: kitchen / security / accessories), Banner, ExploreCategories, FindUsBanner
