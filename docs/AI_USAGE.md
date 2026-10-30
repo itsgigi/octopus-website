@@ -41,6 +41,7 @@ Places where AI output was wrong and had to be rewritten. (Kept above the spend 
 | 8 | `FadeInImage` (phase 6) never revealed images that loaded before hydration (`onLoad` was not called), so cards stayed blank once real files existed | Checks `img.complete` on mount; regression test |
 | 8 | `Container` (phase 4, `box-content` + auto margins) shrank inside flex-column parents, putting the banner text over the photo | `container-page` utility with an explicit width |
 | 8 | A `git add -A` in the Firefox e2e commit also committed the user's raw screenshots and a 19 MB screen recording that were being uploaded | Untracked and git-ignored; stage paths explicitly from now on |
+| 8 | Product and category images were resolved at module load, so assets added while `pnpm dev` ran stayed placeholders (first diagnosis blamed only a stale cache and asked for a restart) | Resolved per call, like the homepage sections |
 | 1 | `cn` would have merged `font-book` as a font-family (it drops `font-sans`) | Registered custom font-size, font-weight and radius groups in tailwind-merge |
 
 ## Spend log
