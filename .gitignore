@@ -36,3 +36,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+
+# raw Figma screenshots / screen recordings (processed copies live in public/images/<slot>/)
+public/images/Screenshot *
+public/images/Registrazione schermo *
