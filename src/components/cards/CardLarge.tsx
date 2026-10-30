@@ -6,7 +6,7 @@ import type { Product } from "@/lib/types";
 import { CardContent } from "./CardContent";
 
 const cardVariants = cva(
-  "relative isolate flex aspect-card-medium overflow-hidden rounded-card md:aspect-card-large",
+  "relative isolate flex aspect-card-large-mobile overflow-hidden rounded-card md:aspect-card-large",
   {
     variants: {
       orientation: {
@@ -23,7 +23,7 @@ const cardVariants = cva(
 );
 
 const contentVariants = cva(
-  "w-full p-8 md:max-w-copy md:items-start md:justify-center md:p-10 md:text-left lg:p-20",
+  "w-full gap-6 px-6 pt-10 md:max-w-copy md:items-start md:justify-center md:gap-8 md:p-10 md:text-left lg:p-20",
   {
     variants: {
       orientation: {

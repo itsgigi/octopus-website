@@ -33,6 +33,7 @@ const twMerge = extendTailwindMerge({
         "banner",
         "banner-mobile",
         "card-large",
+        "card-large-mobile",
         "card-medium",
         "card-tall",
         "card-portrait",
