@@ -11,6 +11,11 @@ export function FadeInImage({ alt, className, onLoad, ...props }: ImageProps) {
     <Image
       {...props}
       alt={alt}
+      // An image can finish loading before hydration, so `onLoad` never fires for it:
+      // check `complete` when the element is attached, otherwise it would stay invisible.
+      ref={(img) => {
+        if (img?.complete && img.naturalWidth > 0) setLoaded(true);
+      }}
       onLoad={(event) => {
         setLoaded(true);
         onLoad?.(event);
