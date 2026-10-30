@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/motion/Reveal";
 import { CardLarge } from "@/components/cards/CardLarge";
 import { CardMedium } from "@/components/cards/CardMedium";
 import { CardSmall } from "@/components/cards/CardSmall";
@@ -20,14 +21,16 @@ export function CategorySection({ section }: { section: Section }) {
       aria-labelledby={headingId}
       className="scroll-mt-24 py-10 md:py-20 lg:scroll-mt-28"
     >
-      <Container className="flex flex-col gap-10 md:gap-20">
-        <SectionHeading
-          id={headingId}
-          title={section.categoryData.name}
-          subtitle={section.categoryData.tagline}
-          cta={section.cta}
-        />
-        <Bento layout={section.layout} products={section.products} />
+      <Container>
+        <Reveal className="flex flex-col gap-10 md:gap-20">
+          <SectionHeading
+            id={headingId}
+            title={section.categoryData.name}
+            subtitle={section.categoryData.tagline}
+            cta={section.cta}
+          />
+          <Bento layout={section.layout} products={section.products} />
+        </Reveal>
       </Container>
     </section>
   );

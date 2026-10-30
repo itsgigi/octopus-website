@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/motion/Reveal";
 import { cva, type VariantProps } from "class-variance-authority";
 import type { ReactNode } from "react";
 import { Container } from "@/components/ui/Container";
@@ -28,8 +29,13 @@ type FullBleedBannerProps = VariantProps<typeof bannerVariants> & {
 export function FullBleedBanner({ id, labelledBy, image, tone, children }: FullBleedBannerProps) {
   return (
     <section id={id} aria-labelledby={labelledBy} className={bannerVariants({ tone })}>
-      <Container className="flex flex-col items-center gap-8 py-12 text-center md:items-start md:py-0 md:text-left">
-        {children}
+      <Container className="py-12 md:py-0">
+        <Reveal
+          travel="md"
+          className="flex flex-col items-center gap-8 text-center md:items-start md:text-left"
+        >
+          {children}
+        </Reveal>
       </Container>
       <ProductImage
         src={image.src}

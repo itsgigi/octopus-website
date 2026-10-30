@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/motion/Reveal";
 import { CarouselCard } from "@/components/cards/CarouselCard";
 import { Carousel } from "@/components/carousel/Carousel";
 import { Container } from "@/components/ui/Container";
@@ -11,23 +12,25 @@ export async function BestSellers({ section }: { section: SectionOf<"best-seller
 
   return (
     <section aria-labelledby={`${section.id}-title`} className="pt-20 pb-10 lg:pt-30 lg:pb-15">
-      <Container className="mb-10">
-        <Heading as="h2" size="h3" id={`${section.id}-title`}>
-          {section.title}
-        </Heading>
-      </Container>
-      <Carousel
-        label={section.title}
-        slideClassName="w-carousel-sm max-w-[85vw] md:w-carousel-md lg:w-carousel-lg"
-      >
-        {section.products.map((product) => (
-          <CarouselCard
-            key={product.slug}
-            product={product}
-            categoryName={categoryName(product.category)}
-          />
-        ))}
-      </Carousel>
+      <Reveal>
+        <Container className="mb-10">
+          <Heading as="h2" size="h3" id={`${section.id}-title`}>
+            {section.title}
+          </Heading>
+        </Container>
+        <Carousel
+          label={section.title}
+          slideClassName="w-carousel-sm max-w-[85vw] md:w-carousel-md lg:w-carousel-lg"
+        >
+          {section.products.map((product) => (
+            <CarouselCard
+              key={product.slug}
+              product={product}
+              categoryName={categoryName(product.category)}
+            />
+          ))}
+        </Carousel>
+      </Reveal>
     </section>
   );
 }

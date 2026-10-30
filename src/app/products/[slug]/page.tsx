@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Reveal } from "@/components/motion/Reveal";
 import { FeatureBento } from "@/components/product/FeatureBento";
 import { Downloads } from "@/components/product/Downloads";
 import { ProductInfo } from "@/components/product/ProductInfo";
@@ -66,30 +67,38 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
 
         <div className="order-3 flex flex-col gap-10 md:gap-16 lg:order-none lg:col-start-1 lg:row-start-2 lg:gap-20">
           {lifestyleA ? (
-            <ProductImage
-              src={lifestyleA.src}
-              alt={lifestyleA.alt}
-              aspect="pdp-lifestyle"
-              sizes="(min-width: 1200px) 709px, 100vw"
-            />
+            <Reveal>
+              <ProductImage
+                src={lifestyleA.src}
+                alt={lifestyleA.alt}
+                aspect="pdp-lifestyle"
+                sizes="(min-width: 1200px) 709px, 100vw"
+              />
+            </Reveal>
           ) : null}
-          <FeatureBento features={product.features} />
+          <Reveal>
+            <FeatureBento features={product.features} />
+          </Reveal>
           {lifestyleB ? (
-            <ProductImage
-              src={lifestyleB.src}
-              alt={lifestyleB.alt}
-              aspect="pdp-lifestyle"
-              sizes="(min-width: 1200px) 709px, 100vw"
-            />
+            <Reveal>
+              <ProductImage
+                src={lifestyleB.src}
+                alt={lifestyleB.alt}
+                aspect="pdp-lifestyle"
+                sizes="(min-width: 1200px) 709px, 100vw"
+              />
+            </Reveal>
           ) : null}
           {product.specs.length > 0 || product.downloads.length > 0 ? (
-            <section aria-labelledby="details-title" className="flex flex-col gap-4">
-              <VisuallyHidden>
-                <h2 id="details-title">Product details</h2>
-              </VisuallyHidden>
-              <SpecsAccordion specs={product.specs} />
-              <Downloads downloads={product.downloads} />
-            </section>
+            <Reveal>
+              <section aria-labelledby="details-title" className="flex flex-col gap-4">
+                <VisuallyHidden>
+                  <h2 id="details-title">Product details</h2>
+                </VisuallyHidden>
+                <SpecsAccordion specs={product.specs} />
+                <Downloads downloads={product.downloads} />
+              </section>
+            </Reveal>
           ) : null}
         </div>
       </Container>
