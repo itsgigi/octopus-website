@@ -29,6 +29,11 @@ export function Hero({ section }: { section: SectionOf<"hero"> }) {
         className="absolute inset-0 -z-10"
       />
       {video ? <HeroVideo src={video} poster={poster.src} /> : null}
+      {/* Light scrim behind the heading: the product passes under the text in some frames. */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 -z-10 h-2/3 bg-linear-to-b from-canvas/90 from-0% via-canvas/75 via-45% to-transparent"
+      />
       <Container className="flex flex-col items-center gap-8 pt-32 text-center lg:pt-40">
         <div className="flex flex-col items-center gap-4">
           <Heading as="h1" size="display" id="hero-title">

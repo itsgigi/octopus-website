@@ -37,6 +37,8 @@ type ProductImageProps = VariantProps<typeof frameVariants> & {
   /** Only for the LCP image. */
   priority?: boolean;
   fit?: "cover" | "contain";
+  /** Classes for the <img> itself, e.g. an object-position to choose the crop. */
+  imageClassName?: string;
   className?: string;
 };
 
@@ -53,6 +55,7 @@ export function ProductImage({
   aspect,
   rounded,
   tone,
+  imageClassName,
   className,
 }: ProductImageProps) {
   return (
@@ -64,7 +67,7 @@ export function ProductImage({
           fill
           sizes={sizes}
           priority={priority}
-          className={fit === "cover" ? "object-cover" : "object-contain"}
+          className={cn(fit === "cover" ? "object-cover" : "object-contain", imageClassName)}
         />
       ) : (
         <div

@@ -10,7 +10,13 @@ import type { SectionOf } from "./types";
 export function Banner({ section }: { section: SectionOf<"banner"> }) {
   const titleId = `${section.id}-title`;
   return (
-    <FullBleedBanner id={section.id} labelledBy={titleId} image={section.image}>
+    <FullBleedBanner
+      id={section.id}
+      labelledBy={titleId}
+      image={section.image}
+      // Mobile shows the photo under the text: keep the dryer and the face in the crop.
+      imageClassName="object-[75%_50%] md:object-center"
+    >
       <div className="flex flex-col gap-4">
         <Heading as="h2" size="h2" id={titleId}>
           {section.title}

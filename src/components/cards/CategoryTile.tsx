@@ -11,6 +11,7 @@ export function CategoryTile({ category }: { category: Category }) {
         src={category.image.src}
         alt={category.image.alt}
         sizes="(min-width: 810px) 25vw, 50vw"
+        fit="contain"
         className="transition-transform duration-300 group-hover:scale-[1.02]"
       />
       <span className="text-center text-body-lg font-medium text-ink group-hover:underline">

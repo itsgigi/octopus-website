@@ -8,7 +8,13 @@ import type { SectionOf } from "./types";
 export function FindUsBanner({ section }: { section: SectionOf<"find-us"> }) {
   const titleId = `${section.id}-title`;
   return (
-    <FullBleedBanner id={section.id} labelledBy={titleId} image={section.image} tone="brand">
+    <FullBleedBanner
+      id={section.id}
+      labelledBy={titleId}
+      image={section.image}
+      tone="brand"
+      media="side"
+    >
       <div className="flex flex-col gap-6">
         <Heading as="h2" size="h2" tone="inverse" id={titleId}>
           {section.title}

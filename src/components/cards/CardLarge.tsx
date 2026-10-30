@@ -11,8 +11,11 @@ const cardVariants = cva(
     variants: {
       orientation: {
         horizontal: "",
-        /** Security bento: tall card in the left column on desktop, text centred on top. */
-        "vertical-on-desktop": "lg:aspect-auto lg:h-full lg:min-h-full",
+        /**
+         * Security bento: text centred on top of a portrait photo. Tall (4:5) on tablet, because the
+         * only asset is portrait; fills the left column on desktop.
+         */
+        "vertical-on-desktop": "md:aspect-card-tall lg:aspect-auto lg:h-full lg:min-h-full",
       },
     },
     defaultVariants: { orientation: "horizontal" },
@@ -25,7 +28,7 @@ const contentVariants = cva(
     variants: {
       orientation: {
         horizontal: "",
-        "vertical-on-desktop": "lg:max-w-none lg:items-center lg:justify-start lg:text-center",
+        "vertical-on-desktop": "md:mx-auto md:items-center md:justify-start md:text-center",
       },
     },
   },
@@ -47,6 +50,7 @@ export function CardLarge({ product, orientation, className }: CardLargeProps) {
         aspect="fill"
         rounded={false}
         sizes="(min-width: 1200px) 1344px, 100vw"
+        imageClassName={orientation === "vertical-on-desktop" ? "object-bottom" : undefined}
         className="absolute inset-0 -z-10"
       />
       <CardContent

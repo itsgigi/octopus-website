@@ -56,6 +56,8 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
             alt={product.image.alt}
             aspect="pdp-product"
             fit="contain"
+            // Breathing room around the cut-out (object-fit applies to the content box).
+            imageClassName="p-10 md:p-16 lg:p-20"
             priority
             sizes="(min-width: 1200px) 709px, 100vw"
           />
