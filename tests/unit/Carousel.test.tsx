@@ -9,7 +9,10 @@ function fakeLayout(track: HTMLElement) {
   Object.defineProperty(track, "clientWidth", { value: SLIDE, configurable: true });
   Object.defineProperty(track, "scrollWidth", { value: SLIDE * 3, configurable: true });
   [...track.children].forEach((slide, i) =>
-    Object.defineProperty(slide, "offsetLeft", { value: i * SLIDE, configurable: true }),
+    Object.defineProperties(slide, {
+      offsetLeft: { value: i * SLIDE, configurable: true },
+      offsetWidth: { value: SLIDE, configurable: true },
+    }),
   );
   track.scrollTo = vi.fn(({ left }: ScrollToOptions) => {
     track.scrollLeft = left ?? 0;
@@ -91,5 +94,33 @@ describe("Carousel", () => {
   it("keeps the track keyboard-focusable", () => {
     const { track } = setup();
     expect(track).toHaveAttribute("tabindex", "0");
+  });
+});
+
+describe("Carousel with several slides visible", () => {
+  it("shows one dot per reachable position, not per slide", () => {
+    vi.spyOn(window, "requestAnimationFrame").mockImplementation((cb) => {
+      cb(0);
+      return 0;
+    });
+    render(
+      <Carousel label="Best sellers">
+        {["A", "B", "C", "D"].map((name) => (
+          <p key={name}>{name}</p>
+        ))}
+      </Carousel>,
+    );
+    const track = screen.getAllByRole("group")[0]!.parentElement!;
+    // 4 slides of 100px with a 20px gap in a 340px track → 3 visible → 2 positions.
+    Object.defineProperty(track, "clientWidth", { value: 340, configurable: true });
+    Object.defineProperty(track, "scrollWidth", { value: 460, configurable: true });
+    [...track.children].forEach((slide, i) =>
+      Object.defineProperties(slide, {
+        offsetLeft: { value: i * 120, configurable: true },
+        offsetWidth: { value: 100, configurable: true },
+      }),
+    );
+    act(() => track.dispatchEvent(new Event("scroll")));
+    expect(screen.getAllByRole("button", { name: /Go to slide/ })).toHaveLength(2);
   });
 });
