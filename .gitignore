@@ -1,0 +1,23 @@
+# secrets — never commit
+.claude/settings.local.json
+.env*
+!.env.example
+
+# deps & build
+node_modules/
+.next/
+out/
+build/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+
+# tests
+/test-results/
+/playwright-report/
+/playwright/.cache/
+
+# misc
+.DS_Store
+*.log
+.vercel
