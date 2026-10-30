@@ -44,7 +44,7 @@ Ambiguities in the brief / design system and the option chosen. Design-level dis
 | 38 | Container | `box-content`: max-width applies to the content (1344), the gutter sits outside | Matches Figma: content is 1344 wide at 1600, starting at 128 |
 | 39 | PDP grid | One CSS grid + `order`: mobile image → info → gallery, tablet info → image → gallery, desktop 709fr/555fr columns with the info column `sticky` | No duplicated markup per breakpoint; verified 709×900 gallery and 355 info content at 1600 |
 | 40 | Colour selector | Native `<input type="radio">` styled as swatches inside a `<fieldset>` | Arrow keys, roving tabindex and announcements for free; less code than an ARIA radiogroup |
-| 41 | Downloads | Its own box, but also an accordion item | The brief lists Downloads among the sections that expand and collapse; DS §6.11 draws it as a separate box |
+| 41 | Downloads | Static box separate from the specs accordion: title left, file links (icon + label) right | As in Figma (developer's call over the first reading of the brief). Links are always visible, so nothing to expand |
 | 42 | Accordion panels | Always in the DOM; closed = `inert` + `aria-hidden`, `grid-rows` transition | Animatable height without measuring; closed links leave the tab order |
 | 43 | Mobile CTA | Sticky bottom bar below 810px; the in-flow button is hidden there; `body:has([data-sticky-cta])` adds bottom padding so the footer isn't covered | DS §6.9 |
 | 44 | Unknown product slug | `notFound()` renders the 404 UI with `noindex`, but the HTTP status is 200 | With Partial Prefetching the shell has already started streaming; every real product is prerendered, so this only affects invented URLs |

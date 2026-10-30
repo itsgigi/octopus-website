@@ -100,7 +100,7 @@ docs/                   # brief, design system, plan, decisions, AI usage
 
 - **One grid, three layouts:** CSS `order` plus explicit desktop placement gives image → info → gallery (mobile), info → image → gallery (tablet), and gallery 709 + sticky info 555 (desktop). Verified against the Figma sizes at 1600.
 - **ColourSelector** (client): native radios styled as swatches, so arrow keys and announcements come from the platform. The legend reads "Colour - {selected}".
-- **Accordion** (client): each section toggles on its own (heading > button, `aria-expanded`/`aria-controls`, labelled region). Closed panels are `inert`, and the height animates with `grid-rows`. Used for the three spec sections and for Downloads.
+- **Accordion** (client): each section toggles on its own (heading > button, `aria-expanded`/`aria-controls`, labelled region). Closed panels are `inert`, and the height animates with `grid-rows`. Used for the three spec sections; Downloads is a static box next to it, as in Figma.
 - **Best sellers:** the same `Carousel` with `ProductCard`s, 2 / 3 / 5 visible; Next stops at the last reachable position. On mobile "Where to buy" becomes a sticky bottom bar.
 
 ### UI primitives (`src/components/ui`)
@@ -172,7 +172,7 @@ Reports: [`docs/lighthouse/`](docs/lighthouse/) (HTML + JSON; Lighthouse 13.6, m
 | 2 — Data layer          | ✅     | zod-validated JSON (16 products, 4 categories, home sections) + cached loaders. Data first so pages are pure composition and the CMS swap is one layer                                                   | $1.02         |
 | 3 — Layout shell        | ✅     | Floating navbar, accessible mobile menu below 1200px (focus trap, Escape, closes on route change), data-driven footer, skip link, placeholder route. Shared by both pages, so built before them          | $1.49         |
 | 4 — Homepage            | ✅     | Hero (poster as LCP, optional video + pause), scroll-snap carousel, three category bentos, hair care and find-us banners, explore tiles — all composed from `home.json`                                  | $2.18         |
-| 5 — PDP                 | ✅     | `products/[slug]` with static params + OG, sticky product info, native-radio colour selector, feature bento, accessible specs and downloads accordion, 2/3/5-up best sellers, mobile sticky CTA          | $1.25         |
+| 5 — PDP                 | ✅     | `products/[slug]` with static params + OG, sticky product info, native-radio colour selector, feature bento, accessible specs accordion + downloads box, 2/3/5-up best sellers, mobile sticky CTA        | $1.25         |
 | 6 — Motion & polish     | ✅     | CSS scroll reveal with one shared IntersectionObserver (DS §8 timings, reduced-motion = fade only, visible without JS), image fade-in for real assets. LCP content is never animated                     | subscription² |
 | 7 — Quality             | ✅     | e2e Home → PDP on 5 browser projects, no-overflow sweep at 11 widths, axe WCAG 2.2 AA, Lighthouse mobile 100 on both pages. Fixed the duplicate carousel landmark and two generic link names it surfaced | subscription  |
 | 8 — Ship                | ⏳     | Vercel deploy, final README                                                                                                                                                                              | —             |
