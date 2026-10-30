@@ -31,3 +31,4 @@ Places where AI output was wrong and had to be rewritten. (Kept above the spend 
 | 2026-10-30 14:15 | phase 1 tokens & primitives | $1.6608 | $2.6479 | $3.2625 |
 | 2026-10-30 14:19 | phase 2 data layer start | $0.2028 | $2.8507 | $3.4652 |
 | 2026-10-30 14:23 | phase 2 data layer end | $1.0194 | $3.8701 | $4.4846 |
+| 2026-10-30 14:26 | phase 3 layout shell start | $0.3247 | $4.1947 | $4.8093 |

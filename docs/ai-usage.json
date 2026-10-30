@@ -1,6 +1,6 @@
 {
   "baseline": 0.61456875,
-  "last": 4.48462375,
+  "last": 4.80929815,
   "snapshots": [
     {
       "at": "2026-10-30 14:04",
@@ -36,6 +36,13 @@
       "usage": 4.48462375,
       "sinceLast": 1.0193825999999997,
       "sinceStart": 3.870055
+    },
+    {
+      "at": "2026-10-30 14:26",
+      "label": "phase 3 layout shell start",
+      "usage": 4.80929815,
+      "sinceLast": 0.32467440000000014,
+      "sinceStart": 4.1947294
     }
   ]
 }

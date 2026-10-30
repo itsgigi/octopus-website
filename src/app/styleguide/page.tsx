@@ -109,7 +109,7 @@ function Caption({ children }: { children: ReactNode }) {
 
 export default function StyleguidePage() {
   return (
-    <main id="main" className="py-16">
+    <div className="pt-32 pb-16 lg:pt-40">
       <Container className="flex flex-col gap-16">
         <header className="flex flex-col gap-4">
           <Text size="body-lg" tone="accent">
@@ -301,6 +301,6 @@ export default function StyleguidePage() {
           </Text>
         </Section>
       </Container>
-    </main>
+    </div>
   );
 }
