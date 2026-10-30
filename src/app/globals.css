@@ -51,6 +51,8 @@
   --text-display--font-weight: 700;
   --text-section-sm: 2rem; /* 32 — home category titles on mobile */
   --text-section-sm--line-height: 1.1;
+  --text-section-md: 2.5rem; /* 40 — home category titles on tablet */
+  --text-section-md--line-height: 1.1;
   --text-h2: clamp(2rem, 1.5074rem + 1.9608vw, 2.5rem); /* 32 → 40 */
   --text-h2--line-height: 1.1;
   --text-h2--font-weight: 700;

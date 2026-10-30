@@ -10,10 +10,10 @@ const cardVariants = cva("relative isolate flex overflow-hidden rounded-card bg-
   variants: {
     shape: {
       /**
-       * Full row: text on the left, subject on the right. On mobile the row is too narrow for
-       * both, so the text stacks above the photo.
+       * Full row: text on the left, subject on the right (desktop). Below 1200 the gallery column
+       * is too narrow for both, so the text stacks above the photo.
        */
-      wide: "flex-col md:aspect-feature-wide md:flex-row md:items-center lg:col-span-2",
+      wide: "flex-col lg:col-span-2 lg:aspect-feature-wide lg:flex-row lg:items-center",
       /** Half row on desktop: text on top of the photo. */
       tall: "aspect-feature-tall flex-col",
     },
@@ -24,7 +24,7 @@ const cardVariants = cva("relative isolate flex overflow-hidden rounded-card bg-
 const imageVariants = cva("", {
   variants: {
     shape: {
-      wide: "aspect-photo md:absolute md:inset-0 md:-z-10 md:aspect-auto md:h-full",
+      wide: "aspect-photo lg:absolute lg:inset-0 lg:-z-10 lg:aspect-auto lg:h-full",
       tall: "absolute inset-0 -z-10",
     },
   },
@@ -42,7 +42,7 @@ export function FeatureCard({ feature, shape, className }: FeatureCardProps) {
       <div
         className={cn(
           "flex flex-col gap-2 p-6 md:p-8",
-          s === "wide" && "md:w-1/2 lg:py-12 lg:pr-0 lg:pl-12",
+          s === "wide" && "lg:w-1/2 lg:py-12 lg:pr-0 lg:pl-12",
         )}
       >
         <Heading as="h3" size="title">

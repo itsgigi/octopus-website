@@ -36,9 +36,8 @@ export async function generateMetadata({
 }
 
 /**
- * PDP. One grid, three arrangements:
- * mobile  = main image → info → gallery;  tablet = info → main image → gallery;
- * desktop = gallery column (709) + sticky info column (555), gap 80.
+ * PDP. Mobile stacks main image → info → gallery; from tablet it is the Figma two-column layout:
+ * gallery column (709fr) + sticky info column (555fr), gap 40 on tablet and 80 on desktop.
  */
 export default async function ProductPage({ params }: PageProps<"/products/[slug]">) {
   const product = await getProduct((await params).slug);
@@ -49,8 +48,8 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
 
   return (
     <>
-      <Container className="grid gap-y-10 pt-24 md:gap-y-16 md:pt-32 lg:grid-cols-[minmax(0,709fr)_minmax(0,555fr)] lg:gap-x-20 lg:gap-y-20 lg:pt-30">
-        <div className="order-1 md:order-2 lg:order-0 lg:col-start-1 lg:row-start-1">
+      <Container className="grid gap-y-10 pt-24 md:grid-cols-[minmax(0,709fr)_minmax(0,555fr)] md:gap-x-10 md:gap-y-16 md:pt-32 lg:gap-x-20 lg:gap-y-20 lg:pt-30">
+        <div className="order-1 md:order-0 md:col-start-1 md:row-start-1">
           <ProductImage
             src={product.image.src}
             alt={product.image.alt}
@@ -58,24 +57,24 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
             fit="contain"
             // Breathing room around the cut-out (object-fit applies to the content box). On desktop
             // the product spans from the title to the CTA of the info column, as in Figma.
-            imageClassName="p-10 md:p-16 lg:px-20 lg:pt-20 lg:pb-50"
+            imageClassName="p-10 lg:px-20 lg:pt-20 lg:pb-50"
             priority
-            sizes="(min-width: 1200px) 709px, 100vw"
+            sizes="(min-width: 1200px) 709px, (min-width: 810px) 56vw, 100vw"
           />
         </div>
 
-        <div className="order-2 md:order-1 lg:order-0 lg:col-start-2 lg:row-span-2 lg:row-start-1">
+        <div className="order-2 md:order-0 md:col-start-2 md:row-span-2 md:row-start-1">
           <ProductInfo product={product} cta={cta} />
         </div>
 
-        <div className="order-3 flex flex-col gap-10 md:gap-16 lg:order-0 lg:col-start-1 lg:row-start-2 lg:gap-20">
+        <div className="order-3 flex flex-col gap-10 md:order-0 md:col-start-1 md:row-start-2 md:gap-16 lg:gap-20">
           {lifestyleA ? (
             <Reveal>
               <ProductImage
                 src={lifestyleA.src}
                 alt={lifestyleA.alt}
                 aspect="pdp-lifestyle"
-                sizes="(min-width: 1200px) 709px, 100vw"
+                sizes="(min-width: 1200px) 709px, (min-width: 810px) 56vw, 100vw"
               />
             </Reveal>
           ) : null}
@@ -88,7 +87,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
                 src={lifestyleB.src}
                 alt={lifestyleB.alt}
                 aspect="pdp-lifestyle"
-                sizes="(min-width: 1200px) 709px, 100vw"
+                sizes="(min-width: 1200px) 709px, (min-width: 810px) 56vw, 100vw"
               />
             </Reveal>
           ) : null}

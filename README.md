@@ -98,7 +98,7 @@ docs/                   # brief, design system, plan, decisions, AI usage
 
 `app/products/[slug]/page.tsx` prerenders every product (`generateStaticParams`), returns `notFound()` for unknown slugs and builds title, description and Open Graph from the data.
 
-- **One grid, three layouts:** CSS `order` plus explicit desktop placement gives image → info → gallery (mobile), info → image → gallery (tablet), and gallery 709 + sticky info 555 (desktop). Verified against the Figma sizes at 1600.
+- **One grid, two layouts:** CSS `order` gives image → info → gallery on mobile; from tablet the Figma two-column layout, gallery 709fr + sticky info 555fr (gap 40 on tablet, 80 on desktop). In the narrower tablet column the wide feature cards stack their text above the photo.
 - **ColourSelector** (client): native radios styled as swatches, so arrow keys and announcements come from the platform. The legend reads "Colour - {selected}".
 - **Accordion** (client): each section toggles on its own (heading > button, `aria-expanded`/`aria-controls`, labelled region). Closed panels are `inert`, and the height animates with `grid-rows`. Used for the three spec sections; Downloads is a static box next to it, as in Figma.
 - **Best sellers:** the same `Carousel` with `ProductCard`s, 2 / 3 / 5 visible; Next stops at the last reachable position. On mobile "Where to buy" becomes a sticky bottom bar.

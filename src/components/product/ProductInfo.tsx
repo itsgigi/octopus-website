@@ -9,7 +9,7 @@ type ProductInfoProps = { product: Product; cta: Link };
 /** Title, description, colour selector and "Where to buy" (sticky beside the gallery on desktop). */
 export function ProductInfo({ product, cta }: ProductInfoProps) {
   return (
-    <div className="flex flex-col gap-8 lg:sticky lg:top-30 lg:mx-auto lg:w-full lg:max-w-pdp-info lg:pt-30">
+    <div className="flex flex-col gap-8 md:sticky md:top-30 md:mx-auto md:w-full md:max-w-pdp-info md:pt-10 lg:pt-30">
       <div className="flex flex-col gap-4">
         <Heading as="h1" size="h2">
           {product.name}
