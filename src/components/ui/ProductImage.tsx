@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/cn";
+import { FadeInImage } from "./FadeInImage";
 import { LogoMark } from "./Logo";
 
 const frameVariants = cva("relative w-full overflow-hidden bg-surface", {
@@ -58,7 +58,7 @@ export function ProductImage({
   return (
     <div className={cn(frameVariants({ aspect, rounded, tone }), className)}>
       {src ? (
-        <Image
+        <FadeInImage
           src={src}
           alt={alt}
           fill
