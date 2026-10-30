@@ -1,26 +1,139 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * Design tokens — single source of truth (docs/DESIGN_SYSTEM.md §12).
+ * Components use these through Tailwind utilities only (bg-brand, text-ink-muted, rounded-card…).
+ */
+@theme {
+  /* Breakpoints (mobile-first): tablet ≥ 810, desktop ≥ 1200 */
+  --breakpoint-*: initial;
+  --breakpoint-md: 810px;
+  --breakpoint-lg: 1200px;
+
+  /* Colours — brand */
+  --color-brand: #de2027;
+  --color-brand-hover: #c2151b; /* Figma #f23f45 fails AA with white text (3.8:1) */
+  --color-brand-border: #c2151b;
+  --color-brand-pressed: #b1191e;
+
+  /* Colours — text */
+  --color-ink: #1b1b1b;
+  --color-ink-muted: #575757;
+  --color-ink-nav: #414141;
+  --color-ink-disabled: #bdbdbd;
+  --color-ink-inverse: #ffffff;
+
+  /* Colours — surfaces & lines */
+  --color-canvas: #ffffff;
+  --color-surface: #f9f9f9;
+  --color-surface-strong: #f5f5f5;
+  --color-line: #e8e8e8;
+  --color-line-subtle: #f5f5f5;
+  --color-line-swatch: rgb(0 0 0 / 0.08);
+  --color-dark: #2c2c2c;
+  --color-nav: rgb(255 255 255 / 0.85);
+  --color-overlay-inverse: rgb(255 255 255 / 0.16);
+
+  /* Colours — focus. `focus` is the Figma halo; `focus-ring` is its opaque base,
+     used for the outline so the indicator reaches 3:1 non-text contrast. */
+  --color-focus: rgb(32 105 232 / 0.35);
+  --color-focus-ring: #2069e8;
+
+  /* Font */
+  --font-weight-book: 470;
+
+  /*
+   * Type scale. Headings are fluid in two segments so they hit the Figma values exactly at
+   * 402 (mobile frame), 810 and 1200: base clamp covers 402→810, the md override 810→1200.
+   */
+  --text-display: clamp(2.5rem, 2.0074rem + 1.9608vw, 3rem); /* 40 → 48 */
+  --text-display--line-height: 1.1;
+  --text-display--font-weight: 700;
+  --text-h2: clamp(2rem, 1.5074rem + 1.9608vw, 2.5rem); /* 32 → 40 */
+  --text-h2--line-height: 1.1;
+  --text-h2--font-weight: 700;
+  --text-h3: clamp(1.5rem, 1.2537rem + 0.9804vw, 1.75rem); /* 24 → 28 */
+  --text-h3--line-height: 1.1;
+  --text-h3--font-weight: 700;
+  --text-subtitle: clamp(1.125rem, 1.0018rem + 0.4902vw, 1.25rem); /* 18 → 20 */
+  --text-subtitle--line-height: 1.2;
+  --text-card: clamp(1rem, 0.8768rem + 0.4902vw, 1.125rem); /* 16 → 18 */
+  --text-card--line-height: 1.3;
+  --text-title: 1.25rem; /* Title/Bold 20 */
+  --text-title--line-height: 1.2;
+  --text-title-lg: 1.5rem; /* Title/Bold 24 */
+  --text-title-lg--line-height: 1.2;
+  --text-body: 1rem; /* Figma 100%; 1.3 for multi-line readability */
+  --text-body--line-height: 1.3;
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.3;
+  --text-cta: 1rem;
+  --text-cta--line-height: 1.1;
+  --text-cta--font-weight: 500;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.1;
+  --text-tiny: 0.625rem;
+  --text-tiny--line-height: 1.1;
+
+  /* Radius (card is 16 on mobile, 24 from tablet — see md override) */
+  --radius-card: 1rem;
+  --radius-nav: 2rem;
+  --radius-specifics: 1rem;
+
+  /* Layout */
+  --container-content: 84rem; /* 1344 */
+  --container-copy: 28.125rem; /* 450 — card / banner text column */
+
+  /* Aspect ratios of the image slots */
+  --aspect-banner: 12 / 5;
+  --aspect-card-large: 1344 / 755;
+  --aspect-card-medium: 3 / 4;
+  --aspect-pdp-product: 709 / 900;
+  --aspect-pdp-lifestyle: 709 / 945;
+
+  /* Effects */
+  --shadow-nav: 0 0 16px 8px rgb(0 0 0 / 0.08);
+  --blur-nav: 32px; /* Figma background blur 64 */
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
+@layer theme {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    @variant md {
+      --text-display: clamp(3rem, 1.4423rem + 3.0769vw, 3.75rem); /* 48 → 60 */
+      --text-h2: clamp(2.5rem, 1.9808rem + 1.0256vw, 2.75rem); /* 40 → 44 */
+      --text-h3: clamp(1.75rem, 1.2308rem + 1.0256vw, 2rem); /* 28 → 32 */
+      --text-subtitle: clamp(1.25rem, 0.7308rem + 1.0256vw, 1.5rem); /* 20 → 24 */
+      --text-card: clamp(1.125rem, 0.8654rem + 0.5128vw, 1.25rem); /* 18 → 20 */
+      --radius-card: 1.5rem;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-canvas font-sans text-body text-ink antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-focus-ring;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
