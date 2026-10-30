@@ -351,7 +351,7 @@ Export is disabled, so **no original image can be downloaded**. Strategy (allowe
 - Neutral placeholders with the **exact aspect ratio** of each slot (product tile 1:1, medium image 1:1, large card 16:9, banner 2.4:1, hero video 16:9 → poster image, PDP images 709 × 900 / 709 × 945).
 - One `ImagePlaceholder` / `next/image` wrapper so real assets can be dropped in `public/images` later without touching components.
 - Logo & icons re-drawn as inline SVG (simple shapes) — logo approximated, flagged in README.
-- Find-us banner: The Warehouse icon (SVG, decorative) + retailer name as text.
+- Find-us banner: The Warehouse lockup as an image (alt = retailer name).
 
 Original Figma filenames (for future replacement): `OctopusHairDryer_4K.mp4`, `Hair_Dryer Final_rev04_Resized.png`, `BANNER_003_FOTOMOD…`, `Octopus Indoor Camera.png`, `Octops Blender 灰底-02.png`, …
 

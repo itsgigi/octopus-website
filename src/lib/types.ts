@@ -129,7 +129,7 @@ export const HomeSectionSchema = z.discriminatedUnion("type", [
     id: slug,
     title: z.string(),
     retailer: z.string(),
-    /** Retailer brand icon shown before the name (decorative: the name is the text). */
+    /** Retailer lockup (white on transparent); `retailer` is its alt text and the fallback. */
     retailerLogo: z.string().startsWith("/images/").optional(),
     cta: LinkSchema,
     image: ImageRefSchema,

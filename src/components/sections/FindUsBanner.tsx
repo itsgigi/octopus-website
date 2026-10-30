@@ -4,7 +4,7 @@ import { Heading } from "@/components/ui/Heading";
 import { FullBleedBanner } from "./FullBleedBanner";
 import type { SectionOf } from "./types";
 
-/** Red "Find us at" banner: retailer icon + name, CTA to the store locator. */
+/** Red "Find us at" banner: retailer lockup (name as text if no logo), CTA to the store locator. */
 export function FindUsBanner({ section }: { section: SectionOf<"find-us"> }) {
   const titleId = `${section.id}-title`;
   return (
@@ -19,20 +19,18 @@ export function FindUsBanner({ section }: { section: SectionOf<"find-us"> }) {
         <Heading as="h2" size="h2" tone="inverse" id={titleId}>
           {section.title}
         </Heading>
-        <p className="flex items-center gap-3 text-ink-inverse max-md:justify-center">
-          {section.retailerLogo ? (
-            // Decorative: the retailer name follows as text. SVG, so no optimisation needed.
-            <Image
-              src={section.retailerLogo}
-              alt=""
-              width={40}
-              height={40}
-              unoptimized
-              className="size-10"
-            />
-          ) : null}
-          <span className="text-h3 font-bold">{section.retailer}</span>
-        </p>
+        {section.retailerLogo ? (
+          <Image
+            src={section.retailerLogo}
+            alt={section.retailer}
+            width={1037}
+            height={192}
+            sizes="(min-width: 810px) 40vw, 100vw"
+            className="h-auto w-full max-w-copy md:max-w-none"
+          />
+        ) : (
+          <p className="text-h3 font-bold text-ink-inverse">{section.retailer}</p>
+        )}
       </div>
       <Button href={section.cta.href} variant="secondary">
         {section.cta.label}
