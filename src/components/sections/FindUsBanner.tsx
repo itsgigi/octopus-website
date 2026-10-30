@@ -15,8 +15,8 @@ export function FindUsBanner({ section }: { section: SectionOf<"find-us"> }) {
       tone="brand"
       media="side"
     >
-      <div className="flex flex-col gap-6">
-        <Heading as="h2" size="h2" tone="inverse" id={titleId}>
+      <div className="flex flex-col gap-3">
+        <Heading as="h2" size="h3" tone="inverse" id={titleId}>
           {section.title}
         </Heading>
         {section.retailerLogo ? (
@@ -25,8 +25,8 @@ export function FindUsBanner({ section }: { section: SectionOf<"find-us"> }) {
             alt={section.retailer}
             width={1037}
             height={192}
-            sizes="(min-width: 810px) 40vw, 100vw"
-            className="h-auto w-full max-w-copy md:max-w-none"
+            sizes="(min-width: 810px) 450px, 100vw"
+            className="h-auto w-full max-w-copy"
           />
         ) : (
           <p className="text-h3 font-bold text-ink-inverse">{section.retailer}</p>
