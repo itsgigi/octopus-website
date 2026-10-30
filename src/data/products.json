@@ -152,7 +152,8 @@
     "lifestyleImages": [
       {
         "src": "/images/lifestyle/octopus-indoor-camera-1.jpg",
-        "alt": "The indoor camera on a living-room shelf"
+        "srcLandscape": "/images/lifestyle/octopus-indoor-camera-1-landscape.jpg",
+        "alt": "The indoor camera on a wooden shelf against a sunlit wall"
       }
     ],
     "bestSeller": true,

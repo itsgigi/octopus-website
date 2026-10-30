@@ -10,8 +10,11 @@ const publicDir = path.join(process.cwd(), "public");
  * /public/images is enough for it to show up on the next build — no JSON or code change.
  */
 export function resolveImage(image: ImageRef): ImageRef {
-  if (!image.src) return image;
-  return existsSync(path.join(publicDir, image.src)) ? image : { alt: image.alt };
+  if (!image.src || !existsSync(path.join(publicDir, image.src))) return { alt: image.alt };
+  const { srcLandscape, ...rest } = image;
+  return srcLandscape && existsSync(path.join(publicDir, srcLandscape))
+    ? { ...rest, srcLandscape }
+    : rest;
 }
 
 /** Same rule for non-image assets (hero video): undefined when the file isn't in /public. */

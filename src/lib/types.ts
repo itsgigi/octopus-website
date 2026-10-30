@@ -16,6 +16,8 @@ const slug = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "kebab-case slug");
 export const ImageRefSchema = z.object({
   src: z.string().startsWith("/images/").optional(),
   alt: z.string(),
+  /** Landscape crop of the same photo, for slots that turn landscape (Card Large on tablet). */
+  srcLandscape: z.string().startsWith("/images/").optional(),
   /** Subject position kept in view when the image is cropped (CSS object-position, e.g. "70% 50%"). */
   focus: z
     .string()
