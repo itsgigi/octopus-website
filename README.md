@@ -4,7 +4,19 @@ Demo of two pages of the Octopus consumer-electronics site — **Homepage** and 
 
 **Live:** https://octopus-website-phi.vercel.app · [Homepage](https://octopus-website-phi.vercel.app) · [PDP — Octopus Countertop Blender](https://octopus-website-phi.vercel.app/products/octopus-countertop-blender)
 
-**Lighthouse on the live site: 100 / 100 / 100 / 100 on the homepage, desktop and mobile** (details and the PDP in [Lighthouse](#lighthouse)).
+**Lighthouse on the live site: 100 / 100 / 100 / 100 on the homepage, desktop and mobile** ([PageSpeed Insights report](https://pagespeed.web.dev/analysis/https-octopus-website-phi-vercel-app/6uao75nz92?form_factor=mobile); details and the PDP in [Lighthouse](#lighthouse)).
+
+## Constraints
+
+**No editor access to the Figma file.** The file was shared view-only with export disabled, so I couldn't download any asset or use Dev Mode to inspect exact values. To get as close to pixel-perfect as possible:
+
+- Every value (sizes, spacing, type scale, colours) was read by hand from the properties panel and recorded in [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md).
+- Every image is a screenshot of the Figma frames. Where the screenshot included the frame's own text or buttons, I removed them and rebuilt the background (see [Assets](#assets)). The logo and The Warehouse lockup were redrawn or cut out the same way.
+
+**This raised the AI cost.** Ingesting the design as screenshots, comparing the build against them and processing the images took far more AI work than reading a Dev Mode spec and exporting assets would have. I went over the AI budget the company offered, and chose to for two reasons:
+
+1. The budget wasn't a hard limit, so I didn't treat staying inside it as a requirement.
+2. I could have spent less by doing more of this work by hand. Given point 1, I chose to keep using AI to move faster, since the total cost of the build stays low anyway (breakdown in [AI usage & costs](#ai-usage--costs)).
 
 ## Quick start
 
@@ -39,7 +51,7 @@ Useful routes: `/` (homepage), `/styleguide` (every token and primitive in every
 
 Versions were checked with `npm view` on 2026-10-30 and are the latest stable releases, except where noted.
 
-## Architecture (so far)
+## Architecture
 
 ```
 src/
@@ -173,7 +185,7 @@ Measured on the **live Vercel deployment** with Lighthouse 13.6 (simulated throt
 | PDP      | Desktop | 100         | 100           | 100            | 100 | 0.4 s | 0   | 0 ms  | 327 KiB |
 | PDP      | Mobile  | 99          | 100           | 100            | 100 | 2.0 s | 0   | 10 ms | 333 KiB |
 
-The PDP on mobile is a stable 99 over repeated runs: its LCP is the product photo, 2.0 s on the simulated slow-4G profile, just over the 100 threshold. Reports: [`docs/lighthouse/`](docs/lighthouse/) (HTML + JSON per page and device). `next/image` serves AVIF/WebP at the right `sizes`, below-the-fold images are lazy, the hero poster is the LCP and the video loads after it.
+Live report: [PageSpeed Insights (mobile)](https://pagespeed.web.dev/analysis/https-octopus-website-phi-vercel-app/6uao75nz92?form_factor=mobile). The PDP on mobile is a stable 99 over repeated runs: its LCP is the product photo, 2.0 s on the simulated slow-4G profile, just over the 100 threshold. Reports: [`docs/lighthouse/`](docs/lighthouse/) (HTML + JSON per page and device). `next/image` serves AVIF/WebP at the right `sizes`, below-the-fold images are lazy, the hero poster is the LCP and the video loads after it.
 
 ## Progress
 
