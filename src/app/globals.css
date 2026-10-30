@@ -139,6 +139,13 @@
     @apply bg-canvas font-sans text-body text-ink antialiased;
   }
 
+  /* Mobile menu open: lock page scroll (only where the menu exists, below lg). */
+  html:has([data-scroll-lock]) {
+    @variant max-lg {
+      overflow: hidden;
+    }
+  }
+
   :focus-visible,
   [data-preview~="focus"] {
     @apply outline-2 outline-offset-2 outline-focus-ring;

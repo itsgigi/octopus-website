@@ -1,9 +1,9 @@
-import type { ComponentPropsWithoutRef } from "react";
+import type { ComponentProps } from "react";
 import { cn } from "@/lib/cn";
 import { buttonVariants, type ButtonVariantProps } from "./buttonVariants";
 import { Icon, type IconName } from "./Icon";
 
-type IconButtonProps = Omit<ComponentPropsWithoutRef<"button">, "children" | "aria-label"> &
+type IconButtonProps = Omit<ComponentProps<"button">, "children" | "aria-label"> &
   Pick<ButtonVariantProps, "variant" | "size"> & {
     icon: IconName;
     /** Required accessible name — the button has no visible text. */
