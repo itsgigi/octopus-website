@@ -1,0 +1,32 @@
+{
+  "main": [
+    { "label": "Kitchen", "href": "/#kitchen" },
+    { "label": "Home Security", "href": "/#home-security" },
+    { "label": "Hair Care", "href": "/#hair-care" },
+    { "label": "Accessories", "href": "/#accessories" }
+  ],
+  "cta": { "label": "Where to buy", "href": "/placeholder/where-to-buy" },
+  "footer": {
+    "columns": [
+      {
+        "title": "Our Products",
+        "subColumns": 2,
+        "links": [
+          { "label": "Kitchen", "href": "/#kitchen" },
+          { "label": "Hair Care", "href": "/#hair-care" },
+          { "label": "Home Security", "href": "/#home-security" },
+          { "label": "Accessories", "href": "/#accessories" }
+        ]
+      },
+      {
+        "title": "Learn",
+        "links": [
+          { "label": "Where to buy", "href": "/placeholder/where-to-buy" },
+          { "label": "Contact us", "href": "/placeholder/contact" }
+        ]
+      }
+    ],
+    "copyright": "Copyright 2026 Octopus - All rights reserved",
+    "legal": { "label": "Policies & Terms", "href": "/placeholder/policies-and-terms" }
+  }
+}

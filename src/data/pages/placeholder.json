@@ -1,0 +1,9 @@
+{
+  "eyebrow": "Out of scope for this demo",
+  "text": "This page isn't part of the technical test. The demo covers the homepage and the Octopus Countertop Blender product page.",
+  "primaryCta": { "label": "Back to homepage", "href": "/" },
+  "secondaryCta": {
+    "label": "See the Countertop Blender",
+    "href": "/products/octopus-countertop-blender"
+  }
+}

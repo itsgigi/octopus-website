@@ -136,3 +136,29 @@ export const HomePageSchema = z.object({
   sections: z.array(HomeSectionSchema).min(1),
 });
 export type HomePage = z.infer<typeof HomePageSchema>;
+
+export const NavigationSchema = z.object({
+  main: z.array(LinkSchema).min(1),
+  cta: LinkSchema,
+  footer: z.object({
+    columns: z.array(
+      z.object({
+        title: z.string(),
+        links: z.array(LinkSchema).min(1),
+        /** Links split into this many sub-columns from tablet up (Figma "Our Products"). */
+        subColumns: z.union([z.literal(1), z.literal(2)]).default(1),
+      }),
+    ),
+    copyright: z.string(),
+    legal: LinkSchema,
+  }),
+});
+export type Navigation = z.infer<typeof NavigationSchema>;
+
+export const PlaceholderPageSchema = z.object({
+  eyebrow: z.string(),
+  text: z.string(),
+  primaryCta: LinkSchema,
+  secondaryCta: LinkSchema,
+});
+export type PlaceholderPage = z.infer<typeof PlaceholderPageSchema>;
