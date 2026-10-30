@@ -1,10 +1,18 @@
 # AI usage & costs
 
 ## Tools
-- **Claude Code** (CLI) through **OpenRouter** with the API key provided for the test — all code generation, refactors, tests.
+- **Claude Code** (VS Code extension) — all code generation, refactors, tests.
+  - Phases 0–5 and the start of phase 6: through **OpenRouter** with the API key provided for the test.
+  - From phase 6 on: my own **Claude subscription**, after the key hit its spend limit (see below).
 - **Claude (claude.ai)** — Figma inspection in view-only mode (export disabled) → `docs/DESIGN_SYSTEM.md`, project setup (`CLAUDE.md`, `docs/PLAN.md`). Not billed to the OpenRouter key.
 
 Cost source: OpenRouter `GET /api/v1/key` (`usage` field, USD), snapshotted by `scripts/ai-usage.mjs` at the start/end of each phase. Per-request detail: openrouter.ai/activity. Per-session detail inside Claude Code: `/cost`.
+
+## Switch from the OpenRouter key to my Claude subscription
+
+During phase 6 the provided key ran out of budget. OpenRouter returned `402`: Claude Code requests up to 128k output tokens, and the key could only cover about 118–123k. Rather than ask for a higher limit mid-test, I moved Claude Code to my own Claude subscription (`.claude/settings.local.json` renamed to `.claude/openrouter.local.json`, then `/login`). The spend log below is complete for the key-billed part only. Subscription usage isn't billed per request, so it doesn't appear here in USD.
+
+Takeaway: the scaffold → PDP build (phases 0–5) cost about $11–12 on the key. When Claude Code runs on a key with a hard spend limit, cap its max output tokens (`CLAUDE_CODE_MAX_OUTPUT_TOKENS`).
 
 ## Corrections
 
@@ -44,3 +52,4 @@ Places where AI output was wrong and had to be rewritten. (Kept above the spend 
 | 2026-10-30 14:42 | phase 4 homepage end | $2.1774 | $9.3483 | $9.9629 |
 | 2026-10-30 14:48 | phase 5 pdp start | $0.3391 | $9.6874 | $10.3020 |
 | 2026-10-30 14:52 | phase 5 pdp end | $1.2474 | $10.9348 | $11.5494 |
+| 2026-10-30 14:57 | phase 6 motion start | $0.3640 | $11.2987 | $11.9133 |

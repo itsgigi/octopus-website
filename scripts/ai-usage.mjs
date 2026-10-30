@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Snapshot OpenRouter spend for this project and append it to docs/AI_USAGE.md.
 // Usage: node scripts/ai-usage.mjs "<label>"   (or: pnpm ai:usage "<label>")
-// Key lookup: OPENROUTER_API_KEY env var, else .claude/settings.local.json → env.
+// Key lookup: OPENROUTER_API_KEY env var, else .claude/settings.local.json or .claude/openrouter.local.json → env.
 // The key is never printed or written anywhere.
 
 import { readFile, writeFile, appendFile } from "node:fs/promises";
@@ -15,18 +15,21 @@ const label = process.argv.slice(2).join(" ").trim() || "snapshot";
 
 async function getKey() {
   if (process.env.OPENROUTER_API_KEY) return process.env.OPENROUTER_API_KEY;
-  const settings = path.join(root, ".claude", "settings.local.json");
-  if (existsSync(settings)) {
-    const json = JSON.parse(await readFile(settings, "utf8"));
-    const env = json.env ?? {};
-    return env.OPENROUTER_API_KEY || env.ANTHROPIC_AUTH_TOKEN;
+  // settings.local.json while Claude Code ran on OpenRouter; openrouter.local.json after the
+  // switch to the Claude subscription (renamed so Claude Code stops using the key).
+  for (const name of ["settings.local.json", "openrouter.local.json"]) {
+    const file = path.join(root, ".claude", name);
+    if (!existsSync(file)) continue;
+    const env = JSON.parse(await readFile(file, "utf8")).env ?? {};
+    const key = env.OPENROUTER_API_KEY || env.ANTHROPIC_AUTH_TOKEN;
+    if (key) return key;
   }
   return undefined;
 }
 
 const key = await getKey();
 if (!key) {
-  console.error("No OpenRouter key found (OPENROUTER_API_KEY or .claude/settings.local.json).");
+  console.error("No OpenRouter key found (OPENROUTER_API_KEY or .claude/*.local.json).");
   process.exit(1);
 }
 

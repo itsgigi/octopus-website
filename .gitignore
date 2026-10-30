@@ -1,5 +1,6 @@
 # secrets — never commit
 .claude/settings.local.json
+.claude/*.local.json
 .env*
 !.env.example
 

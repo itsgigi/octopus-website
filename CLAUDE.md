@@ -74,5 +74,5 @@ docs/
 - **Small, meaningful commits** (Conventional Commits: `feat:`, `fix:`, `chore:`, `test:`, `docs:`). Commit after every working step.
 - Before each commit: `pnpm lint && pnpm typecheck && pnpm test:unit`.
 - Follow the phases in `docs/PLAN.md`; tick them off there.
-- AI cost tracking: at the **start and end of every phase** run `pnpm ai:usage "<phase name>"` — it appends a snapshot to `docs/AI_USAGE.md`. Never print or commit the API key.
+- AI cost tracking: phases 0–5 ran on the OpenRouter key and were snapshotted with `pnpm ai:usage`. From phase 6 Claude Code runs on the developer's Claude subscription (the key hit its spend limit), so `ai:usage` is no longer run per phase. Never print or commit the API key.
 - Record in `docs/AI_USAGE.md` → "Corrections" any place where AI output was wrong and had to be rewritten (needed for the README).
