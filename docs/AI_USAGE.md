@@ -35,3 +35,4 @@ Places where AI output was wrong and had to be rewritten. (Kept above the spend 
 | 2026-10-30 14:23 | phase 2 data layer end | $1.0194 | $3.8701 | $4.4846 |
 | 2026-10-30 14:26 | phase 3 layout shell start | $0.3247 | $4.1947 | $4.8093 |
 | 2026-10-30 14:31 | phase 3 layout shell end | $1.4881 | $5.6828 | $6.2974 |
+| 2026-10-30 14:35 | phase 4 homepage start | $1.4881 | $7.1709 | $7.7855 |
