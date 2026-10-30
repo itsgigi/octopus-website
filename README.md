@@ -183,7 +183,7 @@ Detailed checklist: [`docs/PLAN.md`](docs/PLAN.md).
 
 Full lists: [`docs/DECISIONS.md`](docs/DECISIONS.md) (implementation) and [`docs/DESIGN_SYSTEM.md` §11](docs/DESIGN_SYSTEM.md) (Figma vs brief). Highlights:
 
-- **The Figma file is view-only with export disabled.** Values were read by hand from the properties panel. Images are **screenshots taken from Figma** (see Assets below), so they're low-resolution; slots without a screenshot (kettle product cut-out, 4 accessories, other products' PDP photos) keep a neutral placeholder with the correct ratio. The logo mark is traced by hand from the brand artwork as an SVG path.
+- **The Figma file is view-only with export disabled.** Values were read by hand from the properties panel. Images are **screenshots taken from Figma** (see Assets below), so they're low-resolution; slots without a screenshot (4 accessories, other products' PDP photos) keep a neutral placeholder with the correct ratio. The logo mark is traced by hand from the brand artwork as an SVG path.
 - **Navigation collapses below 1200 px** (brief) even though the Figma tablet frame shows inline links.
 - **Primary hover is `#C2151B`** instead of Figma's `#F23F45`: white on `#F23F45` is 3.8:1 and fails WCAG AA.
 - **Focus ring:** the Figma ring (35% alpha blue) is about 1.6:1 on white and fails WCAG 1.4.11, so the outline uses the same blue, fully opaque.
