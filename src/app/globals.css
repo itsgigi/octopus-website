@@ -92,6 +92,7 @@
 
   /* Aspect ratios of the image slots */
   --aspect-banner: 12 / 5;
+  --aspect-banner-mobile: 434 / 768; /* hair care banner, mobile art direction */
   --aspect-card-large: 1344 / 755;
   --aspect-card-medium: 3 / 4;
   --aspect-card-tall: 4 / 5; /* large vertical card on tablet */

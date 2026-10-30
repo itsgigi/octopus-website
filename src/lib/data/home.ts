@@ -57,6 +57,7 @@ async function resolveSection(section: HomeSection): Promise<ResolvedHomeSection
       return {
         ...section,
         image: resolveImage(section.image),
+        imageMobile: section.imageMobile && resolveImage(section.imageMobile),
         product: await requireProduct(section.product, section.id),
       };
     case "explore-categories":

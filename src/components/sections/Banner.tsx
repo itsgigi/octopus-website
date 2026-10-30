@@ -14,7 +14,8 @@ export function Banner({ section }: { section: SectionOf<"banner"> }) {
       id={section.id}
       labelledBy={titleId}
       image={section.image}
-      // Mobile shows the photo under the text: keep the dryer and the face in the crop.
+      imageMobile={section.imageMobile}
+      // Fallback when there is no mobile image: photo under the text, dryer and face in the crop.
       imageClassName="object-[75%_50%] md:object-center"
     >
       <div className="flex flex-col gap-4">

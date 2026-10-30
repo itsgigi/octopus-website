@@ -35,6 +35,10 @@
       "image": {
         "src": "/images/banners/hair-dryer.jpg",
         "alt": "A woman drying her hair with the Octopus Ionic Hair Dryer"
+      },
+      "imageMobile": {
+        "src": "/images/banners/hair-dryer-mobile.jpg",
+        "alt": "A woman drying her hair with the Octopus Ionic Hair Dryer"
       }
     },
     {

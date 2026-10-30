@@ -118,6 +118,8 @@ export const HomeSectionSchema = z.discriminatedUnion("type", [
     title: z.string(),
     text: z.string(),
     image: ImageRefSchema,
+    /** Portrait crop for < 810px with room for the text on top (art direction). */
+    imageMobile: ImageRefSchema.optional(),
   }),
   z.object({
     type: z.literal("explore-categories"),

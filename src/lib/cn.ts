@@ -31,6 +31,7 @@ const twMerge = extendTailwindMerge({
       radius: ["card", "nav", "specifics"],
       aspect: [
         "banner",
+        "banner-mobile",
         "card-large",
         "card-medium",
         "card-tall",
