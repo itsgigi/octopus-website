@@ -1,6 +1,6 @@
 {
   "baseline": 0.61456875,
-  "last": 1.60171815,
+  "last": 3.26247535,
   "snapshots": [
     {
       "at": "2026-10-30 14:04",
@@ -15,6 +15,13 @@
       "usage": 1.60171815,
       "sinceLast": 0.9871494,
       "sinceStart": 0.9871494
+    },
+    {
+      "at": "2026-10-30 14:15",
+      "label": "phase 1 tokens & primitives",
+      "usage": 3.26247535,
+      "sinceLast": 1.6607572,
+      "sinceStart": 2.6479065999999998
     }
   ]
 }

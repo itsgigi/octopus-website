@@ -15,11 +15,11 @@ Track cost: `pnpm ai:usage "<phase> start"` before, `pnpm ai:usage "<phase> end"
 > Prompt: *"Read CLAUDE.md and docs/PLAN.md. Do Phase 0. Verify the latest stable versions of next, react, tailwindcss before installing. Commit after each bullet."*
 
 ## Phase 1 — Design tokens & primitives
-- [ ] `globals.css`: `@theme` tokens from `docs/DESIGN_SYSTEM.md` §12 (colours, fluid type, radius, shadow, breakpoints 810/1200, container 1344)
-- [ ] Satoshi Variable via `next/font/local` (download WOFF2 from Fontshare into `src/app/fonts/`)
-- [ ] `Container`, `Heading` (display/h2/h3, `as` prop), `Text`, `Button` (primary/secondary/ghost/ghost-inverse, link or button, sizes), `IconButton`, `Icon` (chevrons, menu, close, download, play), `ProductImage` placeholder
-- [ ] Logo SVG (mark + wordmark, approximated), favicon
-- [ ] A dev-only `/styleguide` page rendering all primitives (handy for the review call; `robots: noindex`)
+- [x] `globals.css`: `@theme` tokens from `docs/DESIGN_SYSTEM.md` §12 (colours, fluid type, radius, shadow, breakpoints 810/1200, container 1344)
+- [x] Satoshi Variable via `next/font/local` (download WOFF2 from Fontshare into `src/app/fonts/`)
+- [x] `Container`, `Heading` (display/h2/h3, `as` prop), `Text`, `Button` (primary/secondary/ghost/ghost-inverse, link or button, sizes), `IconButton`, `Icon` (chevrons, menu, close, download, play), `ProductImage` placeholder
+- [x] Logo SVG (mark + wordmark, approximated), favicon
+- [x] A dev-only `/styleguide` page rendering all primitives (handy for the review call; `robots: noindex`)
 
 ## Phase 2 — Data layer
 - [ ] `src/lib/types.ts` (Product per brief shape + `images`, `features`, `downloads`; Category; HomePage sections)
