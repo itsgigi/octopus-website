@@ -38,6 +38,9 @@ Places where AI output was wrong and had to be rewritten. (Kept above the spend 
 | 7 | The carousel was a `<section>` labelled "Best sellers" inside a section with the same name: duplicate landmarks | Changed to `role="group"` |
 | 7 | The hero and banner "Learn more" links had no sr-only product name (only the cards did); Lighthouse SEO flagged it | Added "about {product}" |
 | 7 | The first e2e draft force-checked the visually hidden radio, which fails on mobile WebKit | The test taps the visible swatch label, as a user would |
+| 8 | `FadeInImage` (phase 6) never revealed images that loaded before hydration (`onLoad` was not called), so cards stayed blank once real files existed | Checks `img.complete` on mount; regression test |
+| 8 | `Container` (phase 4, `box-content` + auto margins) shrank inside flex-column parents, putting the banner text over the photo | `container-page` utility with an explicit width |
+| 8 | A `git add -A` in the Firefox e2e commit also committed the user's raw screenshots and a 19 MB screen recording that were being uploaded | Untracked and git-ignored; stage paths explicitly from now on |
 | 1 | `cn` would have merged `font-book` as a font-family (it drops `font-sans`) | Registered custom font-size, font-weight and radius groups in tailwind-merge |
 
 ## Spend log

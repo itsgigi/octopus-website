@@ -117,6 +117,21 @@ docs/                   # brief, design system, plan, decisions, AI usage
 | `Logo`           | Mark + wordmark (full / stacked / mark-only), accessible name "Octopus"                                                                                                                                          |
 | `VisuallyHidden` | Screen-reader-only text                                                                                                                                                                                          |
 
+## Assets
+
+The Figma file can't export, so the assets are screenshots and a screen recording taken from it, identified against the Figma frames and renamed to the paths the JSON already referenced. **No JSON or component change was needed to show them**: the loaders pick up any file that exists in `/public`.
+
+| Slot                     | File(s)                                                              | Processing                                                                                                                                               |
+| ------------------------ | -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Product cut-outs (11)    | `public/images/products/*.png`                                       | Background is already `#F9F9F9` = the `surface` token, so cut-outs blend into the tiles                                                                  |
+| Category tiles (4)       | `public/images/categories/*.png`                                     | Blender, Indoor Camera, Hair Dryer, USB-C Cable, as in "Explore all categories"                                                                          |
+| Hair care banner         | `banners/hair-dryer.jpg`                                             | Baked-in title, text and button removed (column-wise interpolation of the plain background)                                                              |
+| Indoor camera large card | `lifestyle/octopus-indoor-camera-1.jpg`                              | Baked-in text removed, rounded card corners cropped                                                                                                      |
+| Find-us banner           | `banners/find-us.jpg`                                                | Shown on the right, fading into the brand red behind the text                                                                                            |
+| Hero                     | `hero/hair-dryer-poster.jpg`, `public/videos/octopus-hair-dryer.mp4` | A clean 7.6 s loop cut from the screen recording: Figma navbar cropped out, no cursor or player UI; H.264, 30 fps, 244 KB. The poster is its first frame |
+
+Still placeholders (no screenshot available): Kettle 1.7 L, Power Bank 20,000 mAh, Magnetic USB-C Cable, Car Charger 42 W, USB-C Charger 30W, and the PDP lifestyle and feature photos. Raw captures are git-ignored.
+
 ## Tests & quality
 
 `pnpm test` runs everything: **44 unit tests** (Vitest) and then **e2e** (Playwright on a production build).
@@ -139,10 +154,10 @@ The e2e suites run on **Chrome, Firefox, desktop Safari, iPhone 15 (WebKit) and 
 
 | Page     | Performance | Accessibility | Best Practices | SEO | LCP   | CLS | TBT   |
 | -------- | ----------- | ------------- | -------------- | --- | ----- | --- | ----- |
-| Homepage | 100         | 100           | 100            | 100 | 0.8 s | 0   | 10 ms |
-| PDP      | 100         | 100           | 100            | 100 | 0.8 s | 0   | 10 ms |
+| Homepage | 100         | 100           | 100            | 100 | 0.8 s | 0   | 20 ms |
+| PDP      | 98          | 100           | 100            | 100 | 2.5 s | 0   | 10 ms |
 
-Reports: [`docs/lighthouse/`](docs/lighthouse/) (HTML + JSON; Lighthouse 13.6, mobile preset, simulated throttling, local production build). **Honest caveat:** images are placeholders (Figma export is disabled), so the score doesn't include the weight of real photography or the hero video. Those are already set up for it (`next/image` with AVIF/WebP, `sizes`, lazy loading below the fold, a poster as LCP, `preload="none"` video), but expect Performance to drop a little once real assets land.
+Reports: [`docs/lighthouse/`](docs/lighthouse/) (HTML + JSON; Lighthouse 13.6, mobile preset, simulated throttling, local production build). Measured **with the real assets** (Figma screenshots + hero video; page weight 532 KiB home, 246 KiB PDP): `next/image` serves AVIF/WebP at the right `sizes`, below-the-fold images are lazy, the hero poster is the LCP and the video loads after it. Higher-resolution source files would add weight; the pipeline already resizes them.
 
 ## Progress
 
@@ -164,7 +179,7 @@ Detailed checklist: [`docs/PLAN.md`](docs/PLAN.md).
 
 Full lists: [`docs/DECISIONS.md`](docs/DECISIONS.md) (implementation) and [`docs/DESIGN_SYSTEM.md` §11](docs/DESIGN_SYSTEM.md) (Figma vs brief). Highlights:
 
-- **The Figma file is view-only with export disabled.** Values were read by hand from the properties panel. Images use placeholders with the correct ratio, and the logo is an approximated SVG.
+- **The Figma file is view-only with export disabled.** Values were read by hand from the properties panel. Images are **screenshots taken from Figma** (see Assets below), so they're low-resolution; slots without a screenshot (kettle, PDP lifestyle and feature photos, 5 accessories) keep a neutral placeholder with the correct ratio. The logo is an approximated SVG.
 - **Navigation collapses below 1200 px** (brief) even though the Figma tablet frame shows inline links.
 - **Primary hover is `#C2151B`** instead of Figma's `#F23F45`: white on `#F23F45` is 3.8:1 and fails WCAG AA.
 - **Focus ring:** the Figma ring (35% alpha blue) is about 1.6:1 on white and fails WCAG 1.4.11, so the outline uses the same blue, fully opaque.
@@ -211,6 +226,7 @@ Full lists: [`docs/DECISIONS.md`](docs/DECISIONS.md) (implementation) and [`docs
 - Homepage: sr-only text inside carousel slides widened the mobile page by 364px; the Container put the gutter inside the 1344 max-width (content 1248 instead of 1344); a light placeholder hid the white text on the red banner. All three were found by measuring in the browser.
 - PDP: the carousel showed one dot per slide, so with 5 of 6 cards visible most dots could never be reached; fixed and unit-tested.
 - Quality pass: the carousel duplicated the "Best sellers" landmark, the hero and banner "Learn more" links lacked a product name, and a first e2e draft force-checked a visually hidden radio. Fixed after the e2e, axe and Lighthouse runs surfaced them.
+- Assets: real images exposed two bugs the placeholders had hidden. Images that loaded before hydration stayed at opacity 0 (the `onLoad` handler was never called), and the `Container` shrank inside flex columns, which put the banner text over the photo. Both were found in the browser, then fixed and regression-tested. Separately, a `git add -A` swept the raw screenshots and the 19 MB recording into an unrelated commit.
 - A shell redaction command didn't work on macOS and echoed a secret into the local session. Separately, an example config in `docs/` contained a real key. Both were caught before the first commit and the key was flagged for rotation.
 
 ## What I'd do with more time
