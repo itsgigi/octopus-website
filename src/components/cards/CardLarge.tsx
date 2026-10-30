@@ -13,9 +13,9 @@ const cardVariants = cva(
         horizontal: "",
         /**
          * Security bento: text centred on top of a portrait photo. Tall (4:5) on tablet, because the
-         * only asset is portrait; fills the left column on desktop.
+         * only asset is portrait; 660 × 1038 on desktop, which sets the height of the whole bento.
          */
-        "vertical-on-desktop": "md:aspect-card-tall lg:aspect-auto lg:h-full lg:min-h-full",
+        "vertical-on-desktop": "md:aspect-card-tall lg:aspect-card-portrait",
       },
     },
     defaultVariants: { orientation: "horizontal" },
@@ -28,7 +28,9 @@ const contentVariants = cva(
     variants: {
       orientation: {
         horizontal: "",
-        "vertical-on-desktop": "md:mx-auto md:items-center md:justify-start md:text-center",
+        // Text column 450 wide, centred: the padding takes the rest of the card width.
+        "vertical-on-desktop":
+          "md:mx-auto md:items-center md:justify-start md:text-center lg:max-w-none lg:px-[calc((100%-var(--container-copy))/2)]",
       },
     },
   },

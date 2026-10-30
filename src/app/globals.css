@@ -93,6 +93,7 @@
   --aspect-card-large: 1344 / 755;
   --aspect-card-medium: 3 / 4;
   --aspect-card-tall: 4 / 5; /* large vertical card on tablet */
+  --aspect-card-portrait: 660 / 1038; /* large vertical card on desktop (security bento) */
   --aspect-pdp-product: 709 / 900;
   --aspect-pdp-lifestyle: 709 / 945;
   --aspect-hero-tablet: 810 / 1132;

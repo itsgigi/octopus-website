@@ -70,7 +70,7 @@ function Bento({ layout, products }: { layout: Section["layout"]; products: Prod
       return (
         <div className="grid gap-6 lg:grid-cols-2">
           <CardLarge product={lead} orientation="vertical-on-desktop" />
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-1">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-1 lg:grid-rows-2">
             {rest.map((p) => (
               <CardMedium key={p.slug} product={p} orientation="horizontal-on-desktop" />
             ))}

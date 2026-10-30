@@ -32,7 +32,7 @@ export function CardMedium({ product, orientation }: CardMediumProps) {
         align="center"
         className={
           o === "horizontal-on-desktop"
-            ? "p-8 md:p-10 lg:w-1/2 lg:items-start lg:p-10 lg:text-left"
+            ? "p-8 md:p-10 lg:w-1/2 lg:items-start lg:py-10 lg:pr-0 lg:pl-10 lg:text-left"
             : "p-8 md:p-10 lg:p-12"
         }
       />
