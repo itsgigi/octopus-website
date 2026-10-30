@@ -1,3 +1,4 @@
+import { cva, type VariantProps } from "class-variance-authority";
 import { Reveal } from "@/components/motion/Reveal";
 import { CardLarge } from "@/components/cards/CardLarge";
 import { CardMedium } from "@/components/cards/CardMedium";
@@ -9,18 +10,31 @@ import type { SectionOf } from "./types";
 
 type Section = SectionOf<"category">;
 
+/** Desktop rhythm from Figma: 180 next to a full-bleed banner, 60 under the carousel, else 120. */
+const sectionVariants = cva("scroll-mt-24 py-10 md:py-20 lg:scroll-mt-28", {
+  variants: {
+    top: { sm: "lg:pt-15", md: "lg:pt-30", lg: "lg:pt-45" },
+    bottom: { md: "lg:pb-30", lg: "lg:pb-45" },
+  },
+  defaultVariants: { top: "md", bottom: "md" },
+});
+
+export type SectionSpacing = VariantProps<typeof sectionVariants>;
+
 /**
  * Category bento. The layout comes from home.json, the products from `featured` in products.json:
  * the first featured product is the large card, any further ones flow into the grid.
  */
-export function CategorySection({ section }: { section: Section }) {
+export function CategorySection({
+  section,
+  spacing,
+}: {
+  section: Section;
+  spacing?: SectionSpacing;
+}) {
   const headingId = `${section.id}-title`;
   return (
-    <section
-      id={section.id}
-      aria-labelledby={headingId}
-      className="scroll-mt-24 py-10 md:py-20 lg:scroll-mt-28"
-    >
+    <section id={section.id} aria-labelledby={headingId} className={sectionVariants(spacing)}>
       <Container>
         <Reveal className="flex flex-col gap-10 md:gap-20">
           <SectionHeading
