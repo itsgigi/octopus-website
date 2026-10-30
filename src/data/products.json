@@ -13,11 +13,11 @@
     "lifestyleImages": [
       {
         "src": "/images/lifestyle/octopus-countertop-blender-1.jpg",
-        "alt": "The countertop blender on a kitchen bench next to fresh fruit"
+        "alt": "The countertop blender full of watermelon and mango on a sunny kitchen bench"
       },
       {
         "src": "/images/lifestyle/octopus-countertop-blender-2.jpg",
-        "alt": "A smoothie being poured from the blender jug"
+        "alt": "A woman pressing the touch panel of the blender, a smoothie in the jug"
       }
     ],
     "bestSeller": false,
@@ -33,7 +33,7 @@
         "description": "A 1500W motor lets you do anything from crushing ice to blending smoothies",
         "image": {
           "src": "/images/features/blender-power.jpg",
-          "alt": "Ice being crushed in the blender jug"
+          "alt": "Ice, strawberries and banana being crushed by the blades"
         }
       },
       {
@@ -41,7 +41,7 @@
         "description": "Add water and a little detergent, press clean, and the blender cleans itself",
         "image": {
           "src": "/images/features/blender-clean.jpg",
-          "alt": "Soapy water swirling in the jug during the clean cycle"
+          "alt": "Water swirling in the jug during the self-clean cycle"
         }
       },
       {
@@ -49,7 +49,7 @@
         "description": "The pulse function runs the blades in bursts, giving you even more control",
         "image": {
           "src": "/images/features/blender-pulse.jpg",
-          "alt": "Close-up of the blender control dial"
+          "alt": "The blades spinning in a creamy mixture, seen from above"
         }
       },
       {
@@ -57,7 +57,7 @@
         "description": "Seven intelligent presets for smoothies, soups, purées & more",
         "image": {
           "src": "/images/features/blender-presets.jpg",
-          "alt": "Soup, smoothie and purée made with the blender presets"
+          "alt": "A finger pressing the presets on the blender touch panel"
         }
       }
     ],

@@ -96,6 +96,8 @@
   --aspect-card-portrait: 660 / 1038; /* large vertical card on desktop (security bento) */
   --aspect-pdp-product: 709 / 900;
   --aspect-pdp-lifestyle: 709 / 945;
+  --aspect-feature-wide: 1754 / 804; /* PDP feature card, full row */
+  --aspect-feature-tall: 862 / 1130; /* PDP feature card, half row */
   --aspect-hero-tablet: 810 / 1132;
   --aspect-photo: 4 / 3; /* lifestyle / studio photos stacked under text on mobile */
   --aspect-carousel-sm: 5 / 8; /* 320 × 512 */

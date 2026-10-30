@@ -129,6 +129,8 @@ The Figma file can't export, so the assets are screenshots and a screen recordin
 | Indoor camera large card | `lifestyle/octopus-indoor-camera-1.jpg`                              | Baked-in text removed, rounded card corners cropped                                                                                                      |
 | Kettle large card        | `lifestyle/octopus-kettle-1-7l-1.jpg`                                | Baked-in text removed, corners cropped; `focus: "72% 50%"` keeps the kettle in the mobile crop                                                           |
 | The Warehouse lockup     | `retailers/the-warehouse.png`                                        | Red background knocked out to transparent white, so it sits on the brand red                                                                             |
+| PDP lifestyle (2)        | `lifestyle/octopus-countertop-blender-{1,2}.jpg`                     | White margin and rounded corners cropped, sharpened; the small one upscaled 2× (Lanczos)                                                                 |
+| PDP features (4)         | `features/blender-{power,clean,pulse,presets}.jpg`                   | Baked-in text removed by harmonic inpainting (keeps the swirl texture), corners cropped                                                                  |
 | Find-us banner           | `banners/find-us.jpg`                                                | Shown on the right, fading into the brand red behind the text                                                                                            |
 | Hero                     | `hero/hair-dryer-poster.jpg`, `public/videos/octopus-hair-dryer.mp4` | A clean 7.6 s loop cut from the screen recording: Figma navbar cropped out, no cursor or player UI; H.264, 30 fps, 244 KB. The poster is its first frame |
 
@@ -181,7 +183,7 @@ Detailed checklist: [`docs/PLAN.md`](docs/PLAN.md).
 
 Full lists: [`docs/DECISIONS.md`](docs/DECISIONS.md) (implementation) and [`docs/DESIGN_SYSTEM.md` §11](docs/DESIGN_SYSTEM.md) (Figma vs brief). Highlights:
 
-- **The Figma file is view-only with export disabled.** Values were read by hand from the properties panel. Images are **screenshots taken from Figma** (see Assets below), so they're low-resolution; slots without a screenshot (kettle product cut-out, PDP lifestyle and feature photos, 4 accessories) keep a neutral placeholder with the correct ratio. The logo mark is traced by hand from the brand artwork as an SVG path.
+- **The Figma file is view-only with export disabled.** Values were read by hand from the properties panel. Images are **screenshots taken from Figma** (see Assets below), so they're low-resolution; slots without a screenshot (kettle product cut-out, 4 accessories, other products' PDP photos) keep a neutral placeholder with the correct ratio. The logo mark is traced by hand from the brand artwork as an SVG path.
 - **Navigation collapses below 1200 px** (brief) even though the Figma tablet frame shows inline links.
 - **Primary hover is `#C2151B`** instead of Figma's `#F23F45`: white on `#F23F45` is 3.8:1 and fails WCAG AA.
 - **Focus ring:** the Figma ring (35% alpha blue) is about 1.6:1 on white and fails WCAG 1.4.11, so the outline uses the same blue, fully opaque.

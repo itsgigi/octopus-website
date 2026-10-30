@@ -40,6 +40,8 @@ const twMerge = extendTailwindMerge({
         "hero-tablet",
         "pdp-product",
         "pdp-lifestyle",
+        "feature-wide",
+        "feature-tall",
         "photo",
       ],
     },
