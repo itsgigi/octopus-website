@@ -85,6 +85,15 @@ docs/                   # brief, design system, plan, decisions, AI usage
 - **Footer**: the link columns come from `navigation.json` ("Our Products" splits into two sub-columns from tablet). Stacked on mobile.
 - **Skip link** to a focusable `<main>`; every out-of-scope link goes to `/placeholder/*`, which is prerendered from the links found in the data.
 
+### Homepage
+
+`app/page.tsx` maps the resolved `home.json` sections to section components (`Hero`, `BestSellers`, `CategorySection`, `Banner`, `ExploreCategories`, `FindUsBanner`); reordering or removing sections is a JSON change.
+
+- **Carousel** (client): native `scroll-snap` gives swipe and trackpad support with no library. Arrows are disabled at the ends, dots follow native scrolling, and the track is a focusable region with `aria-roledescription` carousel and slide.
+- **Category bentos:** three layouts (`large-first`, `large-side`, `small-row`). The first `featured` product becomes the large card, the others flow into the grid.
+- **Cards** share one `CardContent` block; every "Learn more" link has an sr-only "about {product}" so link names are unique.
+- **Hero:** the poster is the LCP image (`priority`); the video loads client-side, muted, with a pause button, and is skipped with `prefers-reduced-motion`.
+
 ### UI primitives (`src/components/ui`)
 
 | Component        | Notes                                                                                                                                                                                                            |
@@ -107,7 +116,7 @@ docs/                   # brief, design system, plan, decisions, AI usage
 | 1 — Tokens & primitives | ✅     | `@theme` tokens, Satoshi, the primitives above, logo + favicon, `/styleguide`. Tokens first so every later component is token-only and consistent                                               | $1.66   |
 | 2 — Data layer          | ✅     | zod-validated JSON (16 products, 4 categories, home sections) + cached loaders. Data first so pages are pure composition and the CMS swap is one layer                                          | $1.02   |
 | 3 — Layout shell        | ✅     | Floating navbar, accessible mobile menu below 1200px (focus trap, Escape, closes on route change), data-driven footer, skip link, placeholder route. Shared by both pages, so built before them | $1.49   |
-| 4 — Homepage            | ⏳     | Hero, carousel, category bentos, banners                                                                                                                                                        | —       |
+| 4 — Homepage            | ✅     | Hero (poster as LCP, optional video + pause), scroll-snap carousel, three category bentos, hair care and find-us banners, explore tiles — all composed from `home.json`                         | $2.18   |
 | 5 — PDP                 | ⏳     | Product info, colour selector, gallery, accordion                                                                                                                                               | —       |
 | 6 — Motion & polish     | ⏳     | Scroll reveal, hover states                                                                                                                                                                     | —       |
 | 7 — Quality             | ⏳     | e2e, Lighthouse ≥ 90, axe                                                                                                                                                                       | —       |
@@ -138,14 +147,18 @@ Full lists: [`docs/DECISIONS.md`](docs/DECISIONS.md) (implementation) and [`docs
 
 **How costs are tracked:** `pnpm ai:usage` reads the key's `usage` from OpenRouter at the start and end of each phase and appends a row to [`docs/AI_USAGE.md`](docs/AI_USAGE.md). The key is never printed or committed.
 
-| Phase                           | Cost (USD) | Cumulative |
-| ------------------------------- | ---------- | ---------- |
-| 0 — Scaffold                    | 0.99       | 0.99       |
-| 1 — Tokens & primitives         | 1.66       | 2.65       |
-| README set-up                   | 0.20       | 2.85       |
-| 2 — Data layer                  | 1.02       | 3.87       |
-| Phase 2 wrap-up (docs, summary) | 0.32       | 4.19       |
-| 3 — Layout shell                | 1.49       | 5.68       |
+| Phase                            | Cost (USD) | Cumulative |
+| -------------------------------- | ---------- | ---------- |
+| 0 — Scaffold                     | 0.99       | 0.99       |
+| 1 — Tokens & primitives          | 1.66       | 2.65       |
+| README set-up                    | 0.20       | 2.85       |
+| 2 — Data layer                   | 1.02       | 3.87       |
+| Phase 2 wrap-up (docs, summary)  | 0.32       | 4.19       |
+| 3 — Layout shell                 | 1.49       | 5.68       |
+| Phase 3 wrap-up (docs, summary)¹ | 1.49       | 7.17       |
+| 4 — Homepage                     | 2.18       | 9.35       |
+
+¹ Same delta as the previous phase; OpenRouter usage can lag by a few minutes, so the split between adjacent rows is approximate (the totals are exact).
 
 **Where the AI output was wrong** (full list in [`docs/AI_USAGE.md` → Corrections](docs/AI_USAGE.md)):
 
@@ -154,6 +167,7 @@ Full lists: [`docs/DECISIONS.md`](docs/DECISIONS.md) (implementation) and [`docs
 - The fluid type formulas in the AI-written design system missed the Figma sizes (54 instead of 60 px at 1200) and were recomputed.
 - It typed `Text` props too narrowly and used `Heading as="p"`; both were caught by `tsc` and fixed.
 - An outdated smoke e2e test failed on WebKit once the homepage became an empty shell, and the mobile menu links were misaligned with the logo; the browser check caught both.
+- Homepage: sr-only text inside carousel slides widened the mobile page by 364px; the Container put the gutter inside the 1344 max-width (content 1248 instead of 1344); a light placeholder hid the white text on the red banner. All three were found by measuring in the browser.
 - A shell redaction command didn't work on macOS and echoed a secret into the local session. Separately, an example config in `docs/` contained a real key. Both were caught before the first commit and the key was flagged for rotation.
 
 ## What I'd do with more time

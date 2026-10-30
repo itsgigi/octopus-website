@@ -22,6 +22,9 @@ Places where AI output was wrong and had to be rewritten. (Kept above the spend 
 | 1 | Styleguide used `<Heading as="p">`, outside the allowed heading levels | Used `headingVariants()` on a plain `<p>` |
 | 3 | The scaffold e2e smoke test asserted `<main>` was visible; it failed on WebKit once the homepage became an empty shell | Replaced with tests of the real shell (banner, footer, skip link, mobile menu) |
 | 3 | Mobile menu links were indented more than the logo (ghost button padding + panel padding) | Spotted in the browser and realigned to the 20px logo inset |
+| 4 | Carousel slides held sr-only spans (`position: absolute`); with a static track they escaped `overflow: auto` and widened the page by 364px on mobile | Track made `relative`; found by measuring scrollWidth in the browser |
+| 4 | `Container` put the 48px gutter inside the 1344 max-width, so desktop content was 1248 wide | `box-content`, verified: content starts at 128 at 1600 |
+| 4 | The image placeholder covered the red find-us banner and hid its white text | Added a `brand` placeholder tone |
 | 1 | `cn` would have merged `font-book` as a font-family (it drops `font-sans`) | Registered custom font-size, font-weight and radius groups in tailwind-merge |
 
 ## Spend log
@@ -36,3 +39,4 @@ Places where AI output was wrong and had to be rewritten. (Kept above the spend 
 | 2026-10-30 14:26 | phase 3 layout shell start | $0.3247 | $4.1947 | $4.8093 |
 | 2026-10-30 14:31 | phase 3 layout shell end | $1.4881 | $5.6828 | $6.2974 |
 | 2026-10-30 14:35 | phase 4 homepage start | $1.4881 | $7.1709 | $7.7855 |
+| 2026-10-30 14:42 | phase 4 homepage end | $2.1774 | $9.3483 | $9.9629 |

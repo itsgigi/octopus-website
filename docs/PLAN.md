@@ -32,10 +32,10 @@ Track cost: `pnpm ai:usage "<phase> start"` before, `pnpm ai:usage "<phase> end"
 - [x] Tests: MobileMenu open/close/Escape
 
 ## Phase 4 — Homepage
-- [ ] Hero (poster as LCP + lazy muted video + play/pause), BestSellers (Carousel + CarouselCard), CategorySection (bento variants: kitchen / security / accessories), Banner, ExploreCategories, FindUsBanner
-- [ ] Generic `Carousel` (scroll-snap, arrows disabled at ends, dots, keyboard, `aria-roledescription="carousel"`)
-- [ ] Tests: Carousel arrows/dots/disabled states
-- [ ] Check at 375 / 810 / 1024 / 1200 / 1440 / 1600 — no horizontal scroll
+- [x] Hero (poster as LCP + lazy muted video + play/pause), BestSellers (Carousel + CarouselCard), CategorySection (bento variants: kitchen / security / accessories), Banner, ExploreCategories, FindUsBanner
+- [x] Generic `Carousel` (scroll-snap, arrows disabled at ends, dots, keyboard, `aria-roledescription="carousel"`)
+- [x] Tests: Carousel arrows/dots/disabled states
+- [ ] Check at 375 / 810 / 1024 / 1200 / 1440 / 1600 — no horizontal scroll _(no overflow verified at 500 / 810 / 1600; full sweep automated in Phase 7)_
 
 ## Phase 5 — Product Detail Page
 - [ ] `products/[slug]` + `generateStaticParams` + `generateMetadata` (OG)

@@ -1,6 +1,6 @@
 {
   "baseline": 0.61456875,
-  "last": 7.78550935,
+  "last": 9.96290415,
   "snapshots": [
     {
       "at": "2026-10-30 14:04",
@@ -57,6 +57,13 @@
       "usage": 7.78550935,
       "sinceLast": 1.4881152000000002,
       "sinceStart": 7.1709406
+    },
+    {
+      "at": "2026-10-30 14:42",
+      "label": "phase 4 homepage end",
+      "usage": 9.96290415,
+      "sinceLast": 2.1773948,
+      "sinceStart": 9.3483354
     }
   ]
 }

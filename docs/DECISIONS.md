@@ -37,3 +37,8 @@ Ambiguities in the brief / design system and the option chosen. Design-level dis
 | 31 | Placeholder route | `generateStaticParams` returns every `/placeholder/*` href found in the content; unlisted paths still render on request; `noindex` | `dynamicParams` isn't compatible with Cache Components |
 | 32 | UI chrome strings | "Skip to content", "Menu", "Octopus home" stay in components; page copy stays in `src/data` | They're accessibility labels for the interface, not content (a future i18n pass would move them to a dictionary) |
 | 33 | Mobile logo | Mark only below 810px, full logo from tablet | DS §6.2 (mobile pill shows the mark) |
+| 34 | Section rhythm | Uniform `py-10 md:py-20` for the category sections (hero, best sellers and explore follow DS §5.2) | The Figma desktop paddings vary (60/180/120…) without a clear rule; one rhythm keeps the spacing consistent, which is what the brief asks for |
+| 35 | Hero without video | The video is rendered only if `/public/videos/…` exists; the poster placeholder is otherwise the hero | Figma export disabled; no autoplaying asset means no pause control to show |
+| 36 | Carousel dots | Shown at every breakpoint, 24px hit area around an 8px dot | Brief asks for dots on desktop; on touch they're still useful and harmless |
+| 37 | "Learn more" links | Visible label + sr-only "about {product}" | Several identical link names on one page fail WCAG 2.4.4 in context |
+| 38 | Container | `box-content`: max-width applies to the content (1344), the gutter sits outside | Matches Figma: content is 1344 wide at 1600, starting at 128 |
