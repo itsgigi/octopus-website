@@ -1,0 +1,300 @@
+[
+  {
+    "id": "p01",
+    "slug": "octopus-countertop-blender",
+    "name": "Octopus Countertop Blender",
+    "category": "kitchen",
+    "shortDescription": "A powerful blender that crushes ice and blends smooth with seven presets",
+    "description": "The Octopus Countertop Blender has the power for daily smoothies and tougher jobs alike. A 1500W motor and seven presets handle most of the work, and a one-touch clean cycle rinses the jug so you don't have to.",
+    "image": {
+      "src": "/images/products/octopus-countertop-blender.png",
+      "alt": "Octopus Countertop Blender with its glass jug"
+    },
+    "lifestyleImages": [
+      {
+        "src": "/images/lifestyle/octopus-countertop-blender-1.jpg",
+        "alt": "The countertop blender on a kitchen bench next to fresh fruit"
+      },
+      {
+        "src": "/images/lifestyle/octopus-countertop-blender-2.jpg",
+        "alt": "A smoothie being poured from the blender jug"
+      }
+    ],
+    "bestSeller": false,
+    "featured": 3,
+    "colours": [
+      { "name": "Black", "value": "#1b1b1b" },
+      { "name": "Silver", "value": "#c9cacc" },
+      { "name": "Red", "value": "#de2027" }
+    ],
+    "features": [
+      {
+        "title": "Powers through the tough stuff",
+        "description": "A 1500W motor lets you do anything from crushing ice to blending smoothies",
+        "image": {
+          "src": "/images/features/blender-power.jpg",
+          "alt": "Ice being crushed in the blender jug"
+        }
+      },
+      {
+        "title": "Skip the scrubbing",
+        "description": "Add water and a little detergent, press clean, and the blender cleans itself",
+        "image": {
+          "src": "/images/features/blender-clean.jpg",
+          "alt": "Soapy water swirling in the jug during the clean cycle"
+        }
+      },
+      {
+        "title": "Control in short bursts",
+        "description": "The pulse function runs the blades in bursts, giving you even more control",
+        "image": {
+          "src": "/images/features/blender-pulse.jpg",
+          "alt": "Close-up of the blender control dial"
+        }
+      },
+      {
+        "title": "A preset for the everyday",
+        "description": "Seven intelligent presets for smoothies, soups, purées & more",
+        "image": {
+          "src": "/images/features/blender-presets.jpg",
+          "alt": "Soup, smoothie and purée made with the blender presets"
+        }
+      }
+    ],
+    "specs": [
+      {
+        "title": "Technical specifications",
+        "items": [
+          { "label": "Power", "value": "1500W" },
+          { "label": "Voltage", "value": "220–240 V" },
+          { "label": "Frequency", "value": "50/60 Hz" },
+          { "label": "Presets", "value": "7" }
+        ]
+      },
+      {
+        "title": "Dimensions & weight",
+        "items": [
+          { "label": "Dimensions", "value": "238 × 210 × 450 mm" },
+          { "label": "Weight", "value": "4.6 kg" },
+          { "label": "Jug capacity", "value": "2 L" }
+        ]
+      },
+      {
+        "title": "Product information",
+        "items": [
+          { "label": "Model", "value": "BL9023-CB" },
+          { "label": "In the box", "value": "Motor base, 2 L jug, tamper, user manual" }
+        ]
+      }
+    ],
+    "downloads": [
+      { "label": "User manual", "href": "/placeholder/downloads/bl9023-cb-user-manual" }
+    ]
+  },
+  {
+    "id": "p02",
+    "slug": "octopus-blender",
+    "name": "Octopus Blender",
+    "category": "kitchen",
+    "shortDescription": "A portable blender that blends straight into a cup you can take with you",
+    "image": {
+      "src": "/images/products/octopus-blender.png",
+      "alt": "Octopus portable Blender with travel cup"
+    },
+    "bestSeller": true,
+    "bestSellerRank": 2,
+    "featured": 2
+  },
+  {
+    "id": "p03",
+    "slug": "octopus-air-fryer-5-7l",
+    "name": "Octopus Air Fryer 5.7 L",
+    "category": "kitchen",
+    "shortDescription": "A 5.7 L air fryer that cooks meals quickly and evenly, with 2200W and dual heaters",
+    "image": {
+      "src": "/images/products/octopus-air-fryer-5-7l.png",
+      "alt": "Octopus Air Fryer 5.7 L"
+    },
+    "bestSeller": true,
+    "bestSellerRank": 3
+  },
+  {
+    "id": "p04",
+    "slug": "octopus-kettle-1-7l",
+    "name": "Octopus Kettle 1.7 L",
+    "category": "kitchen",
+    "shortDescription": "A 1.7 L kettle that boils fast on 1800W, with a body that stays cool to the touch",
+    "image": {
+      "src": "/images/products/octopus-kettle-1-7l.png",
+      "alt": "Octopus Kettle 1.7 L"
+    },
+    "lifestyleImages": [
+      {
+        "src": "/images/lifestyle/octopus-kettle-1-7l-1.jpg",
+        "alt": "The kettle on a sunlit kitchen counter"
+      }
+    ],
+    "bestSeller": true,
+    "bestSellerRank": 5,
+    "featured": 1
+  },
+  {
+    "id": "p05",
+    "slug": "octopus-indoor-camera",
+    "name": "Octopus Indoor Camera",
+    "category": "home-security",
+    "shortDescription": "A 2K indoor camera that pans to cover the whole room and tracks movement as it happens",
+    "image": {
+      "src": "/images/products/octopus-indoor-camera.png",
+      "alt": "Octopus Indoor Camera"
+    },
+    "lifestyleImages": [
+      {
+        "src": "/images/lifestyle/octopus-indoor-camera-1.jpg",
+        "alt": "The indoor camera on a living-room shelf"
+      }
+    ],
+    "bestSeller": true,
+    "bestSellerRank": 4,
+    "featured": 1
+  },
+  {
+    "id": "p06",
+    "slug": "octopus-outdoor-camera",
+    "name": "Octopus Outdoor Camera",
+    "category": "home-security",
+    "shortDescription": "An outdoor camera that runs on solar power and records in 3K",
+    "image": {
+      "src": "/images/products/octopus-outdoor-camera.png",
+      "alt": "Octopus Outdoor Camera with solar panel"
+    },
+    "bestSeller": true,
+    "bestSellerRank": 6,
+    "featured": 2
+  },
+  {
+    "id": "p07",
+    "slug": "octopus-video-doorbell",
+    "name": "Octopus Video Doorbell",
+    "category": "home-security",
+    "shortDescription": "A 2K video doorbell that lets you answer from your phone",
+    "image": {
+      "src": "/images/products/octopus-video-doorbell.png",
+      "alt": "Octopus Video Doorbell"
+    },
+    "bestSeller": false,
+    "featured": 3
+  },
+  {
+    "id": "p08",
+    "slug": "octopus-ionic-hair-dryer",
+    "name": "Octopus Ionic Hair Dryer",
+    "category": "hair-care",
+    "shortDescription": "A powerful hair dryer with a 110,000 RPM motor for fast and efficient drying",
+    "image": {
+      "src": "/images/products/octopus-ionic-hair-dryer.png",
+      "alt": "Octopus Ionic Hair Dryer"
+    },
+    "bestSeller": true,
+    "bestSellerRank": 1
+  },
+  {
+    "id": "p09",
+    "slug": "octopus-power-bank-10000",
+    "name": "Octopus Power Bank 10,000 mAh",
+    "category": "accessories",
+    "shortDescription": "A slim power bank with the USB-C cable already built in",
+    "image": {
+      "src": "/images/products/octopus-power-bank-10000.png",
+      "alt": "Octopus Power Bank 10,000 mAh"
+    },
+    "bestSeller": false,
+    "featured": 1
+  },
+  {
+    "id": "p10",
+    "slug": "octopus-power-bank-20000",
+    "name": "Octopus Power Bank 20,000 mAh",
+    "category": "accessories",
+    "shortDescription": "A 20,000 mAh power bank with the USB-C cable built in and enough charge for several days out",
+    "image": {
+      "src": "/images/products/octopus-power-bank-20000.png",
+      "alt": "Octopus Power Bank 20,000 mAh"
+    },
+    "bestSeller": false
+  },
+  {
+    "id": "p11",
+    "slug": "octopus-power-board-usb",
+    "name": "Octopus Power Board with USB Charging",
+    "category": "accessories",
+    "shortDescription": "A compact power board with four sockets and four USB ports",
+    "image": {
+      "src": "/images/products/octopus-power-board-usb.png",
+      "alt": "Octopus Power Board with four sockets and USB ports"
+    },
+    "bestSeller": false,
+    "featured": 2
+  },
+  {
+    "id": "p12",
+    "slug": "octopus-3-in-1-magnetic-charging-station",
+    "name": "Octopus 3-in-1 Magnetic Charging Station",
+    "category": "accessories",
+    "shortDescription": "A Qi2 stand that charges your phone, watch and earbuds at the same time",
+    "image": {
+      "src": "/images/products/octopus-3-in-1-magnetic-charging-station.png",
+      "alt": "Octopus 3-in-1 Magnetic Charging Station"
+    },
+    "bestSeller": false,
+    "featured": 3
+  },
+  {
+    "id": "p13",
+    "slug": "octopus-usb-c-cable",
+    "name": "Octopus USB-C Cable",
+    "category": "accessories",
+    "shortDescription": "A USB-C cable that carries up to 100W, in 1 m and 2 m lengths",
+    "image": {
+      "src": "/images/products/octopus-usb-c-cable.png",
+      "alt": "Octopus USB-C Cable"
+    },
+    "bestSeller": false
+  },
+  {
+    "id": "p14",
+    "slug": "octopus-magnetic-usb-c-cable",
+    "name": "Octopus Magnetic USB-C Cable",
+    "category": "accessories",
+    "shortDescription": "A 1.2 m magnetic USB-C cable that coils itself away and carries up to 100W",
+    "image": {
+      "src": "/images/products/octopus-magnetic-usb-c-cable.png",
+      "alt": "Octopus Magnetic USB-C Cable, coiled"
+    },
+    "bestSeller": false
+  },
+  {
+    "id": "p15",
+    "slug": "octopus-car-charger-42w",
+    "name": "Octopus Car Charger 42 W",
+    "category": "accessories",
+    "shortDescription": "A 42W car charger that fast-charges two devices from one socket",
+    "image": {
+      "src": "/images/products/octopus-car-charger-42w.png",
+      "alt": "Octopus Car Charger 42 W"
+    },
+    "bestSeller": false
+  },
+  {
+    "id": "p16",
+    "slug": "octopus-usb-c-charger-30w",
+    "name": "Octopus USB-C Charger 30W",
+    "category": "accessories",
+    "shortDescription": "A compact 30W USB-C wall charger that fast-charges phones and small laptops",
+    "image": {
+      "src": "/images/products/octopus-usb-c-charger-30w.png",
+      "alt": "Octopus USB-C Charger 30W"
+    },
+    "bestSeller": false
+  }
+]

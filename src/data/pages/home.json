@@ -1,0 +1,71 @@
+{
+  "title": "Octopus — Smart appliances for every room",
+  "description": "Kitchen appliances, home security cameras, hair care and charging accessories designed by Octopus.",
+  "sections": [
+    {
+      "type": "hero",
+      "id": "hero",
+      "product": "octopus-ionic-hair-dryer",
+      "subtitle": "Dry your hair faster and with less frizz with this powerful ionic hair dryer",
+      "poster": {
+        "src": "/images/hero/hair-dryer-poster.jpg",
+        "alt": "The Octopus Ionic Hair Dryer in a grey studio"
+      },
+      "video": "/videos/octopus-hair-dryer.mp4"
+    },
+    {
+      "type": "best-sellers",
+      "id": "best-sellers",
+      "title": "Best sellers",
+      "products": ["octopus-air-fryer-5-7l", "octopus-indoor-camera", "octopus-ionic-hair-dryer"]
+    },
+    {
+      "type": "category",
+      "id": "kitchen",
+      "category": "kitchen",
+      "layout": "large-first",
+      "cta": { "label": "Explore all products", "href": "/placeholder/categories/kitchen" }
+    },
+    {
+      "type": "banner",
+      "id": "hair-care",
+      "product": "octopus-ionic-hair-dryer",
+      "title": "Octopus Ionic Hair Dryer",
+      "text": "Dry your hair faster and with less frizz with this powerful ionic hair dryer",
+      "image": {
+        "src": "/images/banners/hair-dryer.jpg",
+        "alt": "A woman drying her hair with the Octopus Ionic Hair Dryer"
+      }
+    },
+    {
+      "type": "category",
+      "id": "home-security",
+      "category": "home-security",
+      "layout": "large-side",
+      "cta": { "label": "Explore all products", "href": "/placeholder/categories/home-security" }
+    },
+    {
+      "type": "category",
+      "id": "accessories",
+      "category": "accessories",
+      "layout": "small-row",
+      "cta": { "label": "Explore all products", "href": "/placeholder/categories/accessories" }
+    },
+    {
+      "type": "explore-categories",
+      "id": "explore",
+      "title": "Explore all categories"
+    },
+    {
+      "type": "find-us",
+      "id": "find-us",
+      "title": "Find us at",
+      "retailer": "Partner Retailer",
+      "cta": { "label": "Find your nearest store", "href": "/placeholder/stores" },
+      "image": {
+        "src": "/images/banners/find-us.jpg",
+        "alt": ""
+      }
+    }
+  ]
+}

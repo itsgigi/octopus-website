@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "kitchen",
+    "name": "Kitchen",
+    "tagline": "Powerful appliances for everyday cooking",
+    "image": { "src": "/images/categories/kitchen.png", "alt": "" }
+  },
+  {
+    "slug": "home-security",
+    "name": "Home Security",
+    "tagline": "Home feels safer when you're always in the loop",
+    "image": { "src": "/images/categories/home-security.png", "alt": "" }
+  },
+  {
+    "slug": "hair-care",
+    "name": "Hair Care",
+    "tagline": "Dry your hair faster and with less frizz with this powerful ionic hair dryer",
+    "image": { "src": "/images/categories/hair-care.png", "alt": "" }
+  },
+  {
+    "slug": "accessories",
+    "name": "Accessories",
+    "tagline": "The little things that make everything work better",
+    "image": { "src": "/images/categories/accessories.png", "alt": "" }
+  }
+]
