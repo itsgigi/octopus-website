@@ -1,7 +1,7 @@
 import rawHome from "@/data/pages/home.json";
 import { HomePageSchema, type Category, type HomeSection, type Product } from "@/lib/types";
 import { getCategories, getCategory } from "./categories";
-import { resolveImage } from "./images";
+import { resolveAsset, resolveImage } from "./images";
 import { getBestSellers, getFeaturedProducts, getProduct } from "./products";
 import { assertUnique } from "./validate";
 
@@ -38,6 +38,7 @@ async function resolveSection(section: HomeSection): Promise<ResolvedHomeSection
       return {
         ...section,
         poster: resolveImage(section.poster),
+        video: resolveAsset(section.video),
         product: await requireProduct(section.product, section.id),
       };
     case "best-sellers":

@@ -83,6 +83,9 @@
   /* Layout */
   --container-content: 84rem; /* 1344 */
   --container-copy: 28.125rem; /* 450 — card / banner text column */
+  --container-carousel-sm: 20rem; /* 320 — carousel card widths (mobile / tablet / desktop) */
+  --container-carousel-md: 43rem; /* 688 */
+  --container-carousel-lg: 65.5rem; /* 1048 */
 
   /* Aspect ratios of the image slots */
   --aspect-banner: 12 / 5;
@@ -90,6 +93,10 @@
   --aspect-card-medium: 3 / 4;
   --aspect-pdp-product: 709 / 900;
   --aspect-pdp-lifestyle: 709 / 945;
+  --aspect-hero-tablet: 810 / 1132;
+  --aspect-carousel-sm: 5 / 8; /* 320 × 512 */
+  --aspect-carousel-md: 5 / 3; /* 688 × 413 */
+  --aspect-carousel-lg: 16 / 9; /* 1048 × 589 */
 
   /* Effects */
   --shadow-nav: 0 0 16px 8px rgb(0 0 0 / 0.08);
@@ -112,6 +119,26 @@
 }
 @custom-variant active (&:active, &[data-preview~="active"]);
 @custom-variant focus-visible (&:focus-visible, &[data-preview~="focus"]);
+
+/* Full-bleed tracks: inline padding = page gutter, so content lines up with Container. */
+@utility bleed-gutter {
+  --gutter: --spacing(4);
+  padding-inline: var(--gutter);
+  scroll-padding-inline: var(--gutter);
+  @variant md {
+    --gutter: --spacing(8);
+  }
+  @variant lg {
+    --gutter: max(--spacing(12), calc((100% - var(--container-content)) / 2));
+  }
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 
 @theme inline {
   --font-sans: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;

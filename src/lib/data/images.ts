@@ -13,3 +13,8 @@ export function resolveImage(image: ImageRef): ImageRef {
   if (!image.src) return image;
   return existsSync(path.join(publicDir, image.src)) ? image : { alt: image.alt };
 }
+
+/** Same rule for non-image assets (hero video): undefined when the file isn't in /public. */
+export function resolveAsset(src: string | undefined): string | undefined {
+  return src && existsSync(path.join(publicDir, src)) ? src : undefined;
+}
