@@ -94,7 +94,7 @@
   --aspect-card-medium: 3 / 4;
   --aspect-card-tall: 4 / 5; /* large vertical card on tablet */
   --aspect-card-portrait: 660 / 1038; /* large vertical card on desktop (security bento) */
-  --aspect-pdp-product: 709 / 900;
+  --aspect-pdp-product: 709 / 800; /* Figma 709 × 900, lowered at the developer's request */
   --aspect-pdp-lifestyle: 709 / 945;
   --aspect-feature-wide: 1754 / 804; /* PDP feature card, full row */
   --aspect-feature-tall: 862 / 1130; /* PDP feature card, half row */

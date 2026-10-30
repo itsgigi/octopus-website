@@ -72,7 +72,7 @@ const variantRows: { variant: Variant; surface: string }[] = [
 const aspects = [
   { aspect: "square", label: "Product tile 1:1" },
   { aspect: "card-medium", label: "Card medium 3:4" },
-  { aspect: "pdp-product", label: "PDP product 709:900" },
+  { aspect: "pdp-product", label: "PDP product 709:800" },
   { aspect: "pdp-lifestyle", label: "PDP lifestyle 709:945" },
   { aspect: "video", label: "Hero 16:9" },
   { aspect: "card-large", label: "Card large 1344:755" },
