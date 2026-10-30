@@ -19,8 +19,12 @@ const frameVariants = cva("relative w-full overflow-hidden bg-surface", {
       true: "rounded-card",
       false: "",
     },
+    tone: {
+      light: "",
+      brand: "bg-brand",
+    },
   },
-  defaultVariants: { aspect: "square", rounded: true },
+  defaultVariants: { aspect: "square", rounded: true, tone: "light" },
 });
 
 type ProductImageProps = VariantProps<typeof frameVariants> & {
@@ -48,10 +52,11 @@ export function ProductImage({
   fit = "cover",
   aspect,
   rounded,
+  tone,
   className,
 }: ProductImageProps) {
   return (
-    <div className={cn(frameVariants({ aspect, rounded }), className)}>
+    <div className={cn(frameVariants({ aspect, rounded, tone }), className)}>
       {src ? (
         <Image
           src={src}
@@ -66,7 +71,12 @@ export function ProductImage({
           role={alt ? "img" : undefined}
           aria-label={alt || undefined}
           aria-hidden={alt ? undefined : true}
-          className="absolute inset-0 grid place-items-center bg-linear-to-br from-surface to-surface-strong text-line"
+          className={cn(
+            "absolute inset-0 grid place-items-center bg-linear-to-br",
+            tone === "brand"
+              ? "from-brand to-brand-pressed text-ink-inverse/20"
+              : "from-surface to-surface-strong text-line",
+          )}
         >
           <LogoMark className="size-1/5 max-w-24 min-w-8" />
         </div>
