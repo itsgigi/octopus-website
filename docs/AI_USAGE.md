@@ -29,3 +29,4 @@ Places where AI output was wrong and had to be rewritten. (Kept above the spend 
 | 2026-10-30 14:04 | baseline | $0.0000 | $0.0000 | $0.6146 |
 | 2026-10-30 14:08 | phase 0 scaffold | $0.9871 | $0.9871 | $1.6017 |
 | 2026-10-30 14:15 | phase 1 tokens & primitives | $1.6608 | $2.6479 | $3.2625 |
+| 2026-10-30 14:19 | phase 2 data layer start | $0.2028 | $2.8507 | $3.4652 |
