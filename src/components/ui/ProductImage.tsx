@@ -39,6 +39,8 @@ type ProductImageProps = VariantProps<typeof frameVariants> & {
   fit?: "cover" | "contain";
   /** Classes for the <img> itself, e.g. an object-position to choose the crop. */
   imageClassName?: string;
+  /** Content-driven object-position (`ImageRef.focus`); wins over `imageClassName` positions. */
+  focus?: string;
   className?: string;
 };
 
@@ -56,6 +58,7 @@ export function ProductImage({
   rounded,
   tone,
   imageClassName,
+  focus,
   className,
 }: ProductImageProps) {
   return (
@@ -67,6 +70,7 @@ export function ProductImage({
           fill
           sizes={sizes}
           priority={priority}
+          style={focus ? { objectPosition: focus } : undefined}
           className={cn(fit === "cover" ? "object-cover" : "object-contain", imageClassName)}
         />
       ) : (

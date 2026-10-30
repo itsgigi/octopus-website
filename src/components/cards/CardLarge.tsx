@@ -47,6 +47,7 @@ export function CardLarge({ product, orientation, className }: CardLargeProps) {
       <ProductImage
         src={image.src}
         alt={image.alt}
+        focus={image.focus}
         aspect="fill"
         rounded={false}
         sizes="(min-width: 1200px) 1344px, 100vw"

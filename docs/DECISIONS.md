@@ -68,3 +68,4 @@ Ambiguities in the brief / design system and the option chosen. Design-level dis
 | 62 | Portrait card on tablet | Indoor Camera large card keeps the vertical composition (text centred on top, 4:5) from 810px, instead of Figma's landscape crop | The only asset is portrait: a landscape crop puts the text on the camera lens. A landscape asset would restore the Figma tablet layout |
 | 63 | Low-resolution sources | Kept as-is | They're screenshots (136–1228 px wide), so they look soft when upscaled; replacing the files in `public/images` fixes it with no code change |
 | 64 | Raw captures | Git-ignored, not deleted | They're the user's originals; the processed copies are what ships |
+| 65 | Image focal point | Optional `focus` on `ImageRef` (CSS object-position) in the JSON, applied by `ProductImage` | The crop subject is content, not layout: the kettle sits on the right of a landscape photo and fell out of the portrait mobile card |

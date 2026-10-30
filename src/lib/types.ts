@@ -16,6 +16,11 @@ const slug = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "kebab-case slug");
 export const ImageRefSchema = z.object({
   src: z.string().startsWith("/images/").optional(),
   alt: z.string(),
+  /** Subject position kept in view when the image is cropped (CSS object-position, e.g. "70% 50%"). */
+  focus: z
+    .string()
+    .regex(/^\d{1,3}% \d{1,3}%$/)
+    .optional(),
 });
 export type ImageRef = z.infer<typeof ImageRefSchema>;
 
