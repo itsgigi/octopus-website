@@ -12,7 +12,13 @@ const satoshi = localFont({
   display: "swap",
 });
 
+// Absolute URLs for Open Graph images: the Vercel production domain, or localhost in dev.
+const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Octopus — Consumer electronics",
     template: "%s · Octopus",

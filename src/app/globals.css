@@ -86,6 +86,7 @@
   --container-carousel-sm: 20rem; /* 320 — carousel card widths (mobile / tablet / desktop) */
   --container-carousel-md: 43rem; /* 688 */
   --container-carousel-lg: 65.5rem; /* 1048 */
+  --container-pdp-info: 22.1875rem; /* 355 — PDP info column content */
 
   /* Aspect ratios of the image slots */
   --aspect-banner: 12 / 5;
@@ -164,6 +165,13 @@
 
   body {
     @apply bg-canvas font-sans text-body text-ink antialiased;
+  }
+
+  /* PDP sticky "Where to buy" bar on mobile: keep the footer clear of it. */
+  body:has([data-sticky-cta]) {
+    @variant max-md {
+      padding-bottom: --spacing(20);
+    }
   }
 
   /* Mobile menu open: lock page scroll (only where the menu exists, below lg). */

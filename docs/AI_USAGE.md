@@ -40,3 +40,4 @@ Places where AI output was wrong and had to be rewritten. (Kept above the spend 
 | 2026-10-30 14:31 | phase 3 layout shell end | $1.4881 | $5.6828 | $6.2974 |
 | 2026-10-30 14:35 | phase 4 homepage start | $1.4881 | $7.1709 | $7.7855 |
 | 2026-10-30 14:42 | phase 4 homepage end | $2.1774 | $9.3483 | $9.9629 |
+| 2026-10-30 14:48 | phase 5 pdp start | $0.3391 | $9.6874 | $10.3020 |
