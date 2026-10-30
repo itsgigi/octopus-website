@@ -62,7 +62,11 @@ async function resolveSection(section: HomeSection): Promise<ResolvedHomeSection
     case "explore-categories":
       return { ...section, categories: await getCategories() };
     case "find-us":
-      return { ...section, image: resolveImage(section.image) };
+      return {
+        ...section,
+        image: resolveImage(section.image),
+        retailerLogo: resolveAsset(section.retailerLogo),
+      };
   }
 }
 

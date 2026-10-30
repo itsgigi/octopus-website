@@ -60,7 +60,8 @@
       "type": "find-us",
       "id": "find-us",
       "title": "Find us at",
-      "retailer": "Partner Retailer",
+      "retailer": "The Warehouse",
+      "retailerLogo": "/images/retailers/the-warehouse.svg",
       "cta": { "label": "Find your nearest store", "href": "/placeholder/stores" },
       "image": {
         "src": "/images/banners/find-us.jpg",

@@ -1,10 +1,10 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Heading } from "@/components/ui/Heading";
-import { Text } from "@/components/ui/Text";
 import { FullBleedBanner } from "./FullBleedBanner";
 import type { SectionOf } from "./types";
 
-/** Red "Find us at" banner. Retailer shown as text (no third-party logo reproduction). */
+/** Red "Find us at" banner: retailer icon + name, CTA to the store locator. */
 export function FindUsBanner({ section }: { section: SectionOf<"find-us"> }) {
   const titleId = `${section.id}-title`;
   return (
@@ -19,9 +19,20 @@ export function FindUsBanner({ section }: { section: SectionOf<"find-us"> }) {
         <Heading as="h2" size="h2" tone="inverse" id={titleId}>
           {section.title}
         </Heading>
-        <Text size="subtitle" tone="inverse" weight="bold">
-          {section.retailer}
-        </Text>
+        <p className="flex items-center gap-3 text-ink-inverse max-md:justify-center">
+          {section.retailerLogo ? (
+            // Decorative: the retailer name follows as text. SVG, so no optimisation needed.
+            <Image
+              src={section.retailerLogo}
+              alt=""
+              width={40}
+              height={40}
+              unoptimized
+              className="size-10"
+            />
+          ) : null}
+          <span className="text-h3 font-bold">{section.retailer}</span>
+        </p>
       </div>
       <Button href={section.cta.href} variant="secondary">
         {section.cta.label}

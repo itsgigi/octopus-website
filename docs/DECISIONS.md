@@ -27,7 +27,7 @@ Ambiguities in the brief / design system and the option chosen. Design-level dis
 | 21 | Blender placeholder copy | Figma truncates dimensions and hides some specs: dimensions 238 × 210 × 450 mm, weight 4.6 kg, jug 2 L, "In the box" and the Silver/Red colours are **plausible placeholders** | DS §11 #3 and #5 |
 | 22 | Image fallback | Loaders keep `src` only if the file exists in `/public` | Real assets can be dropped in with no JSON or code change; until then, ratio-correct placeholders |
 | 23 | Explore tiles | Link to the homepage anchors (`/#kitchen`, …); hair care points to the banner section | The brief allows an anchor or a placeholder route; anchors keep users on the demo |
-| 24 | Retailer | "Find us at" shows the text "Partner Retailer" | The retailer logo can't be exported and reproducing a third-party logo is avoided |
+| 24 | Retailer | "Find us at" shows The Warehouse icon (redrawn as SVG from the artwork provided by the developer) + the name as text; the icon is decorative (`alt=""`) | As in Figma. Name as real text keeps it readable and translatable; logo path comes from `home.json` |
 | 25 | Cache lifetime | Default `cacheLife` profile (revalidate 15 min) | Static at build today; with a CMS, content refreshes without a redeploy |
 | 26 | Menu pattern | Disclosure (button + `aria-expanded`/`aria-controls`) with a focus trap, not a modal dialog | The panel is part of the header; a constant "Menu" label plus `aria-expanded` follows WAI-ARIA APG (no label swap) |
 | 27 | Close on route change | Open state stores the pathname it was opened on; `open = openOn === pathname` | Closes on navigation without a `setState` in an effect (React Compiler / `react-hooks` v7 friendly) |
