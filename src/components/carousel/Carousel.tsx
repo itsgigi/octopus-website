@@ -18,7 +18,8 @@ type ScrollState = { index: number; positions: number; atStart: boolean; atEnd: 
 
 /**
  * Native horizontal scroll with CSS scroll-snap (swipe and trackpad for free), plus arrows that
- * are disabled at the ends and pagination dots. Full-bleed track aligned to the page grid.
+ * are disabled at the ends (no pagination dots, as in Figma). Full-bleed track aligned to the
+ * page grid.
  */
 export function Carousel({ label, children, slideClassName }: CarouselProps) {
   const slides = Children.toArray(children);
@@ -110,26 +111,7 @@ export function Carousel({ label, children, slideClassName }: CarouselProps) {
         ))}
       </div>
 
-      <Container className="mt-6 flex items-center justify-between gap-4">
-        <div className="flex items-center">
-          {Array.from({ length: state.positions }, (_, i) => (
-            <button
-              key={i}
-              type="button"
-              aria-label={`Go to slide ${i + 1}`}
-              aria-current={i === state.index ? "true" : undefined}
-              onClick={() => goTo(i)}
-              className="group grid size-6 place-items-center rounded-full"
-            >
-              <span
-                className={cn(
-                  "h-2 rounded-full transition-all duration-300",
-                  i === state.index ? "w-6 bg-ink" : "w-2 bg-line group-hover:bg-ink-muted",
-                )}
-              />
-            </button>
-          ))}
-        </div>
+      <Container className="mt-6 flex justify-end">
         <div className="flex gap-2">
           <IconButton
             icon="chevron-left"

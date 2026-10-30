@@ -39,7 +39,7 @@ Ambiguities in the brief / design system and the option chosen. Design-level dis
 | 33 | Mobile logo | Mark only below 810px, full logo from tablet | DS §6.2 (mobile pill shows the mark) |
 | 34 | Section rhythm | Uniform `py-10 md:py-20` for the category sections (hero, best sellers and explore follow DS §5.2) | The Figma desktop paddings vary (60/180/120…) without a clear rule; one rhythm keeps the spacing consistent, which is what the brief asks for |
 | 35 | Hero without video | The video is rendered only if `/public/videos/…` exists; the poster placeholder is otherwise the hero | Figma export disabled; no autoplaying asset means no pause control to show |
-| 36 | Carousel dots | Shown at every breakpoint, 24px hit area around an 8px dot | Brief asks for dots on desktop; on touch they're still useful and harmless |
+| 36 | Carousel dots | Removed: arrows only, right-aligned | Figma has no dots; the developer chose Figma over the brief's mention. Arrows still stop at the last reachable position |
 | 37 | "Learn more" links | Visible label + sr-only "about {product}" | Several identical link names on one page fail WCAG 2.4.4 in context |
 | 38 | Container | `box-content`: max-width applies to the content (1344), the gutter sits outside | Matches Figma: content is 1344 wide at 1600, starting at 128 |
 | 39 | PDP grid | One CSS grid + `order`: mobile image → info → gallery, tablet info → image → gallery, desktop 709fr/555fr columns with the info column `sticky` | No duplicated markup per breakpoint; verified 709×900 gallery and 355 info content at 1600 |
@@ -48,7 +48,7 @@ Ambiguities in the brief / design system and the option chosen. Design-level dis
 | 42 | Accordion panels | Always in the DOM; closed = `inert` + `aria-hidden`, `grid-rows` transition | Animatable height without measuring; closed links leave the tab order |
 | 43 | Mobile CTA | Sticky bottom bar below 810px; the in-flow button is hidden there; `body:has([data-sticky-cta])` adds bottom padding so the footer isn't covered | DS §6.9 |
 | 44 | Unknown product slug | `notFound()` renders the 404 UI with `noindex`, but the HTTP status is 200 | With Partial Prefetching the shell has already started streaming; every real product is prerendered, so this only affects invented URLs |
-| 45 | PDP best sellers | All best sellers by rank except the current product; 2 / 3 / 5 visible; dots = reachable positions | DS §6.6; one dot per slide would leave dots that can never be reached |
+| 45 | PDP best sellers | All best sellers by rank except the current product; 2 / 3 / 5 visible; Next stops at the last reachable position | DS §6.6 |
 | 46 | Feature bento shapes | By position: wide, tall, tall, wide (repeating) | Matches Figma for the blender's 4 features and keeps working if features are added |
 | 47 | Scroll reveal | One shared `IntersectionObserver`; it sets `data-visible` on the DOM, and the transition is CSS | No re-renders and one observer for the whole page; DS §8 values (60/30px, 1.2s, ease-out, 0.1s delay, no replay) |
 | 48 | What is not revealed | Hero, PDP main image and product info | They're above the fold and contain the LCP; animating them would delay LCP and hurt Lighthouse |

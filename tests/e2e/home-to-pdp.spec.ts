@@ -47,6 +47,7 @@ test("best-sellers carousel: arrows disabled at the ends", async ({ page }) => {
   await expect(prev).toBeDisabled();
   await next.click();
   await expect(prev).toBeEnabled();
-  await carousel.getByRole("button", { name: "Go to slide 3" }).click();
+  // Walk to the end: the number of stops depends on how many cards fit the viewport.
+  for (let i = 0; i < 5 && (await next.isEnabled()); i++) await next.click();
   await expect(next).toBeDisabled();
 });

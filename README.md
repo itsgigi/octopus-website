@@ -89,7 +89,7 @@ docs/                   # brief, design system, plan, decisions, AI usage
 
 `app/page.tsx` maps the resolved `home.json` sections to section components (`Hero`, `BestSellers`, `CategorySection`, `Banner`, `ExploreCategories`, `FindUsBanner`); reordering or removing sections is a JSON change.
 
-- **Carousel** (client): native `scroll-snap` gives swipe and trackpad support with no library. Arrows are disabled at the ends, dots follow native scrolling, and the track is a focusable region with `aria-roledescription` carousel and slide.
+- **Carousel** (client): native `scroll-snap` gives swipe and trackpad support with no library. Arrows are disabled at the ends and follow native scrolling (no pagination dots, as in Figma), and the track is a focusable region with `aria-roledescription` carousel and slide.
 - **Category bentos:** three layouts (`large-first`, `large-side`, `small-row`). The first `featured` product becomes the large card, the others flow into the grid.
 - **Cards** share one `CardContent` block; every "Learn more" link has an sr-only "about {product}" so link names are unique.
 - **Hero:** the poster is the LCP image (`priority`); the video loads client-side, muted, with a pause button, and is skipped with `prefers-reduced-motion`.
@@ -101,7 +101,7 @@ docs/                   # brief, design system, plan, decisions, AI usage
 - **One grid, three layouts:** CSS `order` plus explicit desktop placement gives image → info → gallery (mobile), info → image → gallery (tablet), and gallery 709 + sticky info 555 (desktop). Verified against the Figma sizes at 1600.
 - **ColourSelector** (client): native radios styled as swatches, so arrow keys and announcements come from the platform. The legend reads "Colour - {selected}".
 - **Accordion** (client): each section toggles on its own (heading > button, `aria-expanded`/`aria-controls`, labelled region). Closed panels are `inert`, and the height animates with `grid-rows`. Used for the three spec sections and for Downloads.
-- **Best sellers:** the same `Carousel` with `ProductCard`s, 2 / 3 / 5 visible; the dots count the reachable positions. On mobile "Where to buy" becomes a sticky bottom bar.
+- **Best sellers:** the same `Carousel` with `ProductCard`s, 2 / 3 / 5 visible; Next stops at the last reachable position. On mobile "Where to buy" becomes a sticky bottom bar.
 
 ### UI primitives (`src/components/ui`)
 
@@ -137,17 +137,17 @@ Still placeholders (no screenshot available): Kettle 1.7 L, Power Bank 20,000 mA
 
 `pnpm test` runs everything: **44 unit tests** (Vitest) and then **e2e** (Playwright on a production build).
 
-| Suite                                              | What it proves                                                                                                                   |
-| -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `Carousel` (unit)                                  | Arrows disabled at start and end, dots follow native scroll and count only reachable positions, slide semantics, focusable track |
-| `Accordion` (unit)                                 | `aria-expanded`/`aria-controls`, labelled region, inert when closed, independent toggles, keyboard                               |
-| `ColourSelector` (unit)                            | Radio group, label shows the selected colour, arrow keys move the selection                                                      |
-| `MobileMenu` (unit)                                | Open/close, Escape returns focus, focus trap, closes on link, route change and outside click                                     |
-| `Reveal`, `Button`, `Heading`, data loaders (unit) | Reveal fires once; link vs button; heading level vs size; slugs unique, categories valid, home references resolve                |
-| `home-to-pdp` (e2e)                                | Home → "Learn more" on the Countertop Blender → PDP title, colour change, specs accordion; carousel ends                         |
-| `responsive` (e2e)                                 | No horizontal scroll on both pages at 360, 402, 640, 809, 810, 1024, 1199, 1200, 1440, 1600 and 1920 px                          |
-| `a11y` (e2e)                                       | axe WCAG 2.0–2.2 A/AA on both pages; skip link is the first stop and focuses `<main>`                                            |
-| `smoke` (e2e)                                      | Shell landmarks; menu below 1200px opens and closes on Escape                                                                    |
+| Suite                                              | What it proves                                                                                                                         |
+| -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `Carousel` (unit)                                  | Arrows disabled at start and end, follow native scroll, stop at the last reachable position, no dots, slide semantics, focusable track |
+| `Accordion` (unit)                                 | `aria-expanded`/`aria-controls`, labelled region, inert when closed, independent toggles, keyboard                                     |
+| `ColourSelector` (unit)                            | Radio group, label shows the selected colour, arrow keys move the selection                                                            |
+| `MobileMenu` (unit)                                | Open/close, Escape returns focus, focus trap, closes on link, route change and outside click                                           |
+| `Reveal`, `Button`, `Heading`, data loaders (unit) | Reveal fires once; link vs button; heading level vs size; slugs unique, categories valid, home references resolve                      |
+| `home-to-pdp` (e2e)                                | Home → "Learn more" on the Countertop Blender → PDP title, colour change, specs accordion; carousel ends                               |
+| `responsive` (e2e)                                 | No horizontal scroll on both pages at 360, 402, 640, 809, 810, 1024, 1199, 1200, 1440, 1600 and 1920 px                                |
+| `a11y` (e2e)                                       | axe WCAG 2.0–2.2 A/AA on both pages; skip link is the first stop and focuses `<main>`                                                  |
+| `smoke` (e2e)                                      | Shell landmarks; menu below 1200px opens and closes on Escape                                                                          |
 
 The e2e suites run on **Chrome, Firefox, desktop Safari, iPhone 15 (WebKit) and Pixel 7 (Chromium)**; Edge is Chromium. These are engine emulations, not real devices.
 

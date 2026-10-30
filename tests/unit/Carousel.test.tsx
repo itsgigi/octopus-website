@@ -42,7 +42,6 @@ function setup() {
     track,
     prev: screen.getByRole("button", { name: "Previous slide" }),
     next: screen.getByRole("button", { name: "Next slide" }),
-    dots: screen.getAllByRole("button", { name: /Go to slide/ }),
   };
 }
 
@@ -58,37 +57,38 @@ describe("Carousel", () => {
     );
   });
 
-  it("starts with Previous disabled and the first dot current", () => {
-    const { prev, next, dots } = setup();
+  it("starts with Previous disabled and has no pagination dots", () => {
+    const { prev, next } = setup();
     expect(prev).toBeDisabled();
     expect(next).toBeEnabled();
-    expect(dots).toHaveLength(3);
-    expect(dots[0]).toHaveAttribute("aria-current", "true");
+    expect(screen.getAllByRole("button")).toHaveLength(2);
   });
 
   it("moves to the next slide and enables Previous", async () => {
-    const { user, track, prev, next, dots } = setup();
+    const { user, track, prev, next } = setup();
     await user.click(next);
     expect(track.scrollTo).toHaveBeenCalledWith({ left: SLIDE });
     expect(prev).toBeEnabled();
-    expect(dots[1]).toHaveAttribute("aria-current", "true");
   });
 
   it("disables Next at the end", async () => {
-    const { user, next, dots } = setup();
-    await user.click(dots[2]!);
+    const { user, track, next } = setup();
+    await user.click(next);
+    await user.click(next);
+    expect(track.scrollTo).toHaveBeenLastCalledWith({ left: SLIDE * 2 });
     expect(next).toBeDisabled();
-    expect(dots[2]).toHaveAttribute("aria-current", "true");
   });
 
-  it("follows native scrolling (swipe / trackpad)", () => {
-    const { track, prev, dots } = setup();
+  it("follows native scrolling (swipe / trackpad)", async () => {
+    const { user, track, prev } = setup();
     act(() => {
       track.scrollLeft = SLIDE;
       track.dispatchEvent(new Event("scroll"));
     });
     expect(prev).toBeEnabled();
-    expect(dots[1]).toHaveAttribute("aria-current", "true");
+    // Arrows continue from where the user scrolled to.
+    await user.click(prev);
+    expect(track.scrollTo).toHaveBeenLastCalledWith({ left: 0 });
   });
 
   it("keeps the track keyboard-focusable", () => {
@@ -98,7 +98,8 @@ describe("Carousel", () => {
 });
 
 describe("Carousel with several slides visible", () => {
-  it("shows one dot per reachable position, not per slide", () => {
+  it("stops Next at the last reachable position, not the last slide", async () => {
+    const user = userEvent.setup();
     vi.spyOn(window, "requestAnimationFrame").mockImplementation((cb) => {
       cb(0);
       return 0;
@@ -120,7 +121,14 @@ describe("Carousel with several slides visible", () => {
         offsetWidth: { value: 100, configurable: true },
       }),
     );
+    track.scrollTo = vi.fn(({ left }: ScrollToOptions) => {
+      track.scrollLeft = Math.min(left ?? 0, 120);
+      track.dispatchEvent(new Event("scroll"));
+    }) as unknown as typeof track.scrollTo;
     act(() => track.dispatchEvent(new Event("scroll")));
-    expect(screen.getAllByRole("button", { name: /Go to slide/ })).toHaveLength(2);
+    const next = screen.getByRole("button", { name: "Next slide" });
+    await user.click(next);
+    expect(track.scrollTo).toHaveBeenLastCalledWith({ left: 120 });
+    expect(next).toBeDisabled();
   });
 });

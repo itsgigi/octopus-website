@@ -220,7 +220,7 @@ Recurring gaps: **24** (card grids, carousel), **32** (heading → CTA, banner c
 ### 6.6 Carousel
 - Horizontal scroll container, gap **24**, scroll-snap per card, next card **peeks** at the edge.
 - Controls row under the track, right-aligned: prev / next **icon buttons** (40 px, ghost/secondary circle), gap 8. Prev disabled at start, next disabled at end.
-- Figma shows **no pagination dots** — the brief requires dots on desktop → added under the track (see §11).
+- Figma shows **no pagination dots** — none in the build either (developer decision); arrows only.
 - Touch: native swipe via `scroll-snap`. Keyboard: arrows focusable, track is a labelled region.
 - Home "Best sellers": 3 carousel cards (1 visible + peek on desktop/tablet/mobile). PDP "Best sellers": product cards, ~5 visible desktop, 3 tablet, 2 mobile.
 
@@ -362,7 +362,7 @@ Original Figma filenames (for future replacement): `OctopusHairDryer_4K.mp4`, `H
 | # | Topic | Figma | Brief | Decision |
 |---|---|---|---|---|
 | 1 | Tablet navigation | inline links + CTA in a pill | collapse into menu below 1200 px | **Follow the brief** (menu < 1200) — the inline tablet nav also overflows at ~810 px |
-| 2 | Carousel dots | not drawn | arrows + dots on desktop | Add dots under the track (token-styled), keep arrows right-aligned |
+| 2 | Carousel dots | not drawn | arrows + dots on desktop | Superseded: dots removed to match Figma, arrows right-aligned |
 | 3 | Colour selector | single "Black" swatch | selecting a colour updates state | Add 2–3 colours in data (Black, Silver, Red — assumption) |
 | 4 | Radius values | "Card" / "Specifics" variables, values hidden | – | 24 px / 16 px estimated from canvas |
 | 5 | Spec values | partly hidden (dimensions truncated) | – | Fill with plausible placeholder values, marked in data |

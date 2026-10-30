@@ -67,7 +67,7 @@ docs/
 - A11y: semantic landmarks, skip link, visible `:focus-visible` ring (token `--color-focus`), full keyboard support, `aria-expanded/controls`, Escape closes menu, `prefers-reduced-motion` respected, WCAG AA contrast.
 - Primary button hover uses `#C2151B` (Figma `#F23F45` fails AA) — documented deviation.
 - Navigation collapses into a menu **below 1200px** (brief wins over Figma tablet).
-- Carousel: native `scroll-snap` + arrows (disabled at ends) + pagination dots; swipe works natively.
+- Carousel: native `scroll-snap` + arrows (disabled at ends), no pagination dots (as in Figma); swipe works natively.
 
 ## Workflow
 
