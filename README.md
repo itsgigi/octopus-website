@@ -119,17 +119,17 @@ docs/                   # brief, design system, plan, decisions, AI usage
 
 ## Progress
 
-| Phase                   | Status | What & why                                                                                                                                                                                      | AI cost |
-| ----------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| 0 — Scaffold            | ✅     | Next 16 + Tailwind 4 + strict TS, Prettier, Vitest, Playwright, folder structure. Small commits per step, so the history can be reviewed                                                        | $0.99   |
-| 1 — Tokens & primitives | ✅     | `@theme` tokens, Satoshi, the primitives above, logo + favicon, `/styleguide`. Tokens first so every later component is token-only and consistent                                               | $1.66   |
-| 2 — Data layer          | ✅     | zod-validated JSON (16 products, 4 categories, home sections) + cached loaders. Data first so pages are pure composition and the CMS swap is one layer                                          | $1.02   |
-| 3 — Layout shell        | ✅     | Floating navbar, accessible mobile menu below 1200px (focus trap, Escape, closes on route change), data-driven footer, skip link, placeholder route. Shared by both pages, so built before them | $1.49   |
-| 4 — Homepage            | ✅     | Hero (poster as LCP, optional video + pause), scroll-snap carousel, three category bentos, hair care and find-us banners, explore tiles — all composed from `home.json`                         | $2.18   |
-| 5 — PDP                 | ✅     | `products/[slug]` with static params + OG, sticky product info, native-radio colour selector, feature bento, accessible specs and downloads accordion, 2/3/5-up best sellers, mobile sticky CTA | $1.25   |
-| 6 — Motion & polish     | ⏳     | Scroll reveal, hover states                                                                                                                                                                     | —       |
-| 7 — Quality             | ⏳     | e2e, Lighthouse ≥ 90, axe                                                                                                                                                                       | —       |
-| 8 — Ship                | ⏳     | Vercel deploy, final README                                                                                                                                                                     | —       |
+| Phase                   | Status | What & why                                                                                                                                                                                      | AI cost       |
+| ----------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| 0 — Scaffold            | ✅     | Next 16 + Tailwind 4 + strict TS, Prettier, Vitest, Playwright, folder structure. Small commits per step, so the history can be reviewed                                                        | $0.99         |
+| 1 — Tokens & primitives | ✅     | `@theme` tokens, Satoshi, the primitives above, logo + favicon, `/styleguide`. Tokens first so every later component is token-only and consistent                                               | $1.66         |
+| 2 — Data layer          | ✅     | zod-validated JSON (16 products, 4 categories, home sections) + cached loaders. Data first so pages are pure composition and the CMS swap is one layer                                          | $1.02         |
+| 3 — Layout shell        | ✅     | Floating navbar, accessible mobile menu below 1200px (focus trap, Escape, closes on route change), data-driven footer, skip link, placeholder route. Shared by both pages, so built before them | $1.49         |
+| 4 — Homepage            | ✅     | Hero (poster as LCP, optional video + pause), scroll-snap carousel, three category bentos, hair care and find-us banners, explore tiles — all composed from `home.json`                         | $2.18         |
+| 5 — PDP                 | ✅     | `products/[slug]` with static params + OG, sticky product info, native-radio colour selector, feature bento, accessible specs and downloads accordion, 2/3/5-up best sellers, mobile sticky CTA | $1.25         |
+| 6 — Motion & polish     | ✅     | CSS scroll reveal with one shared IntersectionObserver (DS §8 timings, reduced-motion = fade only, visible without JS), image fade-in for real assets. LCP content is never animated            | subscription² |
+| 7 — Quality             | ⏳     | e2e, Lighthouse ≥ 90, axe                                                                                                                                                                       | —             |
+| 8 — Ship                | ⏳     | Vercel deploy, final README                                                                                                                                                                     | —             |
 
 Detailed checklist: [`docs/PLAN.md`](docs/PLAN.md).
 
@@ -151,7 +151,7 @@ Full lists: [`docs/DECISIONS.md`](docs/DECISIONS.md) (implementation) and [`docs
 
 **Tools**
 
-- **Claude Code** (CLI) through **OpenRouter**, with the key provided for the test: scaffolding, all code, tests and docs, in one session per phase following [`docs/PLAN.md`](docs/PLAN.md).
+- **Claude Code** (VS Code extension): scaffolding, all code, tests and docs, one session per phase following [`docs/PLAN.md`](docs/PLAN.md). Phases 0–5 (and the start of 6) ran through **OpenRouter** on the key provided for the test; from phase 6 on, my own **Claude subscription**.
 - **Claude (claude.ai)**: reading the view-only Figma into [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md) and preparing the project setup. Not billed to the key.
 
 **How costs are tracked:** `pnpm ai:usage` reads the key's `usage` from OpenRouter at the start and end of each phase and appends a row to [`docs/AI_USAGE.md`](docs/AI_USAGE.md). The key is never printed or committed.
@@ -168,8 +168,11 @@ Full lists: [`docs/DECISIONS.md`](docs/DECISIONS.md) (implementation) and [`docs
 | 4 — Homepage                     | 2.18       | 9.35       |
 | Phase 4 wrap-up (docs, summary)  | 0.34       | 9.69       |
 | 5 — PDP                          | 1.25       | 10.93      |
+| Phase 5 wrap-up + phase 6 start  | 0.36       | 11.30      |
 
 ¹ Same delta as the previous phase; OpenRouter usage can lag by a few minutes, so the split between adjacent rows is approximate (the totals are exact).
+
+² **Switch to the subscription.** During phase 6 the key hit its spend limit: OpenRouter returned `402`, because Claude Code requests up to 128k output tokens per call and the remaining budget covered less. Instead of asking for a higher limit mid-test, I moved Claude Code to my own Claude subscription, which isn't billed per request, so there are no USD figures from phase 6 on. Takeaway: on a key with a hard limit, cap `CLAUDE_CODE_MAX_OUTPUT_TOKENS`. **Key-billed total for scaffold → PDP: about $11.30.**
 
 **Where the AI output was wrong** (full list in [`docs/AI_USAGE.md` → Corrections](docs/AI_USAGE.md)):
 

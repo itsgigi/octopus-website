@@ -50,3 +50,8 @@ Ambiguities in the brief / design system and the option chosen. Design-level dis
 | 44 | Unknown product slug | `notFound()` renders the 404 UI with `noindex`, but the HTTP status is 200 | With Partial Prefetching the shell has already started streaming; every real product is prerendered, so this only affects invented URLs |
 | 45 | PDP best sellers | All best sellers by rank except the current product; 2 / 3 / 5 visible; dots = reachable positions | DS §6.6; one dot per slide would leave dots that can never be reached |
 | 46 | Feature bento shapes | By position: wide, tall, tall, wide (repeating) | Matches Figma for the blender's 4 features and keeps working if features are added |
+| 47 | Scroll reveal | One shared `IntersectionObserver`; it sets `data-visible` on the DOM, and the transition is CSS | No re-renders and one observer for the whole page; DS §8 values (60/30px, 1.2s, ease-out, 0.1s delay, no replay) |
+| 48 | What is not revealed | Hero, PDP main image and product info | They're above the fold and contain the LCP; animating them would delay LCP and hurt Lighthouse |
+| 49 | Reveal without JS | Elements are hidden only under `@media (scripting: enabled)` | With JS off (or before hydration on a no-JS crawler) content is visible, never stuck at opacity 0 |
+| 50 | Reduced motion and reveal | Fade kept, translate removed (overrides the global reset on purpose) | DS §8: "Reduced motion: opacity only" |
+| 51 | Image fade-in | `FadeInImage` client wrapper rendered only when `src` exists | Placeholders cost no JS; real assets get a 500ms fade, except `priority` (LCP) images |

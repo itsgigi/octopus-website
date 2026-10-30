@@ -43,8 +43,8 @@ Track cost: `pnpm ai:usage "<phase> start"` before, `pnpm ai:usage "<phase> end"
 - [x] Tests: Accordion (toggle, aria), ColourSelector (selection updates label)
 
 ## Phase 6 — Motion & polish
-- [ ] `Reveal` (IntersectionObserver, 60px/1.2s ease-out, once, reduced-motion = opacity only)
-- [ ] Hover/focus states, image fade-in
+- [x] `Reveal` (IntersectionObserver, 60px/1.2s ease-out, once, reduced-motion = opacity only)
+- [x] Hover/focus states, image fade-in
 
 ## Phase 7 — Quality
 - [ ] e2e: Home → "Learn more" on Countertop Blender → PDP (title visible, colour change, accordion)
