@@ -2,7 +2,9 @@
 
 Demo of two pages of the Octopus consumer-electronics site — **Homepage** and **Product Detail Page (Octopus Countertop Blender)** — responsive at three breakpoints (mobile < 810, tablet 810–1199, desktop ≥ 1200).
 
-> **Status: in progress.** This README is updated at the end of every phase: what was done, why, and what it cost in AI usage. Live URL and Lighthouse reports land in Phase 7–8.
+**Live:** https://octopus-website-phi.vercel.app · [Homepage](https://octopus-website-phi.vercel.app) · [PDP — Octopus Countertop Blender](https://octopus-website-phi.vercel.app/products/octopus-countertop-blender)
+
+**Lighthouse on the live site: 100 / 100 / 100 / 100 on the homepage, desktop and mobile** (details and the PDP in [Lighthouse](#lighthouse)).
 
 ## Quick start
 
@@ -156,28 +158,36 @@ Still placeholders (no screenshot available): Kettle 1.7 L, Power Bank 20,000 mA
 
 The e2e suites run on **Chrome, Firefox, desktop Safari, iPhone 15 (WebKit) and Pixel 7 (Chromium)**; Edge is Chromium. These are engine emulations, not real devices.
 
-### Lighthouse (mobile)
+### Lighthouse
 
-| Page     | Performance | Accessibility | Best Practices | SEO | LCP   | CLS | TBT   |
-| -------- | ----------- | ------------- | -------------- | --- | ----- | --- | ----- |
-| Homepage | 100         | 100           | 100            | 100 | 0.8 s | 0   | 20 ms |
-| PDP      | 98          | 100           | 100            | 100 | 2.5 s | 0   | 10 ms |
+Measured on the **live Vercel deployment** with Lighthouse 13.6 (simulated throttling), real assets included.
 
-Reports: [`docs/lighthouse/`](docs/lighthouse/) (HTML + JSON; Lighthouse 13.6, mobile preset, simulated throttling, local production build). Measured **with the real assets** (Figma screenshots + hero video; page weight 532 KiB home, 246 KiB PDP): `next/image` serves AVIF/WebP at the right `sizes`, below-the-fold images are lazy, the hero poster is the LCP and the video loads after it. Higher-resolution source files would add weight; the pipeline already resizes them.
+| Homepage — desktop                                                             | Homepage — mobile                                                            |
+| ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| ![Lighthouse desktop: 100 in every category](docs/lighthouse/home-desktop.png) | ![Lighthouse mobile: 100 in every category](docs/lighthouse/home-mobile.png) |
+
+| Page     | Device  | Performance | Accessibility | Best Practices | SEO | LCP   | CLS | TBT   | Weight  |
+| -------- | ------- | ----------- | ------------- | -------------- | --- | ----- | --- | ----- | ------- |
+| Homepage | Desktop | 100         | 100           | 100            | 100 | 0.5 s | 0   | 20 ms | 562 KiB |
+| Homepage | Mobile  | 100         | 100           | 100            | 100 | 1.0 s | 0   | 0 ms  | 560 KiB |
+| PDP      | Desktop | 100         | 100           | 100            | 100 | 0.4 s | 0   | 0 ms  | 327 KiB |
+| PDP      | Mobile  | 99          | 100           | 100            | 100 | 2.0 s | 0   | 10 ms | 333 KiB |
+
+The PDP on mobile is a stable 99 over repeated runs: its LCP is the product photo, 2.0 s on the simulated slow-4G profile, just over the 100 threshold. Reports: [`docs/lighthouse/`](docs/lighthouse/) (HTML + JSON per page and device). `next/image` serves AVIF/WebP at the right `sizes`, below-the-fold images are lazy, the hero poster is the LCP and the video loads after it.
 
 ## Progress
 
-| Phase                   | Status | What & why                                                                                                                                                                                               | AI cost       |
-| ----------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| 0 — Scaffold            | ✅     | Next 16 + Tailwind 4 + strict TS, Prettier, Vitest, Playwright, folder structure. Small commits per step, so the history can be reviewed                                                                 | $0.99         |
-| 1 — Tokens & primitives | ✅     | `@theme` tokens, Satoshi, the primitives above, logo + favicon, `/styleguide`. Tokens first so every later component is token-only and consistent                                                        | $1.66         |
-| 2 — Data layer          | ✅     | zod-validated JSON (16 products, 4 categories, home sections) + cached loaders. Data first so pages are pure composition and the CMS swap is one layer                                                   | $1.02         |
-| 3 — Layout shell        | ✅     | Floating navbar, accessible mobile menu below 1200px (focus trap, Escape, closes on route change), data-driven footer, skip link, placeholder route. Shared by both pages, so built before them          | $1.49         |
-| 4 — Homepage            | ✅     | Hero (poster as LCP, optional video + pause), scroll-snap carousel, three category bentos, hair care and find-us banners, explore tiles — all composed from `home.json`                                  | $2.18         |
-| 5 — PDP                 | ✅     | `products/[slug]` with static params + OG, sticky product info, native-radio colour selector, feature bento, accessible specs accordion + downloads box, 2/3/5-up best sellers, mobile sticky CTA        | $1.25         |
-| 6 — Motion & polish     | ✅     | CSS scroll reveal with one shared IntersectionObserver (DS §8 timings, reduced-motion = fade only, visible without JS), image fade-in for real assets. LCP content is never animated                     | subscription² |
-| 7 — Quality             | ✅     | e2e Home → PDP on 5 browser projects, no-overflow sweep at 11 widths, axe WCAG 2.2 AA, Lighthouse mobile 100 on both pages. Fixed the duplicate carousel landmark and two generic link names it surfaced | subscription  |
-| 8 — Ship                | ⏳     | Vercel deploy, final README                                                                                                                                                                              | —             |
+| Phase                   | Status | What & why                                                                                                                                                                                        | AI cost       |
+| ----------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| 0 — Scaffold            | ✅     | Next 16 + Tailwind 4 + strict TS, Prettier, Vitest, Playwright, folder structure. Small commits per step, so the history can be reviewed                                                          | $0.99         |
+| 1 — Tokens & primitives | ✅     | `@theme` tokens, Satoshi, the primitives above, logo + favicon, `/styleguide`. Tokens first so every later component is token-only and consistent                                                 | $1.66         |
+| 2 — Data layer          | ✅     | zod-validated JSON (16 products, 4 categories, home sections) + cached loaders. Data first so pages are pure composition and the CMS swap is one layer                                            | $1.02         |
+| 3 — Layout shell        | ✅     | Floating navbar, accessible mobile menu below 1200px (focus trap, Escape, closes on route change), data-driven footer, skip link, placeholder route. Shared by both pages, so built before them   | $1.49         |
+| 4 — Homepage            | ✅     | Hero (poster as LCP, optional video + pause), scroll-snap carousel, three category bentos, hair care and find-us banners, explore tiles — all composed from `home.json`                           | $2.18         |
+| 5 — PDP                 | ✅     | `products/[slug]` with static params + OG, sticky product info, native-radio colour selector, feature bento, accessible specs accordion + downloads box, 2/3/5-up best sellers, mobile sticky CTA | $1.25         |
+| 6 — Motion & polish     | ✅     | CSS scroll reveal with one shared IntersectionObserver (DS §8 timings, reduced-motion = fade only, visible without JS), image fade-in for real assets. LCP content is never animated              | subscription² |
+| 7 — Quality             | ✅     | e2e Home → PDP on 5 browser projects, no-overflow sweep at 11 widths, axe WCAG 2.2 AA, Lighthouse reports. Fixed the duplicate carousel landmark and two generic link names it surfaced           | subscription  |
+| 8 — Ship                | ✅     | Public GitHub repo (raw captures purged from history first), Vercel deploy, Lighthouse on the live site, final README                                                                             | subscription  |
 
 Detailed checklist: [`docs/PLAN.md`](docs/PLAN.md).
 

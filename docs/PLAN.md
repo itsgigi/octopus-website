@@ -52,5 +52,5 @@ Track cost: `pnpm ai:usage "<phase> start"` before, `pnpm ai:usage "<phase> end"
 - [x] axe check, keyboard pass, cross-browser smoke test
 
 ## Phase 8 — Ship
-- [ ] Deploy to Vercel, add URL to README
-- [ ] README: setup, architecture, components, trade-offs, Lighthouse results, **AI usage & costs** (from `docs/AI_USAGE.md`), what I'd do with more time
+- [x] Deploy to Vercel, add URL to README
+- [x] README: setup, architecture, components, trade-offs, Lighthouse results, **AI usage & costs** (from `docs/AI_USAGE.md`), what I'd do with more time
