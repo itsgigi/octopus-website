@@ -35,7 +35,7 @@ Track cost: `pnpm ai:usage "<phase> start"` before, `pnpm ai:usage "<phase> end"
 - [x] Hero (poster as LCP + lazy muted video + play/pause), BestSellers (Carousel + CarouselCard), CategorySection (bento variants: kitchen / security / accessories), Banner, ExploreCategories, FindUsBanner
 - [x] Generic `Carousel` (scroll-snap, arrows disabled at ends, dots, keyboard, `aria-roledescription="carousel"`)
 - [x] Tests: Carousel arrows/dots/disabled states
-- [ ] Check at 375 / 810 / 1024 / 1200 / 1440 / 1600 — no horizontal scroll _(no overflow verified at 500 / 810 / 1600; full sweep automated in Phase 7)_
+- [x] Check at 375 / 810 / 1024 / 1200 / 1440 / 1600 — no horizontal scroll (automated: `tests/e2e/responsive.spec.ts`, 11 widths)
 
 ## Phase 5 — Product Detail Page
 - [x] `products/[slug]` + `generateStaticParams` + `generateMetadata` (OG)
@@ -47,9 +47,9 @@ Track cost: `pnpm ai:usage "<phase> start"` before, `pnpm ai:usage "<phase> end"
 - [x] Hover/focus states, image fade-in
 
 ## Phase 7 — Quality
-- [ ] e2e: Home → "Learn more" on Countertop Blender → PDP (title visible, colour change, accordion)
-- [ ] Lighthouse mobile ≥ 90 Performance & Accessibility on both pages → save reports in `docs/lighthouse/`
-- [ ] axe check, keyboard pass, cross-browser smoke test
+- [x] e2e: Home → "Learn more" on Countertop Blender → PDP (title visible, colour change, accordion)
+- [x] Lighthouse mobile ≥ 90 Performance & Accessibility on both pages → save reports in `docs/lighthouse/`
+- [x] axe check, keyboard pass, cross-browser smoke test
 
 ## Phase 8 — Ship
 - [ ] Deploy to Vercel, add URL to README

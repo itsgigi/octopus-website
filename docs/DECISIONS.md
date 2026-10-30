@@ -55,3 +55,7 @@ Ambiguities in the brief / design system and the option chosen. Design-level dis
 | 49 | Reveal without JS | Elements are hidden only under `@media (scripting: enabled)` | With JS off (or before hydration on a no-JS crawler) content is visible, never stuck at opacity 0 |
 | 50 | Reduced motion and reveal | Fade kept, translate removed (overrides the global reset on purpose) | DS §8: "Reduced motion: opacity only" |
 | 51 | Image fade-in | `FadeInImage` client wrapper rendered only when `src` exists | Placeholders cost no JS; real assets get a 500ms fade, except `priority` (LCP) images |
+| 52 | Carousel container role | `role="group"` + `aria-roledescription="carousel"`, not a second `<section>` | The surrounding section is already the landmark; two regions named "Best sellers" were announced twice (found by the e2e locator) |
+| 53 | Browser coverage | Playwright projects: Chrome, Firefox, desktop Safari, iPhone 15 (WebKit), Pixel 7 (Chromium) | Brief's list; Edge shares Chromium. These are engine emulations, not real devices |
+| 54 | Lighthouse | CLI 13.6 against `next start`, mobile preset (simulated throttling), reports in `docs/lighthouse/` | Reproducible locally; the deployed URL can be re-audited in Phase 8 |
+| 55 | Axe scope | WCAG 2.0/2.1/2.2 A + AA tags, after forcing every `Reveal` visible | Checks the final state; at opacity 0 axe would skip or misjudge contrast |

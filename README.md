@@ -8,7 +8,7 @@ Demo of two pages of the Octopus consumer-electronics site — **Homepage** and 
 
 ```bash
 pnpm install
-pnpm exec playwright install chromium webkit   # first time only, for e2e
+pnpm exec playwright install chromium webkit firefox   # first time only, for e2e
 pnpm dev                                        # http://localhost:3000
 ```
 
@@ -117,19 +117,46 @@ docs/                   # brief, design system, plan, decisions, AI usage
 | `Logo`           | Mark + wordmark (full / stacked / mark-only), accessible name "Octopus"                                                                                                                                          |
 | `VisuallyHidden` | Screen-reader-only text                                                                                                                                                                                          |
 
+## Tests & quality
+
+`pnpm test` runs everything: **44 unit tests** (Vitest) and then **e2e** (Playwright on a production build).
+
+| Suite                                              | What it proves                                                                                                                   |
+| -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `Carousel` (unit)                                  | Arrows disabled at start and end, dots follow native scroll and count only reachable positions, slide semantics, focusable track |
+| `Accordion` (unit)                                 | `aria-expanded`/`aria-controls`, labelled region, inert when closed, independent toggles, keyboard                               |
+| `ColourSelector` (unit)                            | Radio group, label shows the selected colour, arrow keys move the selection                                                      |
+| `MobileMenu` (unit)                                | Open/close, Escape returns focus, focus trap, closes on link, route change and outside click                                     |
+| `Reveal`, `Button`, `Heading`, data loaders (unit) | Reveal fires once; link vs button; heading level vs size; slugs unique, categories valid, home references resolve                |
+| `home-to-pdp` (e2e)                                | Home → "Learn more" on the Countertop Blender → PDP title, colour change, specs accordion; carousel ends                         |
+| `responsive` (e2e)                                 | No horizontal scroll on both pages at 360, 402, 640, 809, 810, 1024, 1199, 1200, 1440, 1600 and 1920 px                          |
+| `a11y` (e2e)                                       | axe WCAG 2.0–2.2 A/AA on both pages; skip link is the first stop and focuses `<main>`                                            |
+| `smoke` (e2e)                                      | Shell landmarks; menu below 1200px opens and closes on Escape                                                                    |
+
+The e2e suites run on **Chrome, Firefox, desktop Safari, iPhone 15 (WebKit) and Pixel 7 (Chromium)**; Edge is Chromium. These are engine emulations, not real devices.
+
+### Lighthouse (mobile)
+
+| Page     | Performance | Accessibility | Best Practices | SEO | LCP   | CLS | TBT   |
+| -------- | ----------- | ------------- | -------------- | --- | ----- | --- | ----- |
+| Homepage | 100         | 100           | 100            | 100 | 0.8 s | 0   | 10 ms |
+| PDP      | 100         | 100           | 100            | 100 | 0.8 s | 0   | 10 ms |
+
+Reports: [`docs/lighthouse/`](docs/lighthouse/) (HTML + JSON; Lighthouse 13.6, mobile preset, simulated throttling, local production build). **Honest caveat:** images are placeholders (Figma export is disabled), so the score doesn't include the weight of real photography or the hero video. Those are already set up for it (`next/image` with AVIF/WebP, `sizes`, lazy loading below the fold, a poster as LCP, `preload="none"` video), but expect Performance to drop a little once real assets land.
+
 ## Progress
 
-| Phase                   | Status | What & why                                                                                                                                                                                      | AI cost       |
-| ----------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| 0 — Scaffold            | ✅     | Next 16 + Tailwind 4 + strict TS, Prettier, Vitest, Playwright, folder structure. Small commits per step, so the history can be reviewed                                                        | $0.99         |
-| 1 — Tokens & primitives | ✅     | `@theme` tokens, Satoshi, the primitives above, logo + favicon, `/styleguide`. Tokens first so every later component is token-only and consistent                                               | $1.66         |
-| 2 — Data layer          | ✅     | zod-validated JSON (16 products, 4 categories, home sections) + cached loaders. Data first so pages are pure composition and the CMS swap is one layer                                          | $1.02         |
-| 3 — Layout shell        | ✅     | Floating navbar, accessible mobile menu below 1200px (focus trap, Escape, closes on route change), data-driven footer, skip link, placeholder route. Shared by both pages, so built before them | $1.49         |
-| 4 — Homepage            | ✅     | Hero (poster as LCP, optional video + pause), scroll-snap carousel, three category bentos, hair care and find-us banners, explore tiles — all composed from `home.json`                         | $2.18         |
-| 5 — PDP                 | ✅     | `products/[slug]` with static params + OG, sticky product info, native-radio colour selector, feature bento, accessible specs and downloads accordion, 2/3/5-up best sellers, mobile sticky CTA | $1.25         |
-| 6 — Motion & polish     | ✅     | CSS scroll reveal with one shared IntersectionObserver (DS §8 timings, reduced-motion = fade only, visible without JS), image fade-in for real assets. LCP content is never animated            | subscription² |
-| 7 — Quality             | ⏳     | e2e, Lighthouse ≥ 90, axe                                                                                                                                                                       | —             |
-| 8 — Ship                | ⏳     | Vercel deploy, final README                                                                                                                                                                     | —             |
+| Phase                   | Status | What & why                                                                                                                                                                                               | AI cost       |
+| ----------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| 0 — Scaffold            | ✅     | Next 16 + Tailwind 4 + strict TS, Prettier, Vitest, Playwright, folder structure. Small commits per step, so the history can be reviewed                                                                 | $0.99         |
+| 1 — Tokens & primitives | ✅     | `@theme` tokens, Satoshi, the primitives above, logo + favicon, `/styleguide`. Tokens first so every later component is token-only and consistent                                                        | $1.66         |
+| 2 — Data layer          | ✅     | zod-validated JSON (16 products, 4 categories, home sections) + cached loaders. Data first so pages are pure composition and the CMS swap is one layer                                                   | $1.02         |
+| 3 — Layout shell        | ✅     | Floating navbar, accessible mobile menu below 1200px (focus trap, Escape, closes on route change), data-driven footer, skip link, placeholder route. Shared by both pages, so built before them          | $1.49         |
+| 4 — Homepage            | ✅     | Hero (poster as LCP, optional video + pause), scroll-snap carousel, three category bentos, hair care and find-us banners, explore tiles — all composed from `home.json`                                  | $2.18         |
+| 5 — PDP                 | ✅     | `products/[slug]` with static params + OG, sticky product info, native-radio colour selector, feature bento, accessible specs and downloads accordion, 2/3/5-up best sellers, mobile sticky CTA          | $1.25         |
+| 6 — Motion & polish     | ✅     | CSS scroll reveal with one shared IntersectionObserver (DS §8 timings, reduced-motion = fade only, visible without JS), image fade-in for real assets. LCP content is never animated                     | subscription² |
+| 7 — Quality             | ✅     | e2e Home → PDP on 5 browser projects, no-overflow sweep at 11 widths, axe WCAG 2.2 AA, Lighthouse mobile 100 on both pages. Fixed the duplicate carousel landmark and two generic link names it surfaced | subscription  |
+| 8 — Ship                | ⏳     | Vercel deploy, final README                                                                                                                                                                              | —             |
 
 Detailed checklist: [`docs/PLAN.md`](docs/PLAN.md).
 
@@ -183,6 +210,7 @@ Full lists: [`docs/DECISIONS.md`](docs/DECISIONS.md) (implementation) and [`docs
 - An outdated smoke e2e test failed on WebKit once the homepage became an empty shell, and the mobile menu links were misaligned with the logo; the browser check caught both.
 - Homepage: sr-only text inside carousel slides widened the mobile page by 364px; the Container put the gutter inside the 1344 max-width (content 1248 instead of 1344); a light placeholder hid the white text on the red banner. All three were found by measuring in the browser.
 - PDP: the carousel showed one dot per slide, so with 5 of 6 cards visible most dots could never be reached; fixed and unit-tested.
+- Quality pass: the carousel duplicated the "Best sellers" landmark, the hero and banner "Learn more" links lacked a product name, and a first e2e draft force-checked a visually hidden radio. Fixed after the e2e, axe and Lighthouse runs surfaced them.
 - A shell redaction command didn't work on macOS and echoed a secret into the local session. Separately, an example config in `docs/` contained a real key. Both were caught before the first commit and the key was flagged for rotation.
 
 ## What I'd do with more time

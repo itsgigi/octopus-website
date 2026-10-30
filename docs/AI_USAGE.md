@@ -35,6 +35,9 @@ Places where AI output was wrong and had to be rewritten. (Kept above the spend 
 | 4 | The image placeholder covered the red find-us banner and hid its white text | Added a `brand` placeholder tone |
 | 5 | Carousel showed one dot per slide; with 5 of 6 PDP cards visible, 4 dots were unreachable | Dots now count reachable positions (unit-tested) |
 | 5 | A verification script clicked the same accordion button twice and reported it closed | Script bug, not a component bug; the behaviour is covered by unit tests |
+| 7 | The carousel was a `<section>` labelled "Best sellers" inside a section with the same name: duplicate landmarks | Changed to `role="group"` |
+| 7 | The hero and banner "Learn more" links had no sr-only product name (only the cards did); Lighthouse SEO flagged it | Added "about {product}" |
+| 7 | The first e2e draft force-checked the visually hidden radio, which fails on mobile WebKit | The test taps the visible swatch label, as a user would |
 | 1 | `cn` would have merged `font-book` as a font-family (it drops `font-sans`) | Registered custom font-size, font-weight and radius groups in tailwind-merge |
 
 ## Spend log
