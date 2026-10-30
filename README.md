@@ -236,4 +236,10 @@ Full lists: [`docs/DECISIONS.md`](docs/DECISIONS.md) (implementation) and [`docs
 
 ## What I'd do with more time
 
-_To be completed at the end of the project._
+- **Real assets.** Every photo is a screenshot from a view-only Figma file, and some had text removed by inpainting. With export access (or the source photography) I'd use full-resolution images, the SVG logo and lettering, and a proper portrait crop of the indoor camera for mobile and tablet. The `ProductImage` and `resolveImage` setup means this only needs files dropped into `public/images`.
+- **Art direction with `<picture>`.** The hair care banner switches photos by rendering two `next/image`s and hiding one per breakpoint (the hidden one is lazy, so it is never downloaded). `getImageProps` with a `<picture>` would give the browser a single element and one decision.
+- **CI.** Run lint, typecheck, unit tests and the Playwright matrix on every pull request in GitHub Actions, and add Lighthouse CI with budgets so performance can't regress silently.
+- **Visual regression.** Add Playwright screenshot tests per breakpoint. Most of the late fixes were visual details found by comparing against Figma by eye, so a baseline would catch them earlier.
+- **Headless CMS.** Swap the JSON for a CMS behind the same `src/lib/data/*` functions, with on-demand revalidation through cache tags instead of build-time only.
+- **Colour variants.** Show a product photo per colour, so the swatch changes the gallery and not only the label.
+- **Remaining placeholders.** Four accessories and the other products' PDP photos still use ratio-correct placeholders.
