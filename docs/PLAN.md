@@ -4,13 +4,13 @@ Each phase = one Claude Code session/prompt + several small commits.
 Track cost: `pnpm ai:usage "<phase> start"` before, `pnpm ai:usage "<phase> end"` after. (Phase 0: run `node scripts/ai-usage.mjs` directly, package.json doesn't exist yet.)
 
 ## Phase 0 — Scaffold
-- [ ] `git init`, first commit with `CLAUDE.md`, `docs/`, `scripts/`, `.gitignore`
-- [ ] Scaffold Next.js in a temp dir (create-next-app refuses a folder that already contains files) and move it up:
+- [x] `git init`, first commit with `CLAUDE.md`, `docs/`, `scripts/`, `.gitignore`
+- [x] Scaffold Next.js in a temp dir (create-next-app refuses a folder that already contains files) and move it up:
   `pnpm create next-app@latest _app --ts --tailwind --eslint --app --src-dir --turbopack --import-alias "@/*" --use-pnpm` → move contents of `_app/` to root, merge `.gitignore`
-- [ ] `next.config.ts`: `cacheComponents: true`, `reactCompiler: true`, `images.formats: ['image/avif','image/webp']`
-- [ ] TypeScript strict + `noUncheckedIndexedAccess`; Prettier + tailwind plugin; scripts `lint`, `typecheck`, `test`, `test:unit`, `test:e2e`, `ai:usage`
-- [ ] Vitest + Testing Library + jsdom; Playwright (chromium + mobile Safari project)
-- [ ] Folder structure from `CLAUDE.md`
+- [x] `next.config.ts`: `cacheComponents: true`, `reactCompiler: true`, `images.formats: ['image/avif','image/webp']`
+- [x] TypeScript strict + `noUncheckedIndexedAccess`; Prettier + tailwind plugin; scripts `lint`, `typecheck`, `test`, `test:unit`, `test:e2e`, `ai:usage`
+- [x] Vitest + Testing Library + jsdom; Playwright (chromium + mobile Safari project)
+- [x] Folder structure from `CLAUDE.md`
 
 > Prompt: *"Read CLAUDE.md and docs/PLAN.md. Do Phase 0. Verify the latest stable versions of next, react, tailwindcss before installing. Commit after each bullet."*
 

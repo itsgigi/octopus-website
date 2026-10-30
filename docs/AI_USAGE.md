@@ -11,3 +11,4 @@ Cost source: OpenRouter `GET /api/v1/key` (`usage` field, USD), snapshotted by `
 | When (UTC) | Phase / label | Δ since last | Project total | Key total |
 |---|---|---|---|---|
 | 2026-10-30 14:04 | baseline | $0.0000 | $0.0000 | $0.6146 |
+| 2026-10-30 14:08 | phase 0 scaffold | $0.9871 | $0.9871 | $1.6017 |
