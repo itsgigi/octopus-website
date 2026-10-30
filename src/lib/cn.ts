@@ -1,8 +1,8 @@
 import { clsx, type ClassValue } from "clsx";
 import { extendTailwindMerge } from "tailwind-merge";
 
-// Teach tailwind-merge about custom @theme tokens so e.g. `text-h2` (font-size)
-// and `text-ink` (colour) are not treated as conflicting classes.
+// Teach tailwind-merge about custom @theme tokens so they are grouped correctly, e.g. `text-h2`
+// (font-size) vs `text-ink` (colour), or `font-book` (weight, not font-family).
 const twMerge = extendTailwindMerge({
   extend: {
     classGroups: {
@@ -24,6 +24,10 @@ const twMerge = extendTailwindMerge({
           ],
         },
       ],
+      "font-weight": [{ font: ["book"] }],
+    },
+    theme: {
+      radius: ["card", "nav", "specifics"],
     },
   },
 });
