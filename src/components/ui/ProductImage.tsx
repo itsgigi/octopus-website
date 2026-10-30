@@ -85,7 +85,7 @@ export function ProductImage({
               : "from-surface to-surface-strong text-line",
           )}
         >
-          <LogoMark className="size-1/5 max-w-24 min-w-8" />
+          <LogoMark className="h-auto w-1/5 max-w-24 min-w-8" />
         </div>
       )}
     </div>

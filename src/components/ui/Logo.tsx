@@ -5,23 +5,24 @@ import { VisuallyHidden } from "./VisuallyHidden";
 const logoVariants = cva("inline-flex items-center font-bold text-current", {
   variants: {
     variant: {
-      full: "gap-2 text-title",
-      stacked: "flex-col gap-3 text-h3",
+      full: "gap-[0.2em] text-title",
+      stacked: "flex-col gap-[0.45em] text-title",
       mark: "",
     },
   },
   defaultVariants: { variant: "full" },
 });
 
+// Mark height relative to the wordmark size, measured on the brand artwork.
 const markSizes = {
-  full: "size-8",
-  stacked: "size-20 md:size-24",
-  mark: "size-8",
+  full: "h-[1.25em]",
+  stacked: "h-[3.2em]",
+  mark: "h-8",
 } as const;
 
 type LogoProps = VariantProps<typeof logoVariants> & { className?: string };
 
-/** Octopus mark (approximation — Figma export disabled) + wordmark. Colour = currentColor. */
+/** Octopus mark (traced from the brand artwork) + wordmark. Colour = currentColor. */
 export function Logo({ variant, className }: LogoProps) {
   const v = variant ?? "full";
   return (
@@ -32,21 +33,19 @@ export function Logo({ variant, className }: LogoProps) {
   );
 }
 
+/** One continuous stroke: two tentacle curls joined by the head loop. */
+const LOGO_MARK_PATH =
+  "M75 154C106 154 131 170 131 204V244.5A58 58 0 0 0 247 244.5V236C247 200 197.5 180 197.5 138.5A78 78 0 0 1 353.5 138.5C353.5 180 304 200 304 236V244.5A58 58 0 0 0 420 244.5V204C420 170 445 154 476 154";
+
 export function LogoMark({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 32 32" className={cn("shrink-0", className)} aria-hidden focusable="false">
-      <path
-        fill="currentColor"
-        fillRule="evenodd"
-        d="M16 3a10 10 0 0 0-10 10v5h20v-5A10 10 0 0 0 16 3Zm-3 9.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm9 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"
-      />
-      <path
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={3}
-        strokeLinecap="round"
-        d="M8 18c0 4.5-2.5 6-4 9M13 18c0 5-1 7-2 10M19 18c0 5 1 7 2 10M24 18c0 4.5 2.5 6 4 9"
-      />
+    <svg
+      viewBox="75 38 401 287"
+      className={cn("aspect-[401/287] w-auto shrink-0", className)}
+      aria-hidden
+      focusable="false"
+    >
+      <path d={LOGO_MARK_PATH} fill="none" stroke="currentColor" strokeWidth={45} />
     </svg>
   );
 }
