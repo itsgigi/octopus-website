@@ -13,6 +13,9 @@ export default defineConfig({
   projects: [
     { name: "chromium", use: { ...devices["Desktop Chrome"] } },
     { name: "mobile-safari", use: { ...devices["iPhone 15"] } },
+    { name: "firefox", use: { ...devices["Desktop Firefox"] } },
+    { name: "desktop-safari", use: { ...devices["Desktop Safari"] } },
+    { name: "android-chrome", use: { ...devices["Pixel 7"] } },
   ],
   webServer: {
     command: `pnpm build && pnpm start --port ${PORT}`,

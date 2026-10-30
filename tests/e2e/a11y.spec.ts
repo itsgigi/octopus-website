@@ -23,10 +23,15 @@ for (const path of pages) {
   });
 }
 
-test("keyboard: skip link is first and moves focus to main", async ({ page, isMobile }) => {
+test("keyboard: skip link is first and moves focus to main", async ({
+  page,
+  isMobile,
+  browserName,
+}) => {
   test.skip(isMobile, "keyboard flow checked on desktop");
   await page.goto("/");
-  await page.keyboard.press("Tab");
+  // Safari on macOS only tabs to links with Option+Tab (or "Full Keyboard Access" enabled).
+  await page.keyboard.press(browserName === "webkit" ? "Alt+Tab" : "Tab");
   const skip = page.getByRole("link", { name: "Skip to content" });
   await expect(skip).toBeFocused();
   await expect(skip).toBeVisible();
