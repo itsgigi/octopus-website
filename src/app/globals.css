@@ -96,6 +96,23 @@
   --blur-nav: 32px; /* Figma background blur 64 */
 }
 
+/*
+ * State previews for /styleguide: `data-preview="hover|active|focus"` forces a state so every
+ * variant can be shown side by side. Real interaction behaviour is unchanged.
+ */
+@custom-variant hover {
+  @media (hover: hover) {
+    &:hover {
+      @slot;
+    }
+  }
+  &[data-preview~="hover"] {
+    @slot;
+  }
+}
+@custom-variant active (&:active, &[data-preview~="active"]);
+@custom-variant focus-visible (&:focus-visible, &[data-preview~="focus"]);
+
 @theme inline {
   --font-sans: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
 }
@@ -122,7 +139,8 @@
     @apply bg-canvas font-sans text-body text-ink antialiased;
   }
 
-  :focus-visible {
+  :focus-visible,
+  [data-preview~="focus"] {
     @apply outline-2 outline-offset-2 outline-focus-ring;
   }
 
