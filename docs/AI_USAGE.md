@@ -25,6 +25,8 @@ Places where AI output was wrong and had to be rewritten. (Kept above the spend 
 | 4 | Carousel slides held sr-only spans (`position: absolute`); with a static track they escaped `overflow: auto` and widened the page by 364px on mobile | Track made `relative`; found by measuring scrollWidth in the browser |
 | 4 | `Container` put the 48px gutter inside the 1344 max-width, so desktop content was 1248 wide | `box-content`, verified: content starts at 128 at 1600 |
 | 4 | The image placeholder covered the red find-us banner and hid its white text | Added a `brand` placeholder tone |
+| 5 | Carousel showed one dot per slide; with 5 of 6 PDP cards visible, 4 dots were unreachable | Dots now count reachable positions (unit-tested) |
+| 5 | A verification script clicked the same accordion button twice and reported it closed | Script bug, not a component bug; the behaviour is covered by unit tests |
 | 1 | `cn` would have merged `font-book` as a font-family (it drops `font-sans`) | Registered custom font-size, font-weight and radius groups in tailwind-merge |
 
 ## Spend log
@@ -41,3 +43,4 @@ Places where AI output was wrong and had to be rewritten. (Kept above the spend 
 | 2026-10-30 14:35 | phase 4 homepage start | $1.4881 | $7.1709 | $7.7855 |
 | 2026-10-30 14:42 | phase 4 homepage end | $2.1774 | $9.3483 | $9.9629 |
 | 2026-10-30 14:48 | phase 5 pdp start | $0.3391 | $9.6874 | $10.3020 |
+| 2026-10-30 14:52 | phase 5 pdp end | $1.2474 | $10.9348 | $11.5494 |

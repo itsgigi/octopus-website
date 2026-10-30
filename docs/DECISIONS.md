@@ -42,3 +42,11 @@ Ambiguities in the brief / design system and the option chosen. Design-level dis
 | 36 | Carousel dots | Shown at every breakpoint, 24px hit area around an 8px dot | Brief asks for dots on desktop; on touch they're still useful and harmless |
 | 37 | "Learn more" links | Visible label + sr-only "about {product}" | Several identical link names on one page fail WCAG 2.4.4 in context |
 | 38 | Container | `box-content`: max-width applies to the content (1344), the gutter sits outside | Matches Figma: content is 1344 wide at 1600, starting at 128 |
+| 39 | PDP grid | One CSS grid + `order`: mobile image → info → gallery, tablet info → image → gallery, desktop 709fr/555fr columns with the info column `sticky` | No duplicated markup per breakpoint; verified 709×900 gallery and 355 info content at 1600 |
+| 40 | Colour selector | Native `<input type="radio">` styled as swatches inside a `<fieldset>` | Arrow keys, roving tabindex and announcements for free; less code than an ARIA radiogroup |
+| 41 | Downloads | Its own box, but also an accordion item | The brief lists Downloads among the sections that expand and collapse; DS §6.11 draws it as a separate box |
+| 42 | Accordion panels | Always in the DOM; closed = `inert` + `aria-hidden`, `grid-rows` transition | Animatable height without measuring; closed links leave the tab order |
+| 43 | Mobile CTA | Sticky bottom bar below 810px; the in-flow button is hidden there; `body:has([data-sticky-cta])` adds bottom padding so the footer isn't covered | DS §6.9 |
+| 44 | Unknown product slug | `notFound()` renders the 404 UI with `noindex`, but the HTTP status is 200 | With Partial Prefetching the shell has already started streaming; every real product is prerendered, so this only affects invented URLs |
+| 45 | PDP best sellers | All best sellers by rank except the current product; 2 / 3 / 5 visible; dots = reachable positions | DS §6.6; one dot per slide would leave dots that can never be reached |
+| 46 | Feature bento shapes | By position: wide, tall, tall, wide (repeating) | Matches Figma for the blender's 4 features and keeps working if features are added |

@@ -94,6 +94,15 @@ docs/                   # brief, design system, plan, decisions, AI usage
 - **Cards** share one `CardContent` block; every "Learn more" link has an sr-only "about {product}" so link names are unique.
 - **Hero:** the poster is the LCP image (`priority`); the video loads client-side, muted, with a pause button, and is skipped with `prefers-reduced-motion`.
 
+### Product Detail Page
+
+`app/products/[slug]/page.tsx` prerenders every product (`generateStaticParams`), returns `notFound()` for unknown slugs and builds title, description and Open Graph from the data.
+
+- **One grid, three layouts:** CSS `order` plus explicit desktop placement gives image → info → gallery (mobile), info → image → gallery (tablet), and gallery 709 + sticky info 555 (desktop). Verified against the Figma sizes at 1600.
+- **ColourSelector** (client): native radios styled as swatches, so arrow keys and announcements come from the platform. The legend reads "Colour - {selected}".
+- **Accordion** (client): each section toggles on its own (heading > button, `aria-expanded`/`aria-controls`, labelled region). Closed panels are `inert`, and the height animates with `grid-rows`. Used for the three spec sections and for Downloads.
+- **Best sellers:** the same `Carousel` with `ProductCard`s, 2 / 3 / 5 visible; the dots count the reachable positions. On mobile "Where to buy" becomes a sticky bottom bar.
+
 ### UI primitives (`src/components/ui`)
 
 | Component        | Notes                                                                                                                                                                                                            |
@@ -117,7 +126,7 @@ docs/                   # brief, design system, plan, decisions, AI usage
 | 2 — Data layer          | ✅     | zod-validated JSON (16 products, 4 categories, home sections) + cached loaders. Data first so pages are pure composition and the CMS swap is one layer                                          | $1.02   |
 | 3 — Layout shell        | ✅     | Floating navbar, accessible mobile menu below 1200px (focus trap, Escape, closes on route change), data-driven footer, skip link, placeholder route. Shared by both pages, so built before them | $1.49   |
 | 4 — Homepage            | ✅     | Hero (poster as LCP, optional video + pause), scroll-snap carousel, three category bentos, hair care and find-us banners, explore tiles — all composed from `home.json`                         | $2.18   |
-| 5 — PDP                 | ⏳     | Product info, colour selector, gallery, accordion                                                                                                                                               | —       |
+| 5 — PDP                 | ✅     | `products/[slug]` with static params + OG, sticky product info, native-radio colour selector, feature bento, accessible specs and downloads accordion, 2/3/5-up best sellers, mobile sticky CTA | $1.25   |
 | 6 — Motion & polish     | ⏳     | Scroll reveal, hover states                                                                                                                                                                     | —       |
 | 7 — Quality             | ⏳     | e2e, Lighthouse ≥ 90, axe                                                                                                                                                                       | —       |
 | 8 — Ship                | ⏳     | Vercel deploy, final README                                                                                                                                                                     | —       |
@@ -157,6 +166,8 @@ Full lists: [`docs/DECISIONS.md`](docs/DECISIONS.md) (implementation) and [`docs
 | 3 — Layout shell                 | 1.49       | 5.68       |
 | Phase 3 wrap-up (docs, summary)¹ | 1.49       | 7.17       |
 | 4 — Homepage                     | 2.18       | 9.35       |
+| Phase 4 wrap-up (docs, summary)  | 0.34       | 9.69       |
+| 5 — PDP                          | 1.25       | 10.93      |
 
 ¹ Same delta as the previous phase; OpenRouter usage can lag by a few minutes, so the split between adjacent rows is approximate (the totals are exact).
 
@@ -168,6 +179,7 @@ Full lists: [`docs/DECISIONS.md`](docs/DECISIONS.md) (implementation) and [`docs
 - It typed `Text` props too narrowly and used `Heading as="p"`; both were caught by `tsc` and fixed.
 - An outdated smoke e2e test failed on WebKit once the homepage became an empty shell, and the mobile menu links were misaligned with the logo; the browser check caught both.
 - Homepage: sr-only text inside carousel slides widened the mobile page by 364px; the Container put the gutter inside the 1344 max-width (content 1248 instead of 1344); a light placeholder hid the white text on the red banner. All three were found by measuring in the browser.
+- PDP: the carousel showed one dot per slide, so with 5 of 6 cards visible most dots could never be reached; fixed and unit-tested.
 - A shell redaction command didn't work on macOS and echoed a secret into the local session. Separately, an example config in `docs/` contained a real key. Both were caught before the first commit and the key was flagged for rotation.
 
 ## What I'd do with more time

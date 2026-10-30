@@ -38,9 +38,9 @@ Track cost: `pnpm ai:usage "<phase> start"` before, `pnpm ai:usage "<phase> end"
 - [ ] Check at 375 / 810 / 1024 / 1200 / 1440 / 1600 — no horizontal scroll _(no overflow verified at 500 / 810 / 1600; full sweep automated in Phase 7)_
 
 ## Phase 5 — Product Detail Page
-- [ ] `products/[slug]` + `generateStaticParams` + `generateMetadata` (OG)
-- [ ] ProductInfo (sticky on desktop), ColourSelector (radiogroup, arrow keys), Gallery, FeatureBento, SpecsAccordion, Downloads, Best sellers (ProductCard carousel), sticky mobile CTA
-- [ ] Tests: Accordion (toggle, aria), ColourSelector (selection updates label)
+- [x] `products/[slug]` + `generateStaticParams` + `generateMetadata` (OG)
+- [x] ProductInfo (sticky on desktop), ColourSelector (radiogroup, arrow keys), Gallery, FeatureBento, SpecsAccordion, Downloads, Best sellers (ProductCard carousel), sticky mobile CTA
+- [x] Tests: Accordion (toggle, aria), ColourSelector (selection updates label)
 
 ## Phase 6 — Motion & polish
 - [ ] `Reveal` (IntersectionObserver, 60px/1.2s ease-out, once, reduced-motion = opacity only)
