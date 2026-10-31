@@ -66,7 +66,8 @@ docs/                   # brief, design system, plan, decisions, AI usage
 
 **Rendering:** everything is static at build time (content comes from local JSON). Server Components by default; `'use client'` only for small interactive islands (menu, carousel, colour selector, accordion).
 
-### Data layer
+<details>
+<summary><strong>Data layer</strong></summary>
 
 - **Content lives only in `src/data`.** `home.json` is an ordered list of typed sections (hero, best-sellers, category, banner, explore-categories, find-us) that reference products by slug.
 - **Validated at build time.** zod parses every JSON file when its loader loads. A wrong category, a duplicate slug or a `home.json` reference to a missing product fails `next build` instead of shipping a broken page. The TS types are inferred from the same schemas.
@@ -74,7 +75,10 @@ docs/                   # brief, design system, plan, decisions, AI usage
 - **Placement from data.** `featured: n` puts a product in its category section (the first one is the large card); `bestSeller` + `bestSellerRank` drive the carousels. Adding a product to `products.json` is enough for it to appear.
 - **Images:** paths are in the JSON. The loader keeps a path only if the file exists in `/public`, so dropping real assets into `public/images` replaces the placeholders with no code change.
 
-### Design tokens
+</details>
+
+<details>
+<summary><strong>Design tokens</strong></summary>
 
 `src/app/globals.css` → `@theme` (from `docs/DESIGN_SYSTEM.md` §12). Components never hard-code hex or px values; they use utilities such as `bg-brand`, `text-ink-muted`, `text-h2` and `rounded-card`.
 
@@ -83,14 +87,20 @@ docs/                   # brief, design system, plan, decisions, AI usage
 - **Responsive radius:** `--radius-card` is 16 on mobile and 24 from tablet up, changed in one place.
 - **Focus:** a visible 2 px outline on every `:focus-visible`, white on red or dark surfaces.
 
-### Layout shell
+</details>
+
+<details>
+<summary><strong>Layout shell</strong></summary>
 
 - **Navbar**: a fixed glass pill (`bg-nav` + `backdrop-blur-nav` + `shadow-nav`), rendered as a Server Component. From 1200px it shows the full links and the "Where to buy" button.
 - **MobileMenu** (below 1200px) is the only client code in the shell. It uses the disclosure pattern (`aria-expanded` + `aria-controls`) and handles focus trap, Escape (focus returns to the toggle), outside click, link click and route change. The page scroll lock is pure CSS (`html:has([data-scroll-lock])`, below `lg` only).
 - **Footer**: the link columns come from `navigation.json` ("Our Products" splits into two sub-columns from tablet). Stacked on mobile.
 - **Skip link** to a focusable `<main>`; every out-of-scope link goes to `/placeholder/*`, which is prerendered from the links found in the data.
 
-### Homepage
+</details>
+
+<details>
+<summary><strong>Homepage</strong></summary>
 
 `app/page.tsx` maps the resolved `home.json` sections to section components (`Hero`, `BestSellers`, `CategorySection`, `Banner`, `ExploreCategories`, `FindUsBanner`); reordering or removing sections is a JSON change.
 
@@ -99,7 +109,10 @@ docs/                   # brief, design system, plan, decisions, AI usage
 - **Cards** share one `CardContent` block; every "Learn more" link has an sr-only "about {product}" so link names are unique.
 - **Hero:** the poster is the LCP image (`priority`); the video loads client-side, muted, with a pause button, and is skipped with `prefers-reduced-motion`.
 
-### Product Detail Page
+</details>
+
+<details>
+<summary><strong>Product Detail Page</strong></summary>
 
 `app/products/[slug]/page.tsx` prerenders every product (`generateStaticParams`), returns `notFound()` for unknown slugs and builds title, description and Open Graph from the data.
 
@@ -107,6 +120,8 @@ docs/                   # brief, design system, plan, decisions, AI usage
 - **ColourSelector** (client): native radios styled as swatches, so arrow keys and announcements come from the platform. The legend reads "Colour - {selected}".
 - **Accordion** (client): each section toggles on its own (heading > button, `aria-expanded`/`aria-controls`, labelled region). Closed panels are `inert`, and the height animates with `grid-rows`. Used for the three spec sections; Downloads is a static box next to it, as in Figma.
 - **Best sellers:** the same `Carousel` with `ProductCard`s, 2 / 3 / 5 visible; Next stops at the last reachable position. On mobile "Where to buy" becomes a sticky bottom bar.
+
+</details>
 
 ## Assets
 
