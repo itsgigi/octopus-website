@@ -67,7 +67,8 @@ docs/                   # brief, design system, plan, decisions, AI usage
 **Rendering:** everything is static at build time (content comes from local JSON). Server Components by default; `'use client'` only for small interactive islands (menu, carousel, colour selector, accordion).
 
 <details>
-<summary><strong>Data layer</strong></summary>
+<summary><h3>Data layer</h3></summary>
+<br>
 
 - **Content lives only in `src/data`.** `home.json` is an ordered list of typed sections (hero, best-sellers, category, banner, explore-categories, find-us) that reference products by slug.
 - **Validated at build time.** zod parses every JSON file when its loader loads. A wrong category, a duplicate slug or a `home.json` reference to a missing product fails `next build` instead of shipping a broken page. The TS types are inferred from the same schemas.
@@ -78,7 +79,8 @@ docs/                   # brief, design system, plan, decisions, AI usage
 </details>
 
 <details>
-<summary><strong>Design tokens</strong></summary>
+<summary><h3>Design tokens</h3></summary>
+<br>
 
 `src/app/globals.css` → `@theme` (from `docs/DESIGN_SYSTEM.md` §12). Components never hard-code hex or px values; they use utilities such as `bg-brand`, `text-ink-muted`, `text-h2` and `rounded-card`.
 
@@ -90,7 +92,8 @@ docs/                   # brief, design system, plan, decisions, AI usage
 </details>
 
 <details>
-<summary><strong>Layout shell</strong></summary>
+<summary><h3>Layout shell</h3></summary>
+<br>
 
 - **Navbar**: a fixed glass pill (`bg-nav` + `backdrop-blur-nav` + `shadow-nav`), rendered as a Server Component. From 1200px it shows the full links and the "Where to buy" button.
 - **MobileMenu** (below 1200px) is the only client code in the shell. It uses the disclosure pattern (`aria-expanded` + `aria-controls`) and handles focus trap, Escape (focus returns to the toggle), outside click, link click and route change. The page scroll lock is pure CSS (`html:has([data-scroll-lock])`, below `lg` only).
@@ -100,7 +103,8 @@ docs/                   # brief, design system, plan, decisions, AI usage
 </details>
 
 <details>
-<summary><strong>Homepage</strong></summary>
+<summary><h3>Homepage</h3></summary>
+<br>
 
 `app/page.tsx` maps the resolved `home.json` sections to section components (`Hero`, `BestSellers`, `CategorySection`, `Banner`, `ExploreCategories`, `FindUsBanner`); reordering or removing sections is a JSON change.
 
@@ -112,7 +116,8 @@ docs/                   # brief, design system, plan, decisions, AI usage
 </details>
 
 <details>
-<summary><strong>Product Detail Page</strong></summary>
+<summary><h3>Product Detail Page</h3></summary>
+<br>
 
 `app/products/[slug]/page.tsx` prerenders every product (`generateStaticParams`), returns `notFound()` for unknown slugs and builds title, description and Open Graph from the data.
 
