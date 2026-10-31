@@ -182,6 +182,7 @@ Full lists: [`docs/DECISIONS.md`](docs/DECISIONS.md) (implementation) and [`docs
 - **Best sellers carousel without pagination dots.** The brief (requirement 3) asks for dots on desktop, but the Figma frames have none; I followed Figma. The carousel still has arrows (disabled at the ends), native swipe and a keyboard-scrollable track.
 - **Downloads is a static box, not an accordion item.** The brief (requirement 8) lists it with the collapsible spec sections; Figma draws it as a separate box with the file link always visible, so there is nothing to expand. I followed Figma; the three spec sections are the accessible accordion.
 - **Primary hover is `#C2151B`** instead of Figma's `#F23F45`: white on `#F23F45` is 3.8:1 and fails WCAG AA.
+- **Hero video has a pause button** that isn't in Figma: an autoplaying loop longer than 5 s needs a way to stop it (WCAG 2.2.2, level A). It's a real `<button>` with an accessible label and the focus ring; with `prefers-reduced-motion` the video doesn't play at all and the poster stays.
 - **Focus ring:** the Figma ring (35% alpha blue) is about 1.6:1 on white and fails WCAG 1.4.11, so the outline uses the same blue, fully opaque.
 - **Body line-height is 1.3** instead of Figma's 100% for multi-line copy (readability).
 - **The `/styleguide` page ships to production** with `noindex`, for use during the review call.
