@@ -4,7 +4,7 @@ Demo of two pages of the Octopus consumer-electronics site — **Homepage** and 
 
 **Live:** https://octopus-website-phi.vercel.app · [Homepage](https://octopus-website-phi.vercel.app) · [PDP — Octopus Countertop Blender](https://octopus-website-phi.vercel.app/products/octopus-countertop-blender)
 
-**Lighthouse on the live site: 100 / 100 / 100 / 100 on the homepage, desktop and mobile** ([PageSpeed Insights report](https://pagespeed.web.dev/analysis/https-octopus-website-phi-vercel-app/6uao75nz92?form_factor=mobile); details and the PDP in [Lighthouse](#lighthouse)).
+**Lighthouse on the live site: 100 / 100 / 100 / 100 on both pages, desktop and mobile** (PageSpeed Insights: [homepage](https://pagespeed.web.dev/analysis/https-octopus-website-phi-vercel-app/6uao75nz92?form_factor=mobile) · [PDP](https://pagespeed.web.dev/analysis/https-octopus-website-phi-vercel-app-products-octopus-countertop-blender/5not43ysej?form_factor=mobile); details in [Lighthouse](#lighthouse)).
 
 ## Constraints
 
@@ -142,14 +142,20 @@ Measured on the **live Vercel deployment** with Lighthouse 13.6 (simulated throt
 | ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
 | ![Lighthouse desktop: 100 in every category](docs/lighthouse/home-desktop.png) | ![Lighthouse mobile: 100 in every category](docs/lighthouse/home-mobile.png) |
 
+| PDP — desktop                                                                     | PDP — mobile                                                                    |
+| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| ![Lighthouse PDP desktop: 100 in every category](docs/lighthouse/pdp-desktop.png) | ![Lighthouse PDP mobile: 100 in every category](docs/lighthouse/pdp-mobile.png) |
+
 | Page     | Device  | Performance | Accessibility | Best Practices | SEO | LCP   | CLS | TBT   | Weight  |
 | -------- | ------- | ----------- | ------------- | -------------- | --- | ----- | --- | ----- | ------- |
 | Homepage | Desktop | 100         | 100           | 100            | 100 | 0.5 s | 0   | 20 ms | 562 KiB |
 | Homepage | Mobile  | 100         | 100           | 100            | 100 | 1.0 s | 0   | 0 ms  | 560 KiB |
 | PDP      | Desktop | 100         | 100           | 100            | 100 | 0.4 s | 0   | 0 ms  | 327 KiB |
-| PDP      | Mobile  | 99          | 100           | 100            | 100 | 2.0 s | 0   | 10 ms | 333 KiB |
+| PDP      | Mobile  | 100 ¹       | 100           | 100            | 100 | 2.0 s | 0   | 10 ms | 333 KiB |
 
-Live report: [PageSpeed Insights (mobile)](https://pagespeed.web.dev/analysis/https-octopus-website-phi-vercel-app/6uao75nz92?form_factor=mobile). The PDP on mobile is a stable 99 over repeated runs: its LCP is the product photo, 2.0 s on the simulated slow-4G profile, just over the 100 threshold. Reports: [`docs/lighthouse/`](docs/lighthouse/) (HTML + JSON per page and device). `next/image` serves AVIF/WebP at the right `sizes`, below-the-fold images are lazy, the hero poster is the LCP and the video loads after it.
+Live reports: PageSpeed Insights [homepage](https://pagespeed.web.dev/analysis/https-octopus-website-phi-vercel-app/6uao75nz92?form_factor=mobile) · [PDP](https://pagespeed.web.dev/analysis/https-octopus-website-phi-vercel-app-products-octopus-countertop-blender/5not43ysej?form_factor=mobile).
+
+¹ 100 on PageSpeed Insights (screenshot above). A local Lighthouse CLI run against the same URL scores 99 (LCP 2.0 s on the simulated slow-4G profile, the product photo, just over the 100 threshold): the two run on different machines and networks, so mobile scores at the edge move by a point. Reports: [`docs/lighthouse/`](docs/lighthouse/) (HTML + JSON per page and device). `next/image` serves AVIF/WebP at the right `sizes`, below-the-fold images are lazy, the hero poster is the LCP and the video loads after it.
 
 ## Progress
 
