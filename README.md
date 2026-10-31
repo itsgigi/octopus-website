@@ -24,17 +24,8 @@ Demo of two pages of the Octopus consumer-electronics site — **Homepage** and 
 pnpm install
 pnpm exec playwright install chromium webkit firefox   # first time only, for e2e
 pnpm dev                                        # http://localhost:3000
+pnpm test                                       # unit (Vitest) + e2e (Playwright)
 ```
-
-| Script                                         | What it does                                                                                                                                                                |
-| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pnpm dev` / `pnpm build` / `pnpm start`       | Next.js dev server / production build / serve the build                                                                                                                     |
-| `pnpm lint` · `pnpm typecheck` · `pnpm format` | ESLint · route typegen + `tsc --noEmit` · Prettier                                                                                                                          |
-| `pnpm test`                                    | **All tests in one command**: unit (Vitest), then e2e (Playwright on a production build)                                                                                    |
-| `pnpm test:unit` · `pnpm test:e2e`             | Each suite on its own                                                                                                                                                       |
-| `pnpm ai:usage "<label>"`                      | Snapshot of AI spend appended to `docs/AI_USAGE.md` (needs an OpenRouter key in `.claude/settings.local.json`, git-ignored — see `docs/claude-settings.local.example.json`) |
-
-Useful routes: `/` (homepage), `/styleguide` (every token and primitive in every state, `noindex`).
 
 ## Stack
 
@@ -117,40 +108,13 @@ docs/                   # brief, design system, plan, decisions, AI usage
 - **Accordion** (client): each section toggles on its own (heading > button, `aria-expanded`/`aria-controls`, labelled region). Closed panels are `inert`, and the height animates with `grid-rows`. Used for the three spec sections; Downloads is a static box next to it, as in Figma.
 - **Best sellers:** the same `Carousel` with `ProductCard`s, 2 / 3 / 5 visible; Next stops at the last reachable position. On mobile "Where to buy" becomes a sticky bottom bar.
 
-### UI primitives (`src/components/ui`)
-
-| Component        | Notes                                                                                                                                                                                                            |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Button`         | Renders a `next/link` when `href` is set, otherwise a `<button>` (type-safe union). Variants `primary · secondary · ghost · ghost-inverse`, sizes `sm · md (40, Figma) · lg`, `fullWidth`, leading/trailing icon |
-| `IconButton`     | 40 px circle, **required** `label` → `aria-label`. Shares one `cva` definition with `Button`                                                                                                                     |
-| `Heading`        | Semantic level (`as="h1"`) independent of visual size (`size="h3"`)                                                                                                                                              |
-| `Text`           | Sizes subtitle → tiny, tones default / muted / accent / inverse                                                                                                                                                  |
-| `Container`      | Max 1344, gutters 16 / 32 / 48                                                                                                                                                                                   |
-| `Icon`           | Inline SVG set (chevrons, menu, close, download, play/pause, arrow), `currentColor`, hidden from assistive tech unless it has a `title`                                                                          |
-| `ProductImage`   | Single wrapper for every content image: reserves the slot's aspect ratio (no CLS), renders `next/image` when a file exists, otherwise a neutral placeholder                                                      |
-| `Logo`           | Mark + wordmark (full / stacked / mark-only), accessible name "Octopus"                                                                                                                                          |
-| `VisuallyHidden` | Screen-reader-only text                                                                                                                                                                                          |
-
 ## Assets
 
 The Figma file can't export, so the assets are screenshots and a screen recording taken from it, identified against the Figma frames and renamed to the paths the JSON already referenced. **No JSON or component change was needed to show them**: the loaders pick up any file that exists in `/public`.
 
-| Slot                       | File(s)                                                              | Processing                                                                                                                                               |
-| -------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Product cut-outs (11)      | `public/images/products/*.png`                                       | Background is already `#F9F9F9` = the `surface` token, so cut-outs blend into the tiles                                                                  |
-| Category tiles (4)         | `public/images/categories/*.png`                                     | Blender, Indoor Camera, Hair Dryer, USB-C Cable, as in "Explore all categories"                                                                          |
-| Hair care banner           | `banners/hair-dryer.jpg`                                             | Baked-in title, text and button removed (column-wise interpolation of the plain background)                                                              |
-| Indoor camera large card   | `lifestyle/octopus-indoor-camera-1.jpg`                              | Baked-in text removed, rounded card corners cropped                                                                                                      |
-| Indoor camera card, tablet | `lifestyle/octopus-indoor-camera-1-landscape.jpg`                    | Figma tablet crop: text and button removed, corners cropped, upscaled 2×; `srcLandscape` in the JSON                                                     |
-| Kettle large card          | `lifestyle/octopus-kettle-1-7l-1.jpg`                                | Baked-in text removed, corners cropped; `focus: "72% 50%"` keeps the kettle in the mobile crop                                                           |
-| The Warehouse lockup       | `retailers/the-warehouse.png`                                        | Red background knocked out to transparent white, so it sits on the brand red                                                                             |
-| Hair care banner, mobile   | `banners/hair-dryer-mobile.jpg`                                      | Figma mobile frame: text and button (with its soft shadow) rebuilt from the background, upscaled 2×; shown below 810px with the text on top              |
-| PDP lifestyle (2)          | `lifestyle/octopus-countertop-blender-{1,2}.jpg`                     | White margin and rounded corners cropped, sharpened; the small one upscaled 2× (Lanczos)                                                                 |
-| PDP features (4)           | `features/blender-{power,clean,pulse,presets}.jpg`                   | Baked-in text removed by harmonic inpainting (keeps the swirl texture), corners cropped                                                                  |
-| Find-us banner             | `banners/find-us.jpg`                                                | Shown on the right, fading into the brand red behind the text                                                                                            |
-| Hero                       | `hero/hair-dryer-poster.jpg`, `public/videos/octopus-hair-dryer.mp4` | A clean 7.6 s loop cut from the screen recording: Figma navbar cropped out, no cursor or player UI; H.264, 30 fps, 244 KB. The poster is its first frame |
+Where a screenshot had the frame's own text or buttons baked in, they were removed and the background rebuilt; mobile and tablet crops are wired as art direction (`imageMobile`, `srcLandscape`). Per-asset details are in [`docs/DECISIONS.md`](docs/DECISIONS.md).
 
-Still placeholders (no screenshot available): Kettle 1.7 L, Power Bank 20,000 mAh, Magnetic USB-C Cable, Car Charger 42 W, USB-C Charger 30W, and the PDP lifestyle and feature photos. Raw captures are git-ignored.
+Still placeholders (no screenshot available): Power Bank 20,000 mAh, Magnetic USB-C Cable, Car Charger 42 W, USB-C Charger 30W, and the PDP photos of products other than the Countertop Blender. Raw captures are git-ignored.
 
 ## Tests & quality
 
