@@ -179,6 +179,8 @@ Full lists: [`docs/DECISIONS.md`](docs/DECISIONS.md) (implementation) and [`docs
 
 - **The Figma file is view-only with export disabled.** Values were read by hand from the properties panel. Images are **screenshots taken from Figma** (see Assets below), so they're low-resolution; slots without a screenshot (4 accessories, other products' PDP photos) keep a neutral placeholder with the correct ratio. The logo mark is traced by hand from the brand artwork as an SVG path.
 - **Navigation collapses below 1200 px** (brief) even though the Figma tablet frame shows inline links.
+- **Best sellers carousel without pagination dots.** The brief (requirement 3) asks for dots on desktop, but the Figma frames have none; I followed Figma. The carousel still has arrows (disabled at the ends), native swipe and a keyboard-scrollable track.
+- **Downloads is a static box, not an accordion item.** The brief (requirement 8) lists it with the collapsible spec sections; Figma draws it as a separate box with the file link always visible, so there is nothing to expand. I followed Figma; the three spec sections are the accessible accordion.
 - **Primary hover is `#C2151B`** instead of Figma's `#F23F45`: white on `#F23F45` is 3.8:1 and fails WCAG AA.
 - **Focus ring:** the Figma ring (35% alpha blue) is about 1.6:1 on white and fails WCAG 1.4.11, so the outline uses the same blue, fully opaque.
 - **Body line-height is 1.3** instead of Figma's 100% for multi-line copy (readability).
