@@ -66,6 +66,8 @@ async function resolveSection(section: HomeSection): Promise<ResolvedHomeSection
       return {
         ...section,
         image: resolveImage(section.image),
+        imageTablet: section.imageTablet && resolveImage(section.imageTablet),
+        imageMobile: section.imageMobile && resolveImage(section.imageMobile),
         retailerLogo: resolveAsset(section.retailerLogo),
       };
   }

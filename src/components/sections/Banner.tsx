@@ -15,8 +15,7 @@ export function Banner({ section }: { section: SectionOf<"banner"> }) {
       labelledBy={titleId}
       image={section.image}
       imageMobile={section.imageMobile}
-      // Fallback when there is no mobile image: photo under the text, dryer and face in the crop.
-      imageClassName="object-[75%_50%] md:object-center"
+      className="max-md:aspect-banner-mobile"
     >
       <div className="flex flex-col gap-4">
         <Heading as="h2" size="h2" id={titleId}>

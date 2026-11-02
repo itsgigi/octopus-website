@@ -33,6 +33,8 @@ const twMerge = extendTailwindMerge({
       aspect: [
         "banner",
         "banner-mobile",
+        "find-us-tablet",
+        "find-us-mobile",
         "card-large",
         "card-large-mobile",
         "card-medium",

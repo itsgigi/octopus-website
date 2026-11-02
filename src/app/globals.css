@@ -95,6 +95,8 @@
   /* Aspect ratios of the image slots */
   --aspect-banner: 12 / 5;
   --aspect-banner-mobile: 434 / 768; /* hair care banner, mobile art direction */
+  --aspect-find-us-tablet: 810 / 500; /* Figma frame */
+  --aspect-find-us-mobile: 3 / 4;
   --aspect-card-large: 1344 / 755;
   --aspect-card-large-mobile: 358 / 537; /* Card Large below 810px */
   --aspect-card-medium: 3 / 4;

@@ -70,6 +70,14 @@
       "image": {
         "src": "/images/banners/find-us.jpg",
         "alt": ""
+      },
+      "imageTablet": {
+        "src": "/images/banners/find-us-tablet.jpg",
+        "alt": ""
+      },
+      "imageMobile": {
+        "src": "/images/banners/find-us-mobile.jpg",
+        "alt": ""
       }
     }
   ]

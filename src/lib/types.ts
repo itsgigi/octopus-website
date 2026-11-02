@@ -137,6 +137,8 @@ export const HomeSectionSchema = z.discriminatedUnion("type", [
     retailerLogo: z.string().startsWith("/images/").optional(),
     cta: LinkSchema,
     image: ImageRefSchema,
+    imageTablet: ImageRefSchema.optional(),
+    imageMobile: ImageRefSchema.optional(),
   }),
 ]);
 export type HomeSection = z.infer<typeof HomeSectionSchema>;

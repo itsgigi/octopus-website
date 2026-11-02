@@ -19,49 +19,58 @@ const bannerVariants = cva(
   },
 );
 
-const mediaVariants = cva("bg-transparent", {
-  variants: {
-    media: {
-      /** Photo fills the banner behind the text (it already leaves room on the left). */
-      cover: "md:absolute md:inset-0 md:-z-10 md:aspect-auto md:h-full",
-      /** Product shot on the right, fading into the banner colour behind the text. */
-      side: "aspect-photo md:absolute md:inset-y-0 md:right-0 md:-z-10 md:aspect-auto md:h-full md:w-3/5 md:mask-l-from-70% md:mask-l-to-100%",
-    },
-  },
-  defaultVariants: { media: "cover" },
-});
+type FullBleedBannerProps = VariantProps<typeof bannerVariants> & {
+  id: string;
+  labelledBy: string;
+  /** Desktop photo; also used on smaller screens when no dedicated crop exists. */
+  image: ImageRef;
+  /** Crop for 810–1199px. */
+  imageTablet?: ImageRef;
+  /** Portrait crop for < 810px, with room for the text on top. */
+  imageMobile?: ImageRef;
+  /** Section ratio on the breakpoints with their own crop. */
+  className?: string;
+  /** e.g. an object-position to keep the subject in a crop. */
+  imageClassName?: string;
+  children: ReactNode;
+};
 
-type FullBleedBannerProps = VariantProps<typeof bannerVariants> &
-  VariantProps<typeof mediaVariants> & {
-    id: string;
-    labelledBy: string;
-    image: ImageRef;
-    /** Portrait image for mobile: becomes the background with the text on top of it. */
-    imageMobile?: ImageRef;
-    /** e.g. an object-position to keep the subject in the mobile crop. */
-    imageClassName?: string;
-    children: ReactNode;
-  };
-
-/** Edge-to-edge banner: text over the image from tablet, text above the image on mobile. */
+/**
+ * Edge-to-edge banner with the text over the photo. Each breakpoint can have its own crop: the
+ * others stay `display: none`, and since they are lazy the browser never downloads them.
+ */
 export function FullBleedBanner({
   id,
   labelledBy,
   image,
+  imageTablet,
   imageMobile,
   tone,
-  media,
+  className,
   imageClassName,
   children,
 }: FullBleedBannerProps) {
-  const artDirected = Boolean(imageMobile?.src);
+  const hasMobile = Boolean(imageMobile?.src);
+  const hasTablet = Boolean(imageTablet?.src);
+  const layers = [
+    {
+      image,
+      visibility: cn(hasMobile && "max-md:hidden", hasTablet && "md:max-lg:hidden"),
+      imageClassName,
+    },
+    ...(hasTablet && imageTablet
+      ? [{ image: imageTablet, visibility: "hidden md:max-lg:block" }]
+      : []),
+    ...(hasMobile && imageMobile ? [{ image: imageMobile, visibility: "md:hidden" }] : []),
+  ];
+
   return (
     <section
       id={id}
       aria-labelledby={labelledBy}
-      className={cn(bannerVariants({ tone }), artDirected && "max-md:aspect-banner-mobile")}
+      className={cn(bannerVariants({ tone }), className)}
     >
-      <Container className={cn("py-12 md:py-0", artDirected && "max-md:pt-20")}>
+      <Container className="py-12 md:py-0">
         <Reveal
           travel="md"
           className="flex flex-col items-center gap-8 text-center md:max-w-2/5 md:items-start md:text-left"
@@ -69,26 +78,19 @@ export function FullBleedBanner({
           {children}
         </Reveal>
       </Container>
-      <ProductImage
-        src={image.src}
-        alt={image.alt}
-        rounded={false}
-        sizes={media === "side" ? "(min-width: 810px) 60vw, 100vw" : "100vw"}
-        tone={tone ?? "light"}
-        imageClassName={imageClassName}
-        className={cn(mediaVariants({ media }), artDirected && "max-md:hidden")}
-      />
-      {artDirected && imageMobile ? (
+      {layers.map((layer) => (
         <ProductImage
-          src={imageMobile.src}
-          alt={imageMobile.alt}
+          key={layer.image.src}
+          src={layer.image.src}
+          alt={layer.image.alt}
           aspect="fill"
           rounded={false}
           sizes="100vw"
           tone={tone ?? "light"}
-          className="absolute inset-0 -z-10 md:hidden"
+          imageClassName={layer.imageClassName}
+          className={cn("absolute inset-0 -z-10", layer.visibility)}
         />
-      ) : null}
+      ))}
     </section>
   );
 }
