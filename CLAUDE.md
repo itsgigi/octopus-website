@@ -63,7 +63,7 @@ docs/
 - **Tokens only**: never hard-code hex/px in components; use the `@theme` tokens (`bg-brand`, `text-ink-muted`, `rounded-card`…). If a value is missing, add a token first.
 - Mobile-first Tailwind; breakpoints `md` = 810px, `lg` = 1200px.
 - Content lives in `src/data`, never in JSX. Adding a product to `products.json` must be enough for it to appear in the right section.
-- Images: `next/image` with explicit aspect ratio (no CLS), `priority` only on LCP, lazy below the fold. Assets are **placeholders with the correct ratio** (Figma export disabled) — one `ProductImage` wrapper so real files can be dropped in `public/images`.
+- Images: `next/image` with explicit aspect ratio (no CLS), `priority` only on LCP, lazy below the fold. Official assets where delivered, Figma screenshots otherwise, neutral placeholders with the correct ratio if a file is missing — one `ProductImage` wrapper so real files can be dropped in `public/images`.
 - A11y: semantic landmarks, skip link, visible `:focus-visible` ring (token `--color-focus`), full keyboard support, `aria-expanded/controls`, Escape closes menu, `prefers-reduced-motion` respected, WCAG AA contrast.
 - Primary button hover uses `#C2151B` (Figma `#F23F45` fails AA) — documented deviation.
 - Navigation collapses into a menu **below 1200px** (brief wins over Figma tablet).

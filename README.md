@@ -11,7 +11,7 @@ Demo of two pages of the Octopus consumer-electronics site — **Homepage** and 
 **No editor access to the Figma file.** The file was shared view-only with export disabled, so I couldn't download any asset or use Dev Mode to inspect exact values. To get as close to pixel-perfect as possible:
 
 - Every value (sizes, spacing, type scale, colours) was read by hand from the properties panel and recorded in [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md).
-- Every image is a screenshot of the Figma frames. Where the screenshot included the frame's own text or buttons, I removed them and rebuilt the background (see [Assets](#assets)). The logo and The Warehouse lockup were redrawn or cut out the same way.
+- The images started as screenshots of the Figma frames, with the frame's own text and buttons removed and the background rebuilt. The company later sent the official assets, which replaced most of them; the rest are still screenshots (see [Assets](#assets)).
 
 **This raised the AI cost.** Ingesting the design as screenshots, comparing the build against them and processing the images took far more AI work than reading a Dev Mode spec and exporting assets would have. I went over the AI budget the company offered, and chose to for two reasons:
 
@@ -130,11 +130,13 @@ docs/                   # brief, design system, plan, decisions, AI usage
 
 ## Assets
 
-The Figma file can't export, so the assets are screenshots and a screen recording taken from it, identified against the Figma frames and renamed to the paths the JSON already referenced. **No JSON or component change was needed to show them**: the loaders pick up any file that exists in `/public`.
+**Official assets** (delivered by the company after the first deploy): all 16 product photos, the four Explore tiles, the logo in every variant, and the hair care and find-us banners at high resolution. Each banner has its own crop per breakpoint, set in `home.json` (`imageTablet`, `imageMobile`), and the browser only downloads the one it shows. Hi-res masters are re-encoded to JPEG, so the banners weigh 64–256 KB each. The logo is inlined as SVG paths, so it takes its colour from `currentColor`.
 
-Where a screenshot had the frame's own text or buttons baked in, they were removed and the background rebuilt; mobile and tablet crops are wired as art direction (`imageMobile`, `srcLandscape`). Per-asset details are in [`docs/DECISIONS.md`](docs/DECISIONS.md).
+**Still taken from Figma screenshots** (not in the delivery): the hero video and poster, the kettle and indoor camera large cards, the Countertop Blender's lifestyle and feature photos, and The Warehouse lockup. They're softer when enlarged; where a screenshot had the frame's text or buttons baked in, I removed them and rebuilt the background. Replacing the files in `public/images` is enough to upgrade them. Details per asset are in [`docs/DECISIONS.md`](docs/DECISIONS.md).
 
-Still placeholders (no screenshot available): Power Bank 20,000 mAh, Magnetic USB-C Cable, Car Charger 42 W, USB-C Charger 30W, and the PDP photos of products other than the Countertop Blender. Raw captures are git-ignored.
+**Delivered but unused:** the Kitchen, Home Security and Accessories category banners, a family photo and a phone mockup. None of them appears in the two pages of the Figma flows.
+
+**Placeholders:** only the PDP photos of products other than the Countertop Blender, which the brief doesn't ask for. Their pages use a neutral box with the correct ratio. Raw captures are git-ignored.
 
 ## Tests & quality
 
@@ -197,7 +199,7 @@ Detailed checklist: [`docs/PLAN.md`](docs/PLAN.md).
 
 Full lists: [`docs/DECISIONS.md`](docs/DECISIONS.md) (implementation) and [`docs/DESIGN_SYSTEM.md` §11](docs/DESIGN_SYSTEM.md) (Figma vs brief). Highlights:
 
-- **The Figma file is view-only with export disabled.** Values were read by hand from the properties panel. Images are **screenshots taken from Figma** (see Assets below), so they're low-resolution; slots without a screenshot (4 accessories, other products' PDP photos) keep a neutral placeholder with the correct ratio. The logo mark is traced by hand from the brand artwork as an SVG path.
+- **The Figma file is view-only with export disabled.** Values were read by hand from the properties panel. Most images are now the official assets; the ones that weren't delivered are still screenshots (see [Assets](#assets)).
 - **Navigation collapses below 1200 px** (brief) even though the Figma tablet frame shows inline links.
 - **Best sellers carousel without pagination dots.** The brief (requirement 3) asks for dots on desktop, but the Figma frames have none; I followed Figma. The carousel still has arrows (disabled at the ends), native swipe and a keyboard-scrollable track.
 - **Downloads is a static box, not an accordion item.** The brief (requirement 8) lists it with the collapsible spec sections; Figma draws it as a separate box with the file link always visible, so there is nothing to expand. I followed Figma; the three spec sections are the accessible accordion.
@@ -252,10 +254,9 @@ Full lists: [`docs/DECISIONS.md`](docs/DECISIONS.md) (implementation) and [`docs
 
 ## What I'd do with more time
 
-- **Real assets.** Every photo is a screenshot from a view-only Figma file, and some had text removed by inpainting. With export access (or the source photography) I'd use full-resolution images, the SVG logo and lettering, and Figma's mobile crop of the indoor camera. The `ProductImage` and `resolveImage` setup means this only needs files dropped into `public/images`.
+- **The remaining assets.** Source files for the hero video, the two lifestyle cards and the blender's PDP photos would replace the last screenshots, with no code change.
 - **Art direction with `<picture>`.** The hair care banner switches photos by rendering two `next/image`s and hiding one per breakpoint (the hidden one is lazy, so it is never downloaded). `getImageProps` with a `<picture>` would give the browser a single element and one decision.
 - **CI.** Run lint, typecheck, unit tests and the Playwright matrix on every pull request in GitHub Actions, and add Lighthouse CI with budgets so performance can't regress silently.
 - **Visual regression.** Add Playwright screenshot tests per breakpoint. Most of the late fixes were visual details found by comparing against Figma by eye, so a baseline would catch them earlier.
 - **Headless CMS.** Swap the JSON for a CMS behind the same `src/lib/data/*` functions, with on-demand revalidation through cache tags instead of build-time only.
 - **Colour variants.** Show a product photo per colour, so the swatch changes the gallery and not only the label.
-- **Remaining placeholders.** Four accessories and the other products' PDP photos still use ratio-correct placeholders.
