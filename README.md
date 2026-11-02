@@ -170,14 +170,14 @@ Measured on the **live Vercel deployment** with Lighthouse 13.6 (simulated throt
 
 | Page     | Device  | Performance | Accessibility | Best Practices | SEO | LCP   | CLS | TBT   | Weight  |
 | -------- | ------- | ----------- | ------------- | -------------- | --- | ----- | --- | ----- | ------- |
-| Homepage | Desktop | 100         | 100           | 100            | 100 | 0.5 s | 0   | 20 ms | 562 KiB |
-| Homepage | Mobile  | 100         | 100           | 100            | 100 | 1.0 s | 0   | 0 ms  | 560 KiB |
-| PDP      | Desktop | 100         | 100           | 100            | 100 | 0.4 s | 0   | 0 ms  | 327 KiB |
-| PDP      | Mobile  | 100 ¹       | 100           | 100            | 100 | 2.0 s | 0   | 10 ms | 333 KiB |
+| Homepage | Desktop | 100         | 100           | 100            | 100 | 0.5 s | 0   | 0 ms  | 604 KiB |
+| Homepage | Mobile  | 100         | 100           | 100            | 100 | 1.2 s | 0   | 10 ms | 585 KiB |
+| PDP      | Desktop | 100         | 100           | 100            | 100 | 0.4 s | 0   | 0 ms  | 343 KiB |
+| PDP      | Mobile  | 100         | 100           | 100            | 100 | 1.7 s | 0   | 10 ms | 349 KiB |
 
 Live reports: PageSpeed Insights [homepage](https://pagespeed.web.dev/analysis/https-octopus-website-phi-vercel-app/6uao75nz92?form_factor=mobile) · [PDP](https://pagespeed.web.dev/analysis/https-octopus-website-phi-vercel-app-products-octopus-countertop-blender/5not43ysej?form_factor=mobile).
 
-¹ 100 on PageSpeed Insights (screenshot above). A local Lighthouse CLI run against the same URL scores 99 (LCP 2.0 s on the simulated slow-4G profile, the product photo, just over the 100 threshold): the two run on different machines and networks, so mobile scores at the edge move by a point. Reports: [`docs/lighthouse/`](docs/lighthouse/) (HTML + JSON per page and device). `next/image` serves AVIF/WebP at the right `sizes`, below-the-fold images are lazy, the hero poster is the LCP and the video loads after it.
+The table was re-measured with the Lighthouse CLI after the official assets went live; the screenshots and PageSpeed links are from the deployment just before them, with the same scores. Reports: [`docs/lighthouse/`](docs/lighthouse/) (HTML + JSON per page and device). `next/image` serves AVIF/WebP at the right `sizes`, below-the-fold images are lazy, the hero poster is the LCP and the video loads after it.
 
 ## Progress
 
