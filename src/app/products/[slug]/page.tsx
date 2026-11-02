@@ -55,9 +55,9 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
             alt={product.image.alt}
             aspect="pdp-product"
             fit="contain"
-            // Breathing room around the cut-out (object-fit applies to the content box). On desktop
-            // the product spans from the title to the CTA of the info column, as in Figma.
-            imageClassName="p-10 lg:px-20 lg:pt-20 lg:pb-50"
+            // The artwork has its own margin. On desktop the padding places the product from the
+            // title to the CTA of the info column, as in Figma (object-fit uses the content box).
+            imageClassName="lg:px-18 lg:pt-13 lg:pb-45"
             priority
             sizes="(min-width: 1200px) 709px, (min-width: 810px) 56vw, 100vw"
           />
